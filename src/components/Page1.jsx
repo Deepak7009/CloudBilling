@@ -4,6 +4,14 @@ function RestaurantManagementApp() {
    const [selectedCategory, setSelectedCategory] = useState('Beverages');
    const [searchQuery, setSearchQuery] = useState('');
    const [orderItems, setOrderItems] = useState([]);
+   const [billingDetails, setBillingDetails] = useState({
+      name: '',
+      mobile: '',
+      address: '',
+      locality: '',
+   });
+   const [billSlip, setBillSlip] = useState('');
+   const [isBillModalOpen, setIsBillModalOpen] = useState(false);
 
    const items = {
       Beverages: [
@@ -81,6 +89,35 @@ function RestaurantManagementApp() {
       return orderItems.reduce((total, item) => total + (item.price * item.quantity), 0);
    };
 
+   const handleBillingChange = (e) => {
+      const { name, value } = e.target;
+      setBillingDetails({ ...billingDetails, [name]: value });
+   };
+
+   const generateBillSlip = () => {
+      let bill = `Bill Details:\n\n`;
+      bill += `Name: ${billingDetails.name}\n`;
+      bill += `Mobile: ${billingDetails.mobile}\n`;
+      bill += `Address: ${billingDetails.address}\n`;
+      bill += `Locality: ${billingDetails.locality}\n\n`;
+      bill += `Order Summary:\n`;
+      orderItems.forEach(item => {
+         bill += `${item.name} x ${item.quantity} = ₹${item.price * item.quantity}\n`;
+      });
+      bill += `\nTotal: ₹${calculateTotal()}`;
+      setBillSlip(bill);
+      setIsBillModalOpen(true);
+   };
+
+   const shareOnWhatsApp = () => {
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(billSlip)}`;
+      window.open(whatsappUrl, '_blank');
+   };
+
+   const closeModal = () => {
+      setIsBillModalOpen(false);
+   };
+
    return (
       <div className="flex flex-col h-screen">
          <header className="flex flex-row justify-between bg-gray-800 text-white p-4">
@@ -90,7 +127,6 @@ function RestaurantManagementApp() {
             </div>
             <div className="flex flex-row items-center space-x-4">
                <p className="text-sm">Call For Support: 9099912483</p>
-               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Short Coda</button>
             </div>
          </header>
          <main className="flex flex-grow overflow-y-scroll bg-gray-200 p-4">
@@ -173,6 +209,41 @@ function RestaurantManagementApp() {
                   </div>
                </div>
                <div className="flex flex-col w-full md:w-1/3 bg-white p-4 rounded shadow-md mt-4 md:mt-0 md:ml-4">
+                  <p className="text-lg font-bold mb-4">Billing Details</p>
+                  <div className="flex flex-col space-y-2 mb-4">
+                     <input
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        value={billingDetails.name}
+                        onChange={handleBillingChange}
+                        className="border border-gray-400 rounded px-4 py-2"
+                     />
+                     <input
+                        type="text"
+                        name="mobile"
+                        placeholder="Mobile No."
+                        value={billingDetails.mobile}
+                        onChange={handleBillingChange}
+                        className="border border-gray-400 rounded px-4 py-2"
+                     />
+                     <input
+                        type="text"
+                        name="address"
+                        placeholder="Address"
+                        value={billingDetails.address}
+                        onChange={handleBillingChange}
+                        className="border border-gray-400 rounded px-4 py-2"
+                     />
+                     <input
+                        type="text"
+                        name="locality"
+                        placeholder="Locality"
+                        value={billingDetails.locality}
+                        onChange={handleBillingChange}
+                        className="border border-gray-400 rounded px-4 py-2"
+                     />
+                  </div>
                   <p className="text-lg font-bold mb-4">Order Summary</p>
                   <div className="overflow-x-auto">
                      <table className="min-w-full divide-y divide-gray-200">
@@ -198,12 +269,38 @@ function RestaurantManagementApp() {
                      <p className="text-lg font-bold">Total</p>
                      <p className="text-lg font-bold">₹ {calculateTotal()}</p>
                   </div>
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+                  <button
+                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                     onClick={generateBillSlip}
+                  >
                      Place Order
                   </button>
                </div>
             </div>
          </main>
+
+         {isBillModalOpen && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+               <div className="bg-white p-6 rounded shadow-md w-3/4 max-w-lg">
+                  <p className="text-lg font-bold mb-4">Generated Bill Slip:</p>
+                  <pre className="bg-gray-100 p-4 rounded">{billSlip}</pre>
+                  <div className="flex flex-row justify-between mt-4">
+                     <button
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={shareOnWhatsApp}
+                     >
+                        Share on WhatsApp
+                     </button>
+                     <button
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={closeModal}
+                     >
+                        Close
+                     </button>
+                  </div>
+               </div>
+            </div>
+         )}
       </div>
    );
 }
