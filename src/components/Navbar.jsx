@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="bg-white shadow-md p-4 flex items-center justify-between">
+      <nav className="bg-white shadow-md p-3 flex items-center justify-between">
         {/* Left Section */}
         <div className="flex items-center">
           <button className="mr-4 text-xl block lg:hidden" onClick={toggleSidebar}>

@@ -47,27 +47,12 @@ const SearchBar = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Search
-            </button>
+            {/*<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                     Search
+                  </button>*/}
           </div>
         )}
         <div className="hidden lg:flex flex-row items-center space-x-2">
-          <select
-            className="border border-gray-400 rounded px-4 py-2"
-            onChange={(e) => {
-              setSelectedCategory(e.target.value);
-              setSearchQuery("");
-            }}
-            value={selectedCategory}
-          >
-            <option value="">All Categories</option>
-            {Object.keys(items).map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
           <input
             type="text"
             className="border border-gray-400 rounded px-4 py-2"
