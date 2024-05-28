@@ -8,8 +8,8 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                 <h2 className="text-xl font-bold mb-2">Bill Details</h2>
                 <p><strong>Name:</strong> {billingDetails.name}</p>
                 <p><strong>Mobile:</strong> {billingDetails.mobile}</p>
-                <p><strong>Address:</strong> {billingDetails.address}</p>
-                <p><strong>Locality:</strong> {billingDetails.locality}</p>
+                {/*<p><strong>Address:</strong> {billingDetails.address}</p>
+                <p><strong>Locality:</strong> {billingDetails.locality}</p>*/}
                 <h3 className="text-lg font-bold mt-4 mb-2">Order Summary</h3>
                 <ul className="list-disc list-inside mb-2">
                     {orderItems.map(item => (
