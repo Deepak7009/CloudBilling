@@ -1,32 +1,63 @@
 .bill-slip {
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 16px;
-    background-color: #f7fafc;
- }
+   border: 1px solid #e2e8f0;
+   border-radius: 8px;
+   padding: 16px;
+   background-color: #f7fafc;
+}
+
+.bill-slip h2,
+.bill-slip h3 {
+   color: #2d3748;
+}
+
+.bill-slip p {
+   color: #4a5568;
+}
+
+.bill-slip .bill-items {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+}
+
+.bill-slip .bill-items li {
+   padding: 4px 0;
+}
+
+.bill-slip .bill-total {
+   color: #2d3748;
+   font-weight: bold;
+   text-align: right;
+   margin-top: 16px;
+}
+
+
+.sidebar-item {
+   @apply relative overflow-hidden;
+}
+
+.sidebar-item::before {
+   @apply absolute bottom-[0px] right-0 h-[3px] bg-green-500;
+   content: '';
+   width: 0;
+   transition: width 0.3s ease;
+}
+
+.sidebar-item:hover::before {
+   width: 100%;
+   left: 0;
+}
+
+.sidebar-item.active::before {
+   width: 100%;
+   left: 0;
+}
+
+.example::-webkit-scrollbar {
+   display: none;
+}
+.hn{
+   width: 600px;
+   overflow-x: scroll;
  
- .bill-slip h2, .bill-slip h3 {
-    color: #2d3748;
- }
- 
- .bill-slip p {
-    color: #4a5568;
- }
- 
- .bill-slip .bill-items {
-    margin: 0;
-    padding: 0;
-    list-style: none;
- }
- 
- .bill-slip .bill-items li {
-    padding: 4px 0;
- }
- 
- .bill-slip .bill-total {
-    color: #2d3748;
-    font-weight: bold;
-    text-align: right;
-    margin-top: 16px;
- }
- 
+}

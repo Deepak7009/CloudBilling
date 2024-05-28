@@ -136,49 +136,50 @@ function RestaurantManagementApp() {
     };
 
     return (
-        <div className="flex flex-col h-screen">
-            {/* <Navbar /> */}
-            <main className="flex flex-grow overflow-y-scroll bg-gray-200 p-4">
-                <div className="flex flex-col md:flex-row w-full">
-                    <Sidebar
-                        items={items}
-                        setSelectedCategory={setSelectedCategory}
-                        setSearchQuery={setSearchQuery}
-                    />
-                    <div className="flex flex-col w-full md:w-2/3">
-                        <SearchBar
-                            selectedCategory={selectedCategory}
-                            setSelectedCategory={setSelectedCategory}
-                            searchQuery={searchQuery}
-                            setSearchQuery={setSearchQuery}
-                            items={items}
-                        />
-                        <ItemList
-                            filteredItems={filteredItems}
-                            addToOrder={addToOrder}
-                        />
-                    </div>
-                    <BillingDetails
-                        billingDetails={billingDetails}
-                        handleBillingChange={handleBillingChange}
-                        orderItems={orderItems}
-                        calculateTotal={calculateTotal}
-                        generateBillSlip={generateBillSlip}
-                        removeFromOrder={removeFromOrder}
-                    />
-                </div>
-            </main>
 
-            {isBillModalOpen && (
-                <BillModal
-                    billingDetails={billingDetails}
-                    orderItems={orderItems}
-                    calculateTotal={calculateTotal}
-                    closeModal={closeModal}
-                    shareOnWhatsApp={shareOnWhatsApp}
-                />
-            )}
-        </div>
+      <div className="flex flex-col h-screen">
+        <Navbar />
+        <main className="flex flex-grow overflow-y-scroll bg-gray-200 p-4">
+          <div className="flex flex-col md:flex-row w-full">
+            <Sidebar
+              items={items}
+              setSelectedCategory={setSelectedCategory}
+              setSearchQuery={setSearchQuery}
+            />
+            <div className="flex flex-col w-full lg:w-1/2 xl:w-2/3">
+              <SearchBar
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                items={items}
+              />
+              <ItemList filteredItems={filteredItems} addToOrder={addToOrder} />
+            </div>
+           
+              <BillingDetails
+                billingDetails={billingDetails}
+                handleBillingChange={handleBillingChange}
+                orderItems={orderItems}
+                calculateTotal={calculateTotal}
+                generateBillSlip={generateBillSlip}
+                removeFromOrder={removeFromOrder}
+              />
+         
+          </div>
+        </main>
+
+
+        {isBillModalOpen && (
+          <BillModal
+            billingDetails={billingDetails}
+            orderItems={orderItems}
+            calculateTotal={calculateTotal}
+            closeModal={closeModal}
+            shareOnWhatsApp={shareOnWhatsApp}
+          />
+        )}
+      </div>
     );
 }
 
