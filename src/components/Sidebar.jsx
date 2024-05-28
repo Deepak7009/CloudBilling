@@ -9,11 +9,12 @@ const Sidebar = ({
   const [line, setLine] = useState("");
   return (
     <div className="flex flex-col lg:max-w-[210px] max-w-[164px]  w-full bg-white p-4 rounded shadow-md mb-4 md:mb-0 md:mr-4">
-      <div className="bg-white z-10">
+        <div className="sticky top-0 bg-white z-10">
         <p className="md:text-[25px] sticky top-0 bg-white z-10 text-[20px] md:block hidden font-bold mb-4">
           Categories
         </p>
-        <div className="">
+      </div>
+        <div className="flex-1 overflow-x-auto md:overflow-y-auto">
           {" "}
           <ul className=" flex md:flex-col">
             {Object.keys(items).map((category) => (
@@ -40,6 +41,7 @@ const Sidebar = ({
           </ul>
         </div>
       </div>
+
     </div>
   );
 };
