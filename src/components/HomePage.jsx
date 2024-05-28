@@ -22,7 +22,7 @@ function RestaurantManagementApp() {
 
     const items = {
         Beverages: [
-           { name: 'Coffee', description: 'Hot / Cold', price: 40 },
+           { name: 'Coffee', description: 'Hot / Cold', price: 100 },
            { name: 'Tea', description: 'Hot / Cold', price: 30 },
            { name: 'Juice', description: 'Fresh / Packaged', price: 50 },
            { name: 'Smoothie', description: 'Fruit / Veggie', price: 60 },
@@ -31,14 +31,14 @@ function RestaurantManagementApp() {
         ],
         Desserts: [
            { name: 'Ice Cream', description: 'Vanilla / Chocolate', price: 50 },
-           { name: 'Cake', description: 'Slice', price: 60 },
+           { name: 'Cake', description: 'Slice', price: 500 },
            { name: 'Brownie', description: 'With / Without Nuts', price: 40 },
            { name: 'Pudding', description: 'Chocolate / Vanilla', price: 35 },
            { name: 'Pastry', description: 'Chocolate / Strawberry', price: 45 },
            { name: 'Cookies', description: 'Chocolate Chip / Oatmeal', price: 30 },
         ],
         Snacks: [
-           { name: 'French Fries', description: 'Regular / Large', price: 50 },
+           { name: 'French Fries', description: 'Regular / Large', price: 99 },
            { name: 'Nachos', description: 'Cheese / Jalapeno', price: 70 },
            { name: 'Spring Rolls', description: 'Veg / Non-Veg', price: 80 },
            { name: 'Samosa', description: '2 pieces', price: 40 },
@@ -59,7 +59,7 @@ function RestaurantManagementApp() {
            { name: 'Veg Burger', description: 'With Cheese / Without Cheese', price: 60 },
            { name: 'Chicken Burger', description: 'With Cheese / Without Cheese', price: 80 },
            { name: 'Cheese Burger', description: 'Double Cheese', price: 100 },
-           { name: 'Paneer Burger', description: 'With Cheese / Without Cheese', price: 90 },
+           { name: 'Paneer Burger', description: 'With Cheese / Without Cheese', price: 120 },
         ],
         Rice: [
            { name: 'Fried Rice', description: 'Veg / Non-Veg', price: 90 },

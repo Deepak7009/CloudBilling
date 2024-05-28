@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ItemList = ({ filteredItems, addToOrder }) => (
-    <div className="flex flex-col space-y-4">
+    <div className="flex flex-col space-y-4 overflow-y-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {filteredItems?.map((item) => (
                 <div key={item.name} className="bg-white p-4 rounded shadow-md">
