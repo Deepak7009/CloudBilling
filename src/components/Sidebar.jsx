@@ -22,4 +22,3 @@ const Sidebar = ({ items, setSelectedCategory, setSearchQuery }) => (
 );
 
 export default Sidebar;
-

@@ -26,7 +26,7 @@ const BillingDetails = ({ billingDetails, handleBillingChange, orderItems, calcu
                     className="border border-gray-400 rounded px-4 py-2 flex-grow"
                 />
             </div>
-            <div className='flex items-center'>
+            {/*<div className='flex items-center'>
                 <label className="w-1/4 text-right pr-4">Add:</label>
                 <input
                     type="text"
@@ -47,7 +47,7 @@ const BillingDetails = ({ billingDetails, handleBillingChange, orderItems, calcu
                     onChange={handleBillingChange}
                     className="border border-gray-400 rounded px-4 py-2 flex-grow"
                 />
-            </div>
+            </div>*/}
         </div>
 
         <p className="text-lg font-bold mb-4">Order Summary</p>
