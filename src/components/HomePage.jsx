@@ -59,7 +59,7 @@ function RestaurantManagementApp() {
            { name: 'Veg Burger', description: 'With Cheese / Without Cheese', price: 60 },
            { name: 'Chicken Burger', description: 'With Cheese / Without Cheese', price: 80 },
            { name: 'Cheese Burger', description: 'Double Cheese', price: 100 },
-           { name: 'Paneer Burger', description: 'With Cheese / Without Cheese', price: 120 },
+           { name: 'Paneer Burger', description: 'With Cheese / Without Cheese', price: 100 },
         ],
         Rice: [
            { name: 'Fried Rice', description: 'Veg / Non-Veg', price: 90 },
@@ -79,11 +79,15 @@ function RestaurantManagementApp() {
         setOrderItems(orderItems.filter(item => item !== itemToRemove));
     };
 
+    const allItems = Object.values(items).flat();
+    
+    const filteredItems = searchQuery
+    ? allItems.filter((item) =>
+          item.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : items[selectedCategory] || [];
 
-    const filteredItems = items[selectedCategory]?.filter((item) =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
+    
     const addToOrder = (item) => {
         const existingItem = orderItems.find(orderItem => orderItem.name === item.name);
         if (existingItem) {
