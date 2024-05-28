@@ -74,7 +74,10 @@ function RestaurantManagementApp() {
         ],
      };
   
-  
+     const removeFromOrder = (itemToRemove) => {
+        setOrderItems(orderItems.filter(item => item !== itemToRemove));
+    };
+
 
     const filteredItems = items[selectedCategory]?.filter((item) =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -156,6 +159,7 @@ function RestaurantManagementApp() {
                         orderItems={orderItems}
                         calculateTotal={calculateTotal}
                         generateBillSlip={generateBillSlip}
+                        removeFromOrder={removeFromOrder}
                     />
                 </div>
             </main>
