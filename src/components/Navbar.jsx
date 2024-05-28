@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -10,7 +11,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="bg-white shadow-md p-4 flex items-center justify-between">
+      <nav className="bg-white shadow-md p-3 flex items-center justify-between">
         {/* Left Section */}
         <div className="flex items-center">
           <button
@@ -43,7 +44,11 @@ const Navbar = () => {
           </div>
           <div className="flex items-center space-x-4">
             <i className="fas fa-house-user"></i>
-            <i className="fa-solid fa-plus">Categorie</i>
+            <ul>
+              <li>
+                <Link to='/category'><i className="fa-solid fa-plus">Categorie</i></Link>
+              </li>
+            </ul>
             <i className="fas fa-cog"></i>
             <i className="fas fa-bell"></i>
             <i className="fas fa-user-circle"></i>
