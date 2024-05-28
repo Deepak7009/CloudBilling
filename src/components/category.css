@@ -1,0 +1,41 @@
+.form-wrapper {
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    transform: perspective(1000px);
+    transform-style: preserve-3d;
+  }
+  
+  .form-column {
+    perspective: 1000px;
+  }
+  
+  .input-group {
+    transform: translateZ(30px);
+    margin-bottom: 20px;
+  }
+  
+  .form-input, .form-select, .form-textarea {
+    background: #f0f0f0;
+    box-shadow: inset 5px 5px 10px #d9d9d9, inset -5px -5px 10px #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    box-shadow: inset 5px 5px 10px #d9d9d9, inset -5px -5px 10px #ffffff, 0 0 10px rgba(0, 0, 255, 0.5);
+  }
+  
+  .submit-button {
+    box-shadow: 5px 5px 10px #d9d9d9, -5px -5px 10px #ffffff;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .submit-button:hover {
+    transform: translateY(-2px);
+  }
+  
