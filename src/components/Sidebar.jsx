@@ -18,6 +18,7 @@ const Sidebar = ({ items, selectedCategory, setSelectedCategory, setSearchQuery 
                 </li>
             ))}
         </ul>
+
     </div>
 );
 
