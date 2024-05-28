@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import ItemList from './ItemList';
 import BillingDetails from './BillingDetails';
 import BillModal from './BillModal';
+import Navbar from './Navbar';
 
 function RestaurantManagementApp() {
     const [selectedCategory, setSelectedCategory] = useState('Beverages');
@@ -132,7 +133,7 @@ function RestaurantManagementApp() {
 
     return (
         <div className="flex flex-col h-screen">
-            <Header />
+            <Navbar />
             <main className="flex flex-grow overflow-y-scroll bg-gray-200 p-4">
                 <div className="flex flex-col md:flex-row w-full">
                     <Sidebar
