@@ -42,31 +42,32 @@ const Category = () => {
         price: "",
         description: "",
       });
+      fetchData(); // Fetch data again to update the table
     } catch (error) {
       console.error("Error adding category:", error);
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/getdata");
-        setData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/getdata");
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="container-fluid mx-auto px-4">
       <form
         className="form-wrapper flex flex-col md:flex-row mt-12"
         onSubmit={handleSubmit}
       >
-        <div className="form-column w-full md:w-1/2 px-4">
+        <div className="form-column w-full md:w-1/3 px-4">
           <div className="mb-4 flex flex-wrap justify-between">
             <div className="input-group w-full md:w-5/12 mb-4 md:mb-0">
               <label htmlFor="productid" className="block font-medium">
@@ -103,6 +104,7 @@ const Category = () => {
               value={formData.type}
               onChange={handleChange}
             >
+              <option>Select</option>
               <option value="veg">Veg</option>
               <option value="non-veg">Non-veg</option>
             </select>
@@ -117,6 +119,7 @@ const Category = () => {
               value={formData.category}
               onChange={handleChange}
             >
+              <option>Select</option>
               <option value="category1">Category 1</option>
               <option value="category2">Category 2</option>
             </select>
@@ -178,18 +181,35 @@ const Category = () => {
             </button>
           </div>
         </div>
-        <div className="w-full md:w-1/2 px-4 mt-4 md:mt-0">
-          {data.map((item, index) => (
-            <div key={index}>
-              <p>Product ID: {item.productid}</p>
-              <p>Name: {item.name}</p>
-              <p>Type: {item.type}</p>
-              <p>Category: {item.category}</p>
-              <p>Unit: {item.unit}</p>
-              <p>Stock: {item.stock}</p>
-              <hr />
-            </div>
-          ))}
+        <div className="w-full md:w-2/3 px-4 mt-4 md:mt-0">
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white">
+              <thead>
+                <tr>
+                  <th className="py-2 px-4 border-b">Product ID</th>
+                  <th className="py-2 px-4 border-b">Name</th>
+                  <th className="py-2 px-4 border-b">Type</th>
+                  <th className="py-2 px-4 border-b">Category</th>
+                  <th className="py-2 px-4 border-b">Unit</th>
+                  <th className="py-2 px-4 border-b">Stock</th>
+                  <th className="py-2 px-4 border-b">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((item, index) => (
+                  <tr key={index}>
+                    <td className="py-2 px-4 border-b">{item.productid}</td>
+                    <td className="py-2 px-4 border-b">{item.name}</td>
+                    <td className="py-2 px-4 border-b">{item.type}</td>
+                    <td className="py-2 px-4 border-b">{item.category}</td>
+                    <td className="py-2 px-4 border-b">{item.unit}</td>
+                    <td className="py-2 px-4 border-b">{item.stock}</td>
+                    <td className="py-2 px-4 border-b">{item.description}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </form>
     </div>
