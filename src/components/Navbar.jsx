@@ -46,9 +46,7 @@ const Navbar = () => {
             <i className="fas fa-house-user"></i>
             <ul>
               <li>
-                <Link to="/category">
-                  <i className="fa-solid fa-plus">Categorie</i>
-                </Link>
+                <Link to='/category'><i className="fa-solid fa-plus">Category</i></Link>
               </li>
             </ul>
             <i className="fas fa-cog"></i>

@@ -26,7 +26,7 @@ const SearchBar = ({
         </div>
         {isSearchBarOpen && (
           <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-2">
-            <select
+            {/* <select
               className="border border-gray-400 rounded px-4 py-2"
               onChange={(e) => {
                 setSelectedCategory(e.target.value);
@@ -40,7 +40,7 @@ const SearchBar = ({
                   {category}
                 </option>
               ))}
-            </select>
+            </select> */}
             <input
               type="text"
               className="border border-gray-400 rounded px-4 py-2"
@@ -61,9 +61,7 @@ const SearchBar = ({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Search
-          </button>
+       
         </div>
 
       </div>

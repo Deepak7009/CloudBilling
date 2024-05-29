@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./category.css";
-
+import update from "../assets/images/svg/updateicon.svg";
+import cross from "../assets/images/svg/crossicon.svg";
 const Category = () => {
   const [formData, setFormData] = useState({
     productid: "",
@@ -185,26 +186,57 @@ const Category = () => {
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white">
               <thead>
-                <tr>
-                  <th className="py-2 px-4 border-b">Product ID</th>
-                  <th className="py-2 px-4 border-b">Name</th>
-                  <th className="py-2 px-4 border-b">Type</th>
-                  <th className="py-2 px-4 border-b">Category</th>
-                  <th className="py-2 px-4 border-b">Unit</th>
-                  <th className="py-2 px-4 border-b">Stock</th>
-                  <th className="py-2 px-4 border-b">Description</th>
+                <tr className="">
+                  <th className="py-2 px-4 text-start border-b">Product ID</th>
+                  <th className="py-2 px-4 border-b text-start">Name</th>
+                  <th className="py-2 px-4 border-b text-start">Type</th>
+                  <th className="py-2 px-4 border-b text-start">Category</th>
+                  <th className="py-2 px-4 border-b text-start">Unit</th>
+                  <th className="py-2 px-4 border-b text-start">Stock</th>
+                  <th className="py-2 px-4 border-b text-start">Description</th>
+                  <th className="py-2 px-4 border-b text-start">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {data.map((item, index) => (
                   <tr key={index}>
-                    <td className="py-2 px-4 border-b">{item.productid}</td>
-                    <td className="py-2 px-4 border-b">{item.name}</td>
-                    <td className="py-2 px-4 border-b">{item.type}</td>
-                    <td className="py-2 px-4 border-b">{item.category}</td>
-                    <td className="py-2 px-4 border-b">{item.unit}</td>
-                    <td className="py-2 px-4 border-b">{item.stock}</td>
-                    <td className="py-2 px-4 border-b">{item.description}</td>
+                    <td className="py-2 px-4 border-b text-start">
+                      {item.productid}
+                    </td>
+                    <td className="py-2 px-4 border-b text-start">
+                      {item.name}
+                    </td>
+                    <td className="py-2 px-4 border-b text-start">
+                      {item.type}
+                    </td>
+                    <td className="py-2 px-4 border-b text-start">
+                      {item.category}
+                    </td>
+                    <td className="py-2 px-4 border-b text-start">
+                      {item.unit}
+                    </td>
+                    <td className="py-2 px-4 border-b text-start">
+                      {item.stock}
+                    </td>
+                    <td className="py-2 px-4 border-b text-start">
+                      {item.description}
+                    </td>{" "}
+                    <td className="py-2 px-4 border-b text-start">
+                      <div className="flex gap-3">
+                        <img
+                          className=" cursor-pointer"
+                          src={update}
+                          alt="update icon"
+                          title="Update Your Order"
+                        />
+                        <img
+                          className=" cursor-pointer"
+                          src={cross}
+                          alt="cross icon"
+                          title="Delete Your Order"
+                        />
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>

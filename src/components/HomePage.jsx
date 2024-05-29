@@ -137,7 +137,8 @@ function RestaurantManagementApp() {
     return (
 
       <div className="flex flex-col h-screen">
-        <main className="flex flex-grow overflow-y-scroll bg-gray-200 p-4">
+        {/* <Navbar /> */}
+        <main className="flex flex-grow bg-gray-200 p-4">
           <div className="flex flex-col md:flex-row w-full">
             <Sidebar
               items={items}
