@@ -74,7 +74,13 @@ const Navbar = () => {
               <span className="font-bold">9099012488</span>
             </div>
             <i className="fas fa-house-user"></i>
-            <i className="fas fa-store"></i>
+            <ul>
+              <li>
+                <Link to="/category">
+                  <i className="fa-solid fa-plus">Categorie</i>
+                </Link>
+              </li>
+            </ul>
             <i className="fas fa-cog"></i>
             <i className="fas fa-bell"></i>
             <i className="fas fa-user-circle"></i>
