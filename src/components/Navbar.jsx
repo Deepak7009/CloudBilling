@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from "react-router-dom";
-
+import historyIcon from "../assets/images/svg/orderhistory.svg";
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -46,10 +46,15 @@ const Navbar = () => {
             <i className="fas fa-house-user"></i>
             <ul>
               <li>
-                <Link to='/category'><i className="fa-solid fa-plus">Category</i></Link>
+                <Link to="/category">
+                  <i className="fa-solid fa-plus">Category</i>
+                </Link>
               </li>
             </ul>
-            <i className="fas fa-cog"></i>
+            <Link to="/history">
+              <img title="Order History" src={historyIcon} alt="histroy icon" />
+            </Link>
+
             <i className="fas fa-bell"></i>
             <i className="fas fa-user-circle"></i>
             <i className="fas fa-power-off"></i>
@@ -59,7 +64,7 @@ const Navbar = () => {
 
       {/* Sidebar for mobile and tablet screens */}
       <div
-        className={`fixed top-0 right-0 h-full bg-white shadow-md transform ${
+        className={`fixed top-0 z-50 right-0 h-full bg-white shadow-md transform ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 lg:hidden`}
       >
@@ -77,11 +82,13 @@ const Navbar = () => {
             <ul>
               <li>
                 <Link to="/category">
-                  <i className="fa-solid fa-plus">Categorie</i>
+                  <i className="fa-solid fa-plus">Categories</i>
                 </Link>
               </li>
             </ul>
-            <i className="fas fa-cog"></i>
+            <Link to="/history">
+              <img title="Order History" src={historyIcon} alt="histroy icon" />
+            </Link>
             <i className="fas fa-bell"></i>
             <i className="fas fa-user-circle"></i>
             <i className="fas fa-power-off"></i>

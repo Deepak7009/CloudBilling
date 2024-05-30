@@ -3,6 +3,7 @@ import "./App.css";
 import Category from "./components/Category";
 import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
+import OrderHistory from "./components/OrderHistory";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/category" element={<Category />} />
+        <Route path="/history" element={<OrderHistory />} />
       </Routes>
 
       {/* <Category/> */}
