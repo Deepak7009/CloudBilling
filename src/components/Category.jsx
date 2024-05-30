@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import "./category.css";
+import { baseUrl } from "../utils/Const";
 import update from "../assets/images/svg/updateicon.svg";
 import cross from "../assets/images/svg/crossicon.svg";
 
@@ -36,7 +37,7 @@ const Category = () => {
     if (isUpdateMode) {
       try {
         const response = await axios.put(
-          `http://localhost:5000/category/${updateId}`,
+          `${baseUrl}category/${updateId}`,
           formData
         );
         toast.success("Data updated successfully!");
@@ -59,10 +60,7 @@ const Category = () => {
       }
     } else {
       try {
-        const response = await axios.post(
-          "http://localhost:5000/category",
-          formData
-        );
+        const response = await axios.post(`${baseUrl}category`, formData);
         toast.success("Category added successfully!");
         setFormData({
           productid: "",
@@ -91,7 +89,7 @@ const Category = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/getdata");
+      const response = await axios.get(`${baseUrl}getdata`);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -119,7 +117,7 @@ const Category = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5000/category/${id}`);
+          await axios.delete(`${baseUrl}category/${id}`);
           toast.success("Category deleted successfully!");
           fetchData();
         } catch (error) {
