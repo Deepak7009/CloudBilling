@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { baseUrl } from "../utils/Const";
 import axios from "axios";
 
 const BillingDetails = ({
@@ -18,7 +19,7 @@ const BillingDetails = ({
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/bill", billData);
+      const response = await axios.post(`${baseUrl}bill`, billData);
       setMessage("Order placed successfully!");
       generateBillSlip(); // Handle post-order actions
     } catch (error) {
