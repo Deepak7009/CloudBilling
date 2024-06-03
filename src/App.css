@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+   font-family: "Public Sans", sans-serif;
+}
+
 .bill-slip {
    border: 1px solid #e2e8f0;
    border-radius: 8px;
    padding: 16px;
    background-color: #f7fafc;
 }
+
 
 .bill-slip h2,
 .bill-slip h3 {
@@ -56,8 +63,9 @@
 .example::-webkit-scrollbar {
    display: none;
 }
-.hn{
+
+.hn {
    width: 600px;
    overflow-x: scroll;
- 
+
 }
