@@ -7,7 +7,7 @@ const OrderHistory = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/getBillData");
+      const response = await axios.get("http://localhost:5000/getdata");
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -75,38 +75,38 @@ const OrderHistory = () => {
             <thead>
               <tr className="">
                 <th className="py-2 px-4 text-start border-b">Date</th>
+                <th className="py-2 px-4 text-start border-b">Product ID</th>
                 <th className="py-2 px-4 border-b text-start">Name</th>
-                <th className="py-2 px-4 border-b text-start">Mobile</th>
-                <th className="py-2 px-4 border-b text-start">Item Name</th>
-                <th className="py-2 px-4 border-b text-start">Quantity</th>
-                <th className="py-2 px-4 border-b text-start">Price</th>
+                <th className="py-2 px-4 border-b text-start">Type</th>
+                <th className="py-2 px-4 border-b text-start">Category</th>
+                <th className="py-2 px-4 border-b text-start">Unit</th>
+                <th className="py-2 px-4 border-b text-start">Stock</th>
+                <th className="py-2 px-4 border-b text-start">Description</th>
               </tr>
             </thead>
             <tbody>
-              {filterData(data).map((item) =>
-                item.orderItems.map((orderItem, index) => (
-                  <tr key={index}>
-                    <td className="py-2 px-4 border-b text-start">
-                      {formatDate(item.timestamp)}
-                    </td>
-                    <td className="py-2 px-4 border-b text-start">
-                      {item.name}
-                    </td>
-                    <td className="py-2 px-4 border-b text-start">
-                      {item.mobile}
-                    </td>
-                    <td className="py-2 px-4 border-b text-start">
-                      {orderItem.name}
-                    </td>
-                    <td className="py-2 px-4 border-b text-start">
-                      {orderItem.quantity}
-                    </td>
-                    <td className="py-2 px-4 border-b text-start">
-                      {orderItem.price}
-                    </td>
-                  </tr>
-                ))
-              )}
+              {filterData(data).map((item, index) => (
+                <tr key={index}>
+                  <td className="py-2 px-4 border-b text-start">
+                    {formatDate(item.timestamp)}
+                  </td>
+                  <td className="py-2 px-4 border-b text-start">
+                    {item.productid}
+                  </td>
+                  <td className="py-2 px-4 border-b text-start">{item.name}</td>
+                  <td className="py-2 px-4 border-b text-start">{item.type}</td>
+                  <td className="py-2 px-4 border-b text-start">
+                    {item.category}
+                  </td>
+                  <td className="py-2 px-4 border-b text-start">{item.unit}</td>
+                  <td className="py-2 px-4 border-b text-start">
+                    {item.stock}
+                  </td>
+                  <td className="py-2 px-4 border-b text-start">
+                    {item.description}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
