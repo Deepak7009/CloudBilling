@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from "react-router-dom";
 import historyIcon from "../assets/images/svg/orderhistory.svg";
+import gif from "../assets/images/webp/giphy.webp"
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -20,7 +21,8 @@ const Navbar = () => {
           >
             <i className="fas fa-bars"></i>
           </button>
-          <img src="/path-to-your-logo.png" alt="Pet Pooja" className="h-8" />
+        <img width={100} height={100} src={gif} alt="" />
+       
         </div>
 
         {/* Center Section */}
