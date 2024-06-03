@@ -16,6 +16,11 @@ const BillingDetails = ({
     const billData = {
       name: billingDetails.name,
       mobile: billingDetails.mobile,
+      orderItems: orderItems.map((item) => ({
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price * item.quantity,
+      })),
     };
 
     try {
