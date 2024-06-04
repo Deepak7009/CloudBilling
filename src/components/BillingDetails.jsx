@@ -66,14 +66,14 @@ const BillingDetails = ({
       </div>
 
       <p className="text-lg font-bold mb-4">Order Summary</p>
-      <div className="overflow-x-auto example">
+      <div className="overflow-x-auto overflow-auto max-h-[200px]  example">
         <table className="min-w-full divide-y divide-gray-200">
           <thead>
             <tr>
               <th className="py-1 px-3 bg-gray-50">Item</th>
               <th className="py-1 px-3 bg-gray-50">Quantity</th>
               <th className="py-1 px-3 bg-gray-50">Price</th>
-              <th className="py-1 px-3 bg-gray-50">Actions</th>
+              <th className="py-1 px-3 bg-gray-50">Cancel</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200 text-sm">
