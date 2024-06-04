@@ -4,11 +4,13 @@ import Category from "./components/Category";
 import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 import OrderHistory from "./components/OrderHistory";
+import GenerateCSV from "./components/GenerateCSV";
 
 function App() {
   return (
     <>
       <Navbar />
+      <GenerateCSV />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/category" element={<Category />} />
