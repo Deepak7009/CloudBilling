@@ -3,6 +3,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from "react-router-dom";
 import historyIcon from "../assets/images/order.gif";
 import gif from "../assets/images/webp/giphy.webp"
+import notificationIcon from '../assets/images/notification.gif'
+import call from '../assets/images/customer-service.gif'
 const Navbar = () => {
    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -44,7 +46,10 @@ const Navbar = () => {
             {/* Right Section */}
             <div className="hidden lg:flex items-center space-x-4">
                <div className="flex items-center space-x-2">
-                  <span>📞Call for Support</span>
+                  <span>
+                     <img src={call} alt="" width="36" height="36" />
+                  </span>
+                  <span>Call for Support</span>
                   <span className="font-bold">9876543210</span>
                </div>
                <div className="flex items-center space-x-4">
@@ -65,13 +70,9 @@ const Navbar = () => {
                      />
                   </Link>
 
-                  <svg class="bell-icon" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                     <path fill="#FFD700" d="M12 22C13.1046 22 14 21.1046 14 20H10C10 21.1046 10.8954 22 12 22Z" />
-                     <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFD700" d="M18 16V11C18 7.68629 16.7357 4.73571 14.4645 2.96447C14.3066 2.84119 14.153 2.72529 14 2.6166V2C14 0.89543 13.1046 0 12 0C10.8954 0 10 0.89543 10 2V2.6166C9.84703 2.72529 9.69336 2.84119 9.53553 2.96447C7.26429 4.73571 6 7.68629 6 11V16L4 18V19H20V18L18 16ZM8 11C8 8.23858 9.34315 5.34315 12 4.34315C14.6569 5.34315 16 8.23858 16 11V17H8V11Z" />
-                  </svg>
+                  <img src={notificationIcon} alt="" width="28" height="28" />
 
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-
                      <circle cx="12" cy="8" r="4" fill="#42A5F5"><animate attributeName="r" values="4;5;4" dur="1s" repeatCount="indefinite" /> </circle>
                      <path fill="#1E88E5" d="M12 14c-5 0-9 2.5-9 5v2h18v-2c0-2.5-4-5-9-5z" >
                         <animate
@@ -83,7 +84,7 @@ const Navbar = () => {
                      </path>
                   </svg>
 
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24"  >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="26"  >
                      <path fill="#66BB6A" d="M16 13v-2H7V8l-5 4 5 4v-3z">
                         <animate attributeName="d" values="M16 13v-2H7V8l-5 4 5 4v-3z;  M16 11v-2H7V6l-5 4 5 4v-3z;  M16 13v-2H7V8l-5 4 5 4v-3z" dur="1s" repeatCount="indefinite" />
                      </path>
@@ -108,30 +109,35 @@ const Navbar = () => {
                </button>
                <div className="flex flex-col space-y-4">
                   <div className="flex items-center space-x-2">
-                     <span>📞Call for Support</span>
+                     <span>
+                        <img src={call} alt="" width="36" height="36" />
+                     </span>
+                     <span>Call for Support</span>
                      <span className="font-bold">9099012488</span>
                   </div>
-                  <Link to="/category" className="flex items-center space-x-1 hover:text-red-600 transition duration-300">
+
+                  <Link to="/category" className="flex items-center space-x-2">
+
                      <svg width="40" height="40" viewBox="0 0 40 40">
                         <rect x="10" y="10" width="20" height="20" rx="2" fill="#FFF" stroke="#42A5F5" stroke-width="3" />
                         <path fill="#FFD700"
                            d="M15 20 L25 20 M20 15 L20 25" stroke="#42A5F5" stroke-width="2"
                         />
                      </svg>
+
+                     <span>Add Product</span>
                   </Link>
-                  <Link to="/history"
-                     className="">
+
+                  <Link to="/history" className="flex items-center space-x-2">
                      <img title="Order History"
-                        src={historyIcon} alt="history icon" width="30" height="30"
+                        src={historyIcon} alt="history icon" width="40" height="40"
                      />
+                     <span>Order History</span>
                   </Link>
 
-                  <svg class="bell-icon" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-                     <path fill="#FFD700" d="M12 22C13.1046 22 14 21.1046 14 20H10C10 21.1046 10.8954 22 12 22Z" />
-                     <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFD700" d="M18 16V11C18 7.68629 16.7357 4.73571 14.4645 2.96447C14.3066 2.84119 14.153 2.72529 14 2.6166V2C14 0.89543 13.1046 0 12 0C10.8954 0 10 0.89543 10 2V2.6166C9.84703 2.72529 9.69336 2.84119 9.53553 2.96447C7.26429 4.73571 6 7.68629 6 11V16L4 18V19H20V18L18 16ZM8 11C8 8.23858 9.34315 5.34315 12 4.34315C14.6569 5.34315 16 8.23858 16 11V17H8V11Z" />
-                  </svg>
+                  <img src={notificationIcon} alt="" width="40" height="40" />
 
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36">
 
                      <circle cx="12" cy="8" r="4" fill="#42A5F5"><animate attributeName="r" values="4;5;4" dur="1s" repeatCount="indefinite" /> </circle>
                      <path fill="#1E88E5" d="M12 14c-5 0-9 2.5-9 5v2h18v-2c0-2.5-4-5-9-5z" >
@@ -144,8 +150,7 @@ const Navbar = () => {
                      </path>
                   </svg>
 
-
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24"  >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="40" width="40"  >
                      <path fill="#66BB6A" d="M16 13v-2H7V8l-5 4 5 4v-3z">
                         <animate attributeName="d" values="M16 13v-2H7V8l-5 4 5 4v-3z;  M16 11v-2H7V6l-5 4 5 4v-3z;  M16 13v-2H7V8l-5 4 5 4v-3z" dur="1s" repeatCount="indefinite" />
                      </path>
