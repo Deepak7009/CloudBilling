@@ -4,7 +4,6 @@ import SearchBar from './SearchBar';
 import ItemList from './ItemList';
 import BillingDetails from './BillingDetails';
 import BillModal from './BillModal';
-import Navbar from './Navbar';
 
 function RestaurantManagementApp() {
     const [selectedCategory, setSelectedCategory] = useState('Beverages');

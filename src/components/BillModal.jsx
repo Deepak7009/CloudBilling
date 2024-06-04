@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import QrCode from '../assets/images/Qrcode 1.png'
 
 const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, shareOnWhatsApp }) => {
    const [discount, setDiscount] = useState(0);
    const [gst, setGST] = useState(0);
+   const billRef = useRef(null);
 
    const handleDiscountChange = (e) => {
       const value = parseFloat(e.target.value);
@@ -17,45 +19,94 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
    const totalWithDiscount = calculateTotal() - discount;
    const totalWithGST = totalWithDiscount * (1 + gst / 100);
 
+   const handlePrint = () => {
+      const printContents = billRef.current.innerHTML;
+      const originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContents;
+      window.print();
+      document.body.innerHTML = originalContents;
+      window.location.reload(); // Reload the page to restore original contents
+   };
+
    return (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-         <div className="bg-white p-6 rounded shadow-md w-3/4 max-w-lg">
-            <div className="bill-slip bg-gray-100 p-4 rounded">
-               <h2 className="text-xl font-bold mb-2">Bill Details</h2>
-               <p><span className='font-semibold'>Name: </span>{billingDetails.name}</p>
-               <p><span className='font-semibold'>Mobile: </span>{billingDetails.mobile}</p>
+         <div className="bg-white p-6 rounded shadow-md w-2/4 max-w-[450px]">
 
-               <h3 className="text-lg font-bold mt-4 mb-2">Order Summary</h3>
-               <ul className="list-disc list-inside mb-2">
-                  {orderItems.map(item => (
-                     <li key={item.name}>{item.name} x {item.quantity} = ₹{item.price * item.quantity}</li>
-                  ))}
-               </ul>
-               <p className="bill-total text-lg font-bold mt-4"><strong>Total :</strong> ₹{calculateTotal()}</p>
-               <div className='flex'>
-                  <div className="mt-2">
-                     <label htmlFor="discount" className="font-semibold pl-3">Discount:</label>
-                     <input
-                        type="number"
-                        id="discount"
-                        className="border border-gray-300 rounded p-1 ml-2"
-                        value={discount}
-                        onChange={handleDiscountChange}
-                     />
+            <div className="bill-slip bg-gray-100 p-4 rounded" ref={billRef}>
+               <div className='print:max-w-[200px]'>
+                  <div className='bill'>
+                     <h2 className="text-center text-2xl font-bold">
+                        CLOUD RASHOI
+                     </h2>
+                     <div className='address print:border-b-2 border-dotted border-gray-500 print:py-2'>
+                        <p className='text-center '>
+                           <span className='block'>123 Main Street</span>
+                           <span className='block'>Hisar, Haryana 125001</span>
+                           <span>+91 9876543210</span>
+                        </p>
+                     </div>
+                     <div className="bill-details mt-3 print:border-b-2 border-dotted border-gray-500 print:py-1">
+                        <p className="flex justify-between"><span>Bill No:</span> <span>12345</span></p>
+                        <p className="flex justify-between"><span>Date:</span> <span>{new Date().toLocaleDateString()}</span></p>
+                        <div className='mt-2'>
+                           <p className="flex justify-between"><span>Name:</span> <span>{billingDetails.name}</span></p>
+                           <p className="flex justify-between"><span>Mobile:</span> <span>{billingDetails.mobile}</span></p>
+                        </div>
+                     </div>
+
+                     <h3 className="text-lg font-semibold mt-4 text-center">Order Details :</h3>
+                     <ul className="list-disc list-inside mb-2 max-h-[100px] overflow-auto print:max-h-full">
+                        {orderItems.map((item, index) => (
+                           <li key={item.name} className="flex justify-between">
+                              <span>{index + 1}. {item.name} x {item.quantity} </span>
+                              <span>₹{item.price * item.quantity}</span>
+                           </li>
+                        ))}
+                     </ul>
+                     <p className="flex justify-between bill-total text-lg font-semibold mt-4">
+                        <span>Sub Total :</span> <span>₹{calculateTotal()}</span></p>
+
+                     <div className='discount flex print:block'>
+                        <div className="mt-2 print:flex justify-between">
+
+                           <label htmlFor="discount" className="font-semibold pl-1">Discount:</label>
+                           <input
+                              type="number"
+                              id="discount"
+                              className="border border-gray-300 print:text-end print:p-0 rounded p-1 max-w-[150px] print:border-none"
+                              value={discount}
+                              onChange={handleDiscountChange}
+                           />
+
+                        </div>
+                        <div className="mt-2 print:flex justify-between">
+                           <label htmlFor="gst" className="font-semibold pl-2">GST (%):</label>
+                           <input
+                              type="number"
+                              id="gst"
+                              className="border border-gray-300 print:text-end print:p-0 rounded p-1 ml-2 max-w-[150px] print:border-none"
+                              value={gst}
+                              onChange={handleGSTChange}
+                           />
+                        </div>
+                     </div>
+
+                     <p className="flex justify-between bill-total text-xl font-bold mt-3 print:border-y-2 border-dashed border-gray-500 print:py-2">
+                        <span>Total :</span> <span>₹{totalWithGST.toFixed(2)}</span></p>
                   </div>
-                  <div className="mt-2">
-                     <label htmlFor="gst" className="font-semibold pl-3">GST (%):</label>
-                     <input
-                        type="number"
-                        id="gst"
-                        className="border border-gray-300 rounded p-1 ml-2"
-                        value={gst}
-                        onChange={handleGSTChange}
-                     />
+
+                  <div className='thanks my-3 text-center'>
+                     <p className='text-xl'>Thanks for visiting !!</p>
+
+                     <div className='flex justify-center mt-2'>
+                        <img src={QrCode} alt='' />
+                     </div>
+                     <p className='text-lg'> Scan to pay your bill </p>
                   </div>
+
                </div>
-               <p className="bill-total text-lg font-bold mt-2"><strong>Grand Total :</strong> ₹{totalWithGST}</p>
             </div>
+
             <div className="flex flex-row justify-between mt-4">
                <button
                   className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
@@ -65,7 +116,7 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                </button>
                <button
                   className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
-
+                  onClick={handlePrint}
                >
                   Print
                </button>
