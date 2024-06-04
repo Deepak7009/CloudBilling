@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <GenerateCSV />
+      {/* <GenerateCSV /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/category" element={<Category />} />
