@@ -79,11 +79,13 @@ const Navbar = () => {
                   </Link>
 
                   <Link to="/" className="flex items-center space-x-2">
-                     <img src={profile} alt="" width="28" height="28" />
+                     <img title="Profile"
+                        src={profile} alt="" width="28" height="28" />
                   </Link>
 
                   <Link to="/" className="flex items-center space-x-2">
-                     <img src={logout} alt="" width="28" height="28" />                  
+                     <img title="Logout"
+                        src={logout} alt="" width="28" height="28" />
                   </Link>
 
                </div>
@@ -109,22 +111,19 @@ const Navbar = () => {
                   </div>
 
                   <Link to="/category" className="flex items-center space-x-2">
-                     <img title="Add Product"
-                        src={productIcon} alt="history icon" width="40" height="40"
+                     <img src={productIcon} alt="history icon" width="40" height="40"
                      />
                      <span>Add Product</span>
                   </Link>
 
                   <Link to="/history" className="flex items-center space-x-2">
-                     <img title="Order History"
-                        src={historyIcon} alt="history icon" width="40" height="40"
+                     <img src={historyIcon} alt="history icon" width="40" height="40"
                      />
                      <span>Order History</span>
                   </Link>
 
                   <Link to="/" className="flex items-center space-x-2">
-                     <img title="Order History"
-                        src={notificationIcon} alt="history icon" width="40" height="40"
+                     <img src={notificationIcon} alt="history icon" width="40" height="40"
                      />
                      <span>Notifications</span>
                   </Link>
