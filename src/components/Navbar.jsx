@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from "react-router-dom";
 import historyIcon from "../assets/images/svg/orderhistory.svg";
-
+import gif from "../assets/images/webp/giphy.webp"
 const Navbar = () => {
    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -10,21 +10,20 @@ const Navbar = () => {
       setIsSidebarOpen(!isSidebarOpen);
    };
 
-   return (
-      <div>
-         <nav className="bg-white shadow-md p-3 flex items-center justify-between">
-            {/* Left Section */}
-            <div className="flex items-center">
-               <button
-                  className="mr-4 text-xl block lg:hidden"
-                  onClick={toggleSidebar}
-               >
-                  <i className="fas fa-bars hover:text-red-600 transition duration-300"></i>
-               </button>
-               <Link to="/">
-                  <img src="" alt="Pet Pooja" className="h-8" />
-               </Link>
-            </div>
+  return (
+    <div>
+      <nav className="bg-white shadow-md p-3 flex items-center justify-between">
+        {/* Left Section */}
+        <div className="flex items-center">
+          <button
+            className="mr-4 text-xl block lg:hidden"
+            onClick={toggleSidebar}
+          >
+            <i className="fas fa-bars"></i>
+          </button>
+        <img width={100} height={100} src={gif} alt="" />
+       
+        </div>
 
             {/* Center Section */}
             <div className="flex items-center space-x-4">
