@@ -108,17 +108,22 @@ const Navbar = () => {
                </button>
                <div className="flex flex-col space-y-4">
                   <div className="flex items-center space-x-2">
-                     <i className="fas fa-phone-alt text-red-600"></i>
-                     <span>Call for Support</span>
+                     <span>📞Call for Support</span>
                      <span className="font-bold">9099012488</span>
                   </div>
                   <Link to="/category" className="flex items-center space-x-1 hover:text-red-600 transition duration-300">
-                     <i className="fas fa-plus"></i>
-                     <span>Category</span>
+                     <svg width="40" height="40" viewBox="0 0 40 40">
+                        <rect x="10" y="10" width="20" height="20" rx="2" fill="#FFF" stroke="#42A5F5" stroke-width="3" />
+                        <path fill="#FFD700"
+                           d="M15 20 L25 20 M20 15 L20 25" stroke="#42A5F5" stroke-width="2"
+                        />
+                     </svg>
                   </Link>
-                  <Link to="/history" className="flex items-center space-x-1 hover:text-red-600 transition duration-300">
-                     <img title="Order History" src={historyIcon} alt="history icon" />
-
+                  <Link to="/history"
+                     className="">
+                     <img title="Order History"
+                        src={historyIcon} alt="history icon" width="30" height="30"
+                     />
                   </Link>
 
                   <svg class="bell-icon" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
