@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { baseUrl } from "../utils/Const";
 
 const OrderHistory = () => {
   const [data, setData] = useState([]);
@@ -7,12 +8,14 @@ const OrderHistory = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/getBillData");
+      const response = await axios.get(`${baseUrl}bills`);
       setData(response.data);
+      
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+  
 
   useEffect(() => {
     fetchData();
