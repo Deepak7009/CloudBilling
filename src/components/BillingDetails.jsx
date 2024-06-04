@@ -16,17 +16,19 @@ const BillingDetails = ({
     const billData = {
       name: billingDetails.name,
       mobile: billingDetails.mobile,
-      orderItems: orderItems.map((item) => ({
+      orderItems: orderItems?.map((item) => ({
         name: item.name,
         quantity: item.quantity,
-        price: item.price * item.quantity,
+        price: item.price,
       })),
     };
+    console.log("asd", billData);
 
     try {
       const response = await axios.post(`${baseUrl}bill`, billData);
       setMessage("Order placed successfully!");
-      generateBillSlip(); // Handle post-order actions
+      generateBillSlip();
+      console.log("AS", response);
     } catch (error) {
       setMessage("Error placing order. Please try again.");
       console.error("Error placing order:", error);
@@ -75,16 +77,16 @@ const BillingDetails = ({
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200 text-sm">
-            {orderItems?.map((orderItem) => (
-              <tr key={orderItem.name}>
-                <td className="py-1 px-3">{orderItem.name}</td>
-                <td className="py-1 px-3 text-center">{orderItem.quantity}</td>
+            {orderItems?.map((item) => (
+              <tr key={item.name}>
+                <td className="py-1 px-3">{item.name}</td>
+                <td className="py-1 px-3 text-center">{item.quantity}</td>
                 <td className="py-1 px-3 text-center">
-                  ₹{orderItem.price * orderItem.quantity}
+                  ₹{item.price * item.quantity}
                 </td>
                 <td className="py-1 px-8">
                   <button
-                    onClick={() => removeFromOrder(orderItem)}
+                    onClick={() => removeFromOrder(item)}
                     className="text-red-500 hover:text-red-700 flex justify-center"
                   >
                     ×
