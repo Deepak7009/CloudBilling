@@ -1,66 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Sidebar from './Sidebar';
 import SearchBar from './SearchBar';
 import ItemList from './ItemList';
 import BillingDetails from './BillingDetails';
 import BillModal from './BillModal';
-import { ItemsProvider } from '../context/ItemsContext';
+import { ItemsContext } from '../context/ItemsContext';
 
 function RestaurantManagementApp() {
     const [selectedCategory, setSelectedCategory] = useState('Beverages');
     const [searchQuery, setSearchQuery] = useState('');
     const [orderItems, setOrderItems] = useState([]);
     const [billingDetails, setBillingDetails] = useState({
-        name: '',
+        productName: '',
         mobile: ''
     });
     const [billSlip, setBillSlip] = useState('');
     const [isBillModalOpen, setIsBillModalOpen] = useState(false);
+    const { items } = useContext(ItemsContext);
 
     const removeFromOrder = (itemToRemove) => {
         setOrderItems(orderItems.filter(item => item !== itemToRemove));
     };
 
-    //const allItems = Object.values(items).flat();
+    const allItems = Object.values(items).flat();
+    //   console.log("All Items:",allItems);
 
-    //const filteredItems = searchQuery
-    //    ? allItems.filter((item) =>
-    //        item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    //    )
-    //    : items[selectedCategory] || [];
+    const filteredItems = searchQuery
+        ? allItems.filter((item) =>
+            item.productName.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        : items[selectedCategory] || [];
 
+    //  console.log("Filtered items :", filteredItems);
 
-    //const addToOrder = (item) => {
-    //    const existingItem = orderItems.find(orderItem => orderItem.name === item.name);
-    //    if (existingItem) {
-    //        setOrderItems(orderItems.map(orderItem =>
-    //            orderItem.name === item.name
-    //                ? { ...orderItem, quantity: orderItem.quantity + 1 }
-    //                : orderItem
-    //        ));
-    //    } else {
-    //        setOrderItems([...orderItems, { ...item, quantity: 1 }]);
-    //    }
-    //};
+    const addToOrder = (item) => {
+        const existingItem = orderItems.find(orderItem => orderItem.productName === item.productName);
+        if (existingItem) {
+            setOrderItems(orderItems.map(orderItem =>
+                orderItem.productName === item.productName
+                    ? { ...orderItem, quantity: orderItem.quantity + 1 }
+                    : orderItem
+            ));
+        } else {
+            setOrderItems([...orderItems, { ...item, quantity: 1 }]);
+        }
+    };
 
     const calculateTotal = () => {
         return orderItems.reduce((total, item) => total + (item.price * item.quantity), 0);
     };
 
     const handleBillingChange = (e) => {
-        const { name, value } = e.target;
-        setBillingDetails({ ...billingDetails, [name]: value });
+        const { productName, value } = e.target;
+        setBillingDetails({ ...billingDetails, [productName]: value });
     };
 
     const generateBillSlip = () => {
         let billText = `Bill Details\n`;
-        billText += `Name: ${billingDetails.name}\n`;
+        billText += `productName: ${billingDetails.productName}\n`;
         billText += `Mobile: ${billingDetails.mobile}\n`;
-        billText += `Address: ${billingDetails.address}\n`;
-        billText += `Locality: ${billingDetails.locality}\n`;
         billText += `\nOrder Summary\n`;
         orderItems.forEach(item => {
-            billText += `${item.name} x ${item.quantity} = ₹${item.price * item.quantity}\n`;
+            billText += `${item.productName} x ${item.quantity} = ₹${item.price * item.quantity}\n`;
         });
         billText += `\nTotal: ₹${calculateTotal()}\n`;
 
@@ -78,26 +79,25 @@ function RestaurantManagementApp() {
     };
 
     return (
-
         <div className="flex flex-col h-screen">
             <main className="flex flex-grow bg-gray-200 p-4">
                 <div className="flex flex-col md:flex-row w-full">
-                    <ItemsProvider>
-                        <div className="flex flex-col md:flex-row w-full">
-                            <Sidebar setSelectedCategory={setSelectedCategory} setSearchQuery={setSearchQuery} />
-                            <div className="flex flex-col w-full lg:w-2/3 xl:w-2/3">
-                                <SearchBar
-                                    selectedCategory={selectedCategory}
-                                    setSelectedCategory={setSelectedCategory}
-                                    searchQuery={searchQuery}
-                                    setSearchQuery={setSearchQuery}
-                                    //items={items}
-                                />
-                                <ItemList />
-                            </div>
-                        </div>
-                    </ItemsProvider>
-    
+                    <Sidebar
+                        items={items}
+                        setSelectedCategory={setSelectedCategory}
+                        setSearchQuery={setSearchQuery}
+                    />
+                    <div className="flex flex-col w-full lg:w-1/2 xl:w-2/3">
+                        <SearchBar
+                            selectedCategory={selectedCategory}
+                            setSelectedCategory={setSelectedCategory}
+                            searchQuery={searchQuery}
+                            setSearchQuery={setSearchQuery}
+                            items={items}
+                        />
+                        <ItemList filteredItems={filteredItems} addToOrder={addToOrder} />
+                    </div>
+
                     <BillingDetails
                         billingDetails={billingDetails}
                         handleBillingChange={handleBillingChange}
@@ -106,6 +106,7 @@ function RestaurantManagementApp() {
                         generateBillSlip={generateBillSlip}
                         removeFromOrder={removeFromOrder}
                     />
+
                 </div>
             </main>
 

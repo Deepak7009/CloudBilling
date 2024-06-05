@@ -15,7 +15,7 @@ const ItemList = ({ addToOrder }) => {
           >
             <div className="absolute inset-0 bg-green-500 transform -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0"></div>
             <div className="relative z-10">
-              <p className="text-base font-bold group-hover:text-white">{item.name}</p>
+              <p className="text-base font-bold group-hover:text-white">{item.productName}</p>
               <p className="text-sm group-hover:text-white">{item.description}</p>
               <div className="flex flex-row justify-between mt-2">
                 <p className="text-sm group-hover:text-white">₹ {item.price}</p>
