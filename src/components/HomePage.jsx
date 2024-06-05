@@ -57,7 +57,7 @@ function RestaurantManagementApp() {
 
     const generateBillSlip = () => {
         let billText = `Bill Details\n`;
-        billText += `productName: ${billingDetails.productName}\n`;
+        billText += `productName: ${billingDetails.name}\n`;
         billText += `Mobile: ${billingDetails.mobile}\n`;
         billText += `\nOrder Summary\n`;
         orderItems.forEach(item => {

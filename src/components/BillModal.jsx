@@ -57,8 +57,8 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                      <h3 className="text-lg font-semibold mt-4 text-center">Order Details :</h3>
                      <ul className="list-disc list-inside mb-2 max-h-[100px] overflow-auto print:max-h-full">
                         {orderItems.map((item, index) => (
-                           <li key={item.name} className="flex justify-between">
-                              <span>{index + 1}. {item.name} x {item.quantity} </span>
+                           <li key={item.productName} className="flex justify-between">
+                              <span>{index + 1}. {item.productName} x {item.quantity} </span>
                               <span>₹{item.price * item.quantity}</span>
                            </li>
                         ))}
