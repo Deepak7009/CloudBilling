@@ -11,8 +11,8 @@ import Register from "./login&register/Register";
 function App() {
   return (
     <>
-    {/* <Login/>
-    <Register/> */}
+    <Login/>
+    <Register/>
       <Navbar />
       {/* <GenerateCSV /> */}
       <Routes>
