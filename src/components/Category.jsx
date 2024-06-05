@@ -218,8 +218,8 @@ const Category = () => {
                 onChange={handleChange}
               >
                 <option>Select</option>
-                <option value="unit1">kg</option>
-                <option value="unit2">ml</option>
+                <option value="kg">kg</option>
+                <option value="ml">ml</option>
               </select>
             </div>
             <div className="input-group w-full md:w-5/12">
