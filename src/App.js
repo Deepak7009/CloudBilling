@@ -11,12 +11,12 @@ import Register from "./login&register/Register";
 function App() {
   return (
     <>
-    {/* <Login/>
-    <Register/> */}
       <Navbar />
       {/* <GenerateCSV /> */}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
         <Route path="/category" element={<Category />} />
         <Route path="/history" element={<OrderHistory />} />
       </Routes>
