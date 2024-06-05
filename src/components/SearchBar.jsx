@@ -88,7 +88,8 @@ const SearchBar = ({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-        </div>
+        </div>{" "}
+        <div></div>
       </div>
     </div>
   );
