@@ -38,14 +38,11 @@ const Navbar = () => {
 
             {/* Center Section */}
             <div className="flex items-center space-x-4">
-               <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300">
-                  New Order
-               </button>
-               <input
-                  type="text"
-                  placeholder="Bill No"
-                  className="border px-2 py-1 rounded focus:border-red-600 transition duration-300"
-               />
+               <Link to='/'>
+                  <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300">
+                     New Order
+                  </button>
+               </Link>
             </div>
 
             {/* Right Section */}

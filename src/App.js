@@ -5,10 +5,14 @@ import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 import OrderHistory from "./components/OrderHistory";
 import GenerateCSV from "./components/GenerateCSV";
+import Login from "./login&register/Login";
+import Register from "./login&register/Register";
 
 function App() {
   return (
     <>
+    {/* <Login/>
+    <Register/> */}
       <Navbar />
       {/* <GenerateCSV /> */}
       <Routes>
