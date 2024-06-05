@@ -36,10 +36,10 @@ const Category = () => {
     e.preventDefault();
     if (isUpdateMode) {
       try {
-        const response = 
-        await axios.put(`${baseUrl}category/${updateId}`,
-          formData
-        );
+        const response =
+          await axios.put(`${baseUrl}category/${updateId}`,
+            formData
+          );
         toast.success("Data updated successfully!");
         setFormData({
           productid: "",
