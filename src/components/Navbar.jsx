@@ -6,7 +6,7 @@ import gif from "../assets/images/webp/giphy.webp"
 import notificationIcon from '../assets/images/notification.gif'
 import callIcon from '../assets/images/customer-service.gif'
 import productIcon from '../assets/images/add-product.png'
-import profile from '../assets/images/management-consulting.gif'
+import admin from '../assets/images/management-consulting.gif'
 import logout from '../assets/images/log-out.gif'
 
 
@@ -19,7 +19,7 @@ const Navbar = () => {
 
    return (
       <div>
-         <nav className="bg-white shadow-md p-3 flex items-center justify-between">
+         <nav className="bg-white shadow-md py-1 px-4 flex items-center justify-between">
             {/* Left Section */}
             <div className="flex items-center">
 
@@ -37,13 +37,13 @@ const Navbar = () => {
             </div>
 
             {/* Center Section */}
-            <div className="flex items-center space-x-4">
+            {/*<div className="flex items-center space-x-4">
                <Link to='/'>
                   <button className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition duration-300">
                      New Order
                   </button>
                </Link>
-            </div>
+            </div>*/}
 
             {/* Right Section */}
             <div className="hidden lg:flex items-center space-x-4">
@@ -75,9 +75,9 @@ const Navbar = () => {
                      />
                   </Link>
 
-                  <Link to="/" className="flex items-center space-x-2">
-                     <img title="Profile"
-                        src={profile} alt="" width="28" height="28" />
+                  <Link to="/admin" className="flex items-center space-x-2">
+                     <img title="Admin"
+                        src={admin} alt="" width="28" height="28" />
                   </Link>
 
                   <Link to="/" className="flex items-center space-x-2">
@@ -125,9 +125,9 @@ const Navbar = () => {
                      <span>Notifications</span>
                   </Link>
 
-                  <Link to="/" className="flex items-center space-x-2">
-                     <img src={profile} alt="" width="40" height="40" />
-                     <span>Profile</span>
+                  <Link to="/admin" className="flex items-center space-x-2">
+                     <img src={admin} alt="" width="40" height="40" />
+                     <span>Admin</span>
                   </Link>
 
                   <Link to="/" className="flex items-center space-x-2">

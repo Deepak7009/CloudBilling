@@ -7,11 +7,12 @@ import OrderHistory from "./components/OrderHistory";
 import GenerateCSV from "./components/GenerateCSV";
 import Login from "./login&register/Login";
 import Register from "./login&register/Register";
+import AdminPanel from "./Admin/AdminPanel";
 
 function App() {
   return (
     <>
-    {/* <Login/>
+      {/* <Login/>
     <Register/> */}
       <Navbar />
       {/* <GenerateCSV /> */}
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/category" element={<Category />} />
         <Route path="/history" element={<OrderHistory />} />
+        <Route path="/admin" element={<AdminPanel />} />
       </Routes>
 
       {/* <Category/> */}
