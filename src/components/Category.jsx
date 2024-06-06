@@ -36,10 +36,10 @@ const Category = () => {
     e.preventDefault();
     if (isUpdateMode) {
       try {
-        const response = await axios.put(
-          `${baseUrl}category/${updateId}`,
-          formData
-        );
+        const response =
+          await axios.put(`${baseUrl}category/${updateId}`,
+            formData
+          );
         toast.success("Data updated successfully!");
         setFormData({
           productid: "",
@@ -173,8 +173,11 @@ const Category = () => {
               onChange={handleChange}
             >
               <option>Select</option>
-              <option value="category1">Category 1</option>
-              <option value="category2">Category 2</option>
+              <option value="Pizza">Pizza</option>
+              <option value="Sandwich">Sandwich</option>
+              <option value="Shakes">Shakes</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Combo">Combo</option>
             </select>
           </div>
           <div className="mb-2 flex flex-wrap justify-between">
