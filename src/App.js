@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 import OrderHistory from "./components/OrderHistory";
 import GenerateCSV from "./components/GenerateCSV";
+import Expensises from "./components/Expensises";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/category" element={<Category />} />
         <Route path="/history" element={<OrderHistory />} />
+        <Route path="/expensises" element={<Expensises />} />
       </Routes>
 
       {/* <Category/> */}
