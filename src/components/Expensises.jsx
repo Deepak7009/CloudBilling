@@ -3,7 +3,6 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { baseUrl } from "../utils/Const";
-import update from "../assets/images/svg/updateicon.svg";
 import upd from "../assets/images/edit.png";
 import cross from "../assets/images/svg/crossicon.svg";
 
@@ -19,6 +18,8 @@ const Expensises = () => {
     const [data, setData] = useState([]);
     const [isUpdateMode, setIsUpdateMode] = useState(false);
     const [updateId, setUpdateId] = useState(null);
+
+    const [filter, setFilter] = useState("All Transactions");
 
     const [currentPage, setCurrentPage] = useState(1);
     const expensesPerPage = 15;
@@ -169,8 +170,77 @@ const Expensises = () => {
         );
     };
 
+    // function formatDate(dateString) {
+    //     return new Date(dateString).toLocaleDateString();
+    // }
+
+    function filterData(data) {
+        const now = new Date();
+        let filteredData = data;
+
+        switch (filter) {
+            case "7 Days":
+                filteredData = data.filter((item) => {
+                    const itemDate = new Date(item.timestamp);
+                    return (now - itemDate) / (1000 * 60 * 60 * 24) <= 7;
+                });
+                break;
+            case "1 Month":
+                filteredData = data.filter((item) => {
+                    const itemDate = new Date(item.timestamp);
+                    return (now - itemDate) / (1000 * 60 * 60 * 24) <= 30;
+                });
+                break;
+            case "3 Months":
+                filteredData = data.filter((item) => {
+                    const itemDate = new Date(item.timestamp);
+                    return (now - itemDate) / (1000 * 60 * 60 * 24) <= 90;
+                });
+                break;
+            case "All Transactions":
+            default:
+                break;
+        }
+
+        return filteredData;
+    }
+
+    function calculateTotalPrice(filteredData) {
+        return filteredData.reduce((total, item) => {
+            return total + parseFloat(item.price || 0);
+        }, 0);
+    }
+
+    const handleFilterChange = (event) => {
+        setFilter(event.target.value);
+    };
+
+    const filteredData = filterData(data);
+    const totalPrice = calculateTotalPrice(filteredData);
+
     return (
         <div className="container-fluid mx-auto px-4 py-8 max-[425px]:px-0 max-[1023px]:mx-0">
+            <div>
+                <div className=" flex justify-between items-center max-[370px]:block max-[425px]:px-5 ">
+                    <div className="max-[370px]:flex max-[370px]:justify-center">
+                        <select
+                            id="type"
+                            className=" w-[200px] p-2 border border-gray-300 rounded-md shadow-sm"
+                            onChange={handleFilterChange}
+                        >
+                            <option>7 Days</option>
+                            <option>1 Month</option>
+                            <option>3 Months</option>
+                            <option>All Transactions</option>
+                        </select>
+                    </div>
+                    <div className="max-[370px]:flex max-[370px]:justify-center max-[370px]:pt-5">
+                        <p className="text-lg font-semibold">
+                            Total Price: <span className="text-blue-600 max-[425px]:block">₹ {totalPrice.toFixed(2)}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
             <ToastContainer />
             <form
                 className="form-wrapper flex flex-col md:flex-row mt-12 bg-white p-6 shadow-md rounded-lg max-[425px]:p-0"
