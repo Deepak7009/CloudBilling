@@ -77,7 +77,7 @@ const Navbar = () => {
                   </Link>
 
                   <Link to="/admin" className="flex items-center space-x-2">
-                     <img title="Admin"
+                     <img title="Admin Panel"
                         src={admin} alt="" width="28" height="28" />
                   </Link>
 
@@ -128,7 +128,7 @@ const Navbar = () => {
 
                   <Link to="/admin" className="flex items-center space-x-2">
                      <img src={admin} alt="" width="40" height="40" />
-                     <span>Admin</span>
+                     <span>Admin Panel</span>
                   </Link>
 
                   <Link to="/" className="flex items-center space-x-2">

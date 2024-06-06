@@ -9,6 +9,7 @@ import Expensises from "./components/Expensises";
 import Login from "./login&register/Login";
 import Register from "./login&register/Register";
 import AdminPanel from "./Admin/AdminPanel";
+import Products from "./components/Products";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/history" element={<OrderHistory />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/expensises" element={<Expensises />} />
+        <Route path="/products" element={<Products />} />
 
       </Routes>
 

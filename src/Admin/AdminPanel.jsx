@@ -1,4 +1,5 @@
 import React from 'react';
+import structure from "../assets/images/structure.gif";
 import historyIcon from "../assets/images/order.gif";
 import productIcon from '../assets/images/add-product.png';
 import offer from '../assets/images/offer.png';
@@ -11,12 +12,12 @@ import { Link } from 'react-router-dom';
 const AdminPanel = () => {
    return (
       <div className="container mx-auto px-4 py-8 mt-20">
-         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
+         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 ">
             <Link
                to="/category"
                className="flex flex-col items-center bg-white p-4 rounded-lg shadow-lg hover:bg-gray-100 transition duration-300"
             >
-               <img title="Structure" src={productIcon} alt="Structure" width="80" />
+               <img title="Structure" src={structure} alt="Structure" width="80" />
                <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Structure</h2>
             </Link>
 
@@ -45,7 +46,7 @@ const AdminPanel = () => {
             </Link>
 
             <Link
-               to="/category"
+               to="/products"
                className="flex flex-col items-center bg-white p-4 rounded-lg shadow-lg hover:bg-gray-100 transition duration-300"
             >
                <img title="Products" src={productIcon} alt="product" width="80" />
@@ -77,7 +78,7 @@ const AdminPanel = () => {
             </Link>
 
             <Link
-               to="/history"
+               to="/expensises"
                className="flex flex-col items-center bg-white p-4 rounded-lg shadow-lg hover:bg-gray-100 transition duration-300"
             >
                <img title="Expenses" src={expense} alt="Expenses" width="80" />
