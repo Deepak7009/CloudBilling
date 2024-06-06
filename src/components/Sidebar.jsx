@@ -13,6 +13,15 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
         const response = await axios.get(`${baseUrl}categories`);
         const uniqueCategories = [...new Set(response.data.map(item => item.category))];
         setCategories(uniqueCategories);
+        
+        if (uniqueCategories.includes('Beverages')) {
+          setSelectedCategory('Beverages');
+          fetchProducts('Beverages');
+        } else if (uniqueCategories.length > 0) {
+          setSelectedCategory(uniqueCategories[0]);
+          fetchProducts(uniqueCategories[0]);
+        }
+        
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
@@ -27,6 +36,7 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
         params: { category }
       });
       setItems(response.data);
+      setSearchQuery("");
     } catch (error) {
       console.error('Error fetching data:', error);
     }
