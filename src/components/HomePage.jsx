@@ -11,7 +11,7 @@ function RestaurantManagementApp() {
     const [searchQuery, setSearchQuery] = useState('');
     const [orderItems, setOrderItems] = useState([]);
     const [billingDetails, setBillingDetails] = useState({
-        productName: '',
+        name: '',
         mobile: ''
     });
     const [billSlip, setBillSlip] = useState('');
@@ -23,15 +23,12 @@ function RestaurantManagementApp() {
     };
 
     const allItems = Object.values(items).flat();
-    //   console.log("All Items:",allItems);
 
     const filteredItems = searchQuery
         ? allItems.filter((item) =>
             item.productName.toLowerCase().includes(searchQuery.toLowerCase())
         )
         : items[selectedCategory] || [];
-
-    //  console.log("Filtered items :", filteredItems);
 
     const addToOrder = (item) => {
         const existingItem = orderItems.find(orderItem => orderItem.productName === item.productName);
@@ -51,13 +48,13 @@ function RestaurantManagementApp() {
     };
 
     const handleBillingChange = (e) => {
-        const { productName, value } = e.target;
-        setBillingDetails({ ...billingDetails, [productName]: value });
+        const { name, value } = e.target;
+        setBillingDetails({ ...billingDetails, [name]: value });
     };
 
     const generateBillSlip = () => {
         let billText = `Bill Details\n`;
-        billText += `productName: ${billingDetails.name}\n`;
+        billText += `Name: ${billingDetails.name}\n`;
         billText += `Mobile: ${billingDetails.mobile}\n`;
         billText += `\nOrder Summary\n`;
         orderItems.forEach(item => {

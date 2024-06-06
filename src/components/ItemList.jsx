@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ItemsContext } from '../context/ItemsContext';
 
-const ItemList = ({ addToOrder }) => {
+const ItemList = ({addToOrder }) => {
   const { items } = useContext(ItemsContext);
 
   return (

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 
 const SearchBar = ({
-
   selectedCategory,
   setSelectedCategory,
   searchQuery,
   setSearchQuery,
   items,
-
 }) => {
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
 
@@ -48,9 +46,6 @@ const SearchBar = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            {/*<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                     Search
-                  </button>*/}
           </div>
         )}
         <div className="hidden lg:flex flex-row items-center space-x-2">
@@ -61,9 +56,7 @@ const SearchBar = ({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-       
         </div>
-
       </div>
     </div>
   );

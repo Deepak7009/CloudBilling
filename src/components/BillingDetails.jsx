@@ -17,7 +17,7 @@ const BillingDetails = ({
       name: billingDetails.name,
       mobile: billingDetails.mobile,
       orderItems: orderItems?.map((item) => ({
-        name: item.name,
+        name: item.productName,
         quantity: item.quantity,
         price: item.price,
       })),
@@ -55,7 +55,7 @@ const BillingDetails = ({
             Mobile:
           </label>
           <input
-            type="text"
+            type="tel"
             name="mobile"
             placeholder="Enter Mobile No..."
             value={billingDetails.mobile}
