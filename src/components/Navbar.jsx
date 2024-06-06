@@ -70,6 +70,7 @@ const Navbar = () => {
                   </Link>
 
                   <Link to="/" className="flex items-center space-x-2">
+
                      <img title="Notifications"
                         src={notificationIcon} alt="history icon" width="28" height="28"
                      />

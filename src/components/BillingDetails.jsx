@@ -79,6 +79,7 @@ const BillingDetails = ({
           <tbody className="bg-white divide-y divide-gray-200 text-sm">
             {orderItems?.map((item) => (
               <tr key={item.name}>
+
                 <td className="py-1 px-3">{item.productName}</td>
                 <td className="py-1 px-3 text-center">{item.quantity}</td>
                 <td className="py-1 px-3 text-center">

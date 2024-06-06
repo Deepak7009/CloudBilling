@@ -56,27 +56,48 @@ const OrderHistory = () => {
     return filteredData;
   }
 
+  function calculateTotalPrice(filteredData) {
+    return filteredData.reduce((total, item) => {
+      return total + item.orderItems.reduce((subTotal, orderItem) => {
+        return subTotal + orderItem.price * orderItem.quantity;
+      }, 0);
+    }, 0);
+  }
+
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
 
+  const filteredData = filterData(data);
+  const totalPrice = calculateTotalPrice(filteredData);
+
   return (
-    <div className="">
+    <div className="p-6 bg-gray-100">
       <div className="w-full px-4 mt-4 md:mt-0">
-        <select
-          id="type"
-          className="form-select my-5 w-[200px]"
-          onChange={handleFilterChange}
-        >
-          <option>7 Days</option>
-          <option>1 Month</option>
-          <option>3 Months</option>
-          <option>All Transactions</option>
-        </select>
-        <div className="overflow-x-auto example">
-          <table className="min-w-full bg-white">
+        <div className=" flex justify-between items-center my-5">
+          <div>
+            <select
+              id="type"
+              className="form-select w-[200px] p-2 border border-gray-300 rounded-md shadow-sm"
+              onChange={handleFilterChange}
+            >
+              <option>7 Days</option>
+              <option>1 Month</option>
+              <option>3 Months</option>
+              <option>All Transactions</option>
+            </select>
+          </div>
+          <div>
+            <p className="text-lg font-semibold">
+              Total Price: <span className="text-blue-600">₹ {totalPrice.toFixed(2)}</span>
+            </p>
+          </div>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white shadow-md rounded-lg">
             <thead>
-              <tr className="">
+              <tr className="bg-gray-200">
                 <th className="py-2 px-4 text-start border-b">Date</th>
                 <th className="py-2 px-4 border-b text-start">Name</th>
                 <th className="py-2 px-4 border-b text-start">Mobile</th>
@@ -86,9 +107,9 @@ const OrderHistory = () => {
               </tr>
             </thead>
             <tbody>
-              {filterData(data).map((item) =>
+              {filteredData.map((item) =>
                 item.orderItems.map((orderItem, index) => (
-                  <tr key={index}>
+                  <tr key={index} className="hover:bg-gray-100">
                     <td className="py-2 px-4 border-b text-start">
                       {formatDate(item.timestamp)}
                     </td>
@@ -104,8 +125,8 @@ const OrderHistory = () => {
                     <td className="py-2 px-4 border-b text-start">
                       {orderItem.quantity}
                     </td>
-                    <td className="py-2 px-4 border-b text-start">
-                      {orderItem.price}
+                    <td className="py-2 border-b text-start">
+                      ₹ {orderItem.price.toFixed(2)}
                     </td>
                   </tr>
                 ))
