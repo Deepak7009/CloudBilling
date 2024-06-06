@@ -17,7 +17,7 @@ const BillingDetails = ({
       name: billingDetails.name,
       mobile: billingDetails.mobile,
       orderItems: orderItems?.map((item) => ({
-        name: item.name,
+        name: item.productName,
         quantity: item.quantity,
         price: item.price,
       })),
@@ -55,7 +55,7 @@ const BillingDetails = ({
             Mobile:
           </label>
           <input
-            type="text"
+            type="tel"
             name="mobile"
             placeholder="Enter Mobile No..."
             value={billingDetails.mobile}
@@ -79,7 +79,8 @@ const BillingDetails = ({
           <tbody className="bg-white divide-y divide-gray-200 text-sm">
             {orderItems?.map((item) => (
               <tr key={item.name}>
-                <td className="py-1 px-3">{item.name}</td>
+
+                <td className="py-1 px-3">{item.productName}</td>
                 <td className="py-1 px-3 text-center">{item.quantity}</td>
                 <td className="py-1 px-3 text-center">
                   ₹{item.price * item.quantity}
