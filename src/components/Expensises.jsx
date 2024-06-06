@@ -3,8 +3,13 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { baseUrl } from "../utils/Const";
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import update from "../assets/images/svg/updateicon.svg";
 import upd from "../assets/images/edit.png";
 import cross from "../assets/images/svg/crossicon.svg";
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const Expensises = () => {
     const [form, setForm] = useState({
@@ -18,16 +23,170 @@ const Expensises = () => {
     const [data, setData] = useState([]);
     const [isUpdateMode, setIsUpdateMode] = useState(false);
     const [updateId, setUpdateId] = useState(null);
-
     const [filter, setFilter] = useState("All Transactions");
-
     const [currentPage, setCurrentPage] = useState(1);
     const expensesPerPage = 15;
-    const totalPages = Math.ceil(data.length / expensesPerPage);
 
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`${baseUrl}expenses`);
+            setData(response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setForm((prevData) => ({
+            ...prevData,
+            [id]: value,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (isUpdateMode) {
+            try {
+                await axios.put(`${baseUrl}expenses/${updateId}`, form);
+                toast.success("Data updated successfully!");
+                setForm({
+                    srno: "",
+                    date: new Date().toISOString().split('T')[0],
+                    title: "",
+                    price: "",
+                    description: ""
+                });
+                setIsUpdateMode(false);
+                setUpdateId(null);
+                fetchData();
+            } catch (error) {
+                toast.error("Error updating data!");
+                console.error("Error updating category:", error);
+            }
+        } else {
+            try {
+                const newForm = { ...form, srno: data.length + 1 };
+                await axios.post(`${baseUrl}expenses`, newForm);
+                toast.success("Expense added successfully!");
+                setForm({
+                    srno: "",
+                    date: new Date().toISOString().split('T')[0],
+                    title: "",
+                    price: "",
+                    description: ""
+                });
+                fetchData();
+            } catch (error) {
+                if (error.response && error.response.data.message === "Expense already exists") {
+                    toast.error("Expense already exists!");
+                } else {
+                    toast.error("Error adding expense!");
+                }
+                console.error("Error adding expense:", error);
+            }
+        }
+    };
+
+    const handleUpdateClick = (item) => {
+        setForm(item);
+        setIsUpdateMode(true);
+        setUpdateId(item._id);
+    };
+
+    const handleDelete = async (id) => {
+        toast.info(
+            <div>
+                <div>
+                    <p>Are you sure you want to delete this expense?</p>
+                </div>
+                <div className="flex justify-center mt-2">
+                    <button
+                        className="bg-red-500 text-white px-3 py-1 rounded mr-2"
+                        onClick={async () => {
+                            try {
+                                await axios.delete(`${baseUrl}expenses/${id}`);
+                                toast.dismiss(); // Dismiss the toast after deletion
+                                toast.success("Expense deleted successfully!");
+                                fetchData();
+                            } catch (error) {
+                                toast.dismiss(); // Dismiss the toast if error occurs
+                                toast.error("Error deleting expense!");
+                                console.error("Error deleting expense:", error);
+                            }
+                        }}
+                    >
+                        Yes
+                    </button>
+                    <button
+                        className="bg-gray-300 text-black px-3 py-1 rounded"
+                        onClick={() => toast.dismiss()}
+                    >
+                        No
+                    </button>
+                </div>
+            </div>,
+            {
+                position: "top-center",
+                autoClose: false,
+                closeOnClick: false,
+                closeButton: false,
+                draggable: false
+            }
+        );
+    };
+
+    const filterData = (data) => {
+        const now = new Date();
+        let filteredData = data;
+
+        switch (filter) {
+            case "7 Days":
+                filteredData = data.filter((item) => {
+                    const itemDate = new Date(item.timestamp);
+                    return (now - itemDate) / (1000 * 60 * 60 * 24) <= 7;
+                });
+                break;
+            case "1 Month":
+                filteredData = data.filter((item) => {
+                    const itemDate = new Date(item.timestamp);
+                    return (now - itemDate) / (1000 * 60 * 60 * 24) <= 30;
+                });
+                break;
+            case "3 Months":
+                filteredData = data.filter((item) => {
+                    const itemDate = new Date(item.timestamp);
+                    return (now - itemDate) / (1000 * 60 * 60 * 24) <= 90;
+                });
+                break;
+            case "All Transactions":
+            default:
+                break;
+        }
+
+        return filteredData;
+    };
+
+    const calculateTotalPrice = (filteredData) => {
+        return filteredData.reduce((total, item) => {
+            return total + parseFloat(item.price || 0);
+        }, 0);
+    };
+
+    const handleFilterChange = (event) => {
+        setFilter(event.target.value);
+    };
+
+    const filteredData = filterData(data);
+    const totalPrice = calculateTotalPrice(filteredData);
+    const totalPages = Math.ceil(filteredData.length / expensesPerPage);
     const indexOfLastExpense = currentPage * expensesPerPage;
     const indexOfFirstExpense = indexOfLastExpense - expensesPerPage;
-    const currentExpenses = data.slice(indexOfFirstExpense, indexOfLastExpense);
+    const currentExpenses = filteredData.slice(indexOfFirstExpense, indexOfLastExpense);
 
     const Pagination = ({ totalPages, currentPage, onPageChange }) => (
         <div className="flex justify-center my-4">
@@ -57,317 +216,135 @@ const Expensises = () => {
         </div>
     );
 
-    const handleChange = (e) => {
-        const { id, value } = e.target;
-        setForm((prevData) => ({
-            ...prevData,
-            [id]: value,
-        }));
-    };
+    const getChartData = (data) => {
+        const labels = data.map(item => item.date);
+        const prices = data.map(item => parseFloat(item.price));
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (isUpdateMode) {
-            try {
-                await axios.put(`${baseUrl}expens/${updateId}`, form);
-                toast.success("Data updated successfully!");
-                setForm({
-                    srno: "",
-                    date: new Date().toISOString().split('T')[0],
-                    title: "",
-                    price: "",
-                    description: ""
-                });
-                setIsUpdateMode(false);
-                setUpdateId(null);
-                fetchData();
-            } catch (error) {
-                toast.error("Error updating data!");
-                console.error("Error updating category:", error);
-            }
-        } else {
-            try {
-                const newForm = { ...form, srno: data.length + 1 };
-                await axios.post(`${baseUrl}expenses`, newForm);
-                toast.success("Expens added successfully!");
-                setForm({
-                    srno: "",
-                    date: new Date().toISOString().split('T')[0],
-                    title: "",
-                    price: "",
-                    description: ""
-                });
-                fetchData();
-            } catch (error) {
-                if (error.response && error.response.data.message === "Expens already exists") {
-                    toast.error("Expens already exists!");
-                } else {
-                    toast.error("Error adding expens!");
+        return {
+            labels,
+            datasets: [
+                {
+                    label: 'Expenses',
+                    data: prices,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    tension: 0.4,
                 }
-                console.error("Error adding expens:", error);
-            }
-        }
+            ],
+        };
     };
-
-    const fetchData = async () => {
-        try {
-            const response = await axios.get(`${baseUrl}expenses`);
-            setData(response.data);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const handleUpdateClick = (item) => {
-        setForm(item);
-        setIsUpdateMode(true);
-        setUpdateId(item._id);
-    };
-
-    const handleDelete = async (id) => {
-        toast.info(
-            <div>
-                <div>
-                    <p>Are you sure you want to delete this expens?</p>
-                </div>
-                <div className="flex justify-center mt-2">
-                    <button
-                        className="bg-red-500 text-white px-3 py-1 rounded mr-2"
-                        onClick={async () => {
-                            try {
-                                await axios.delete(`${baseUrl}expens/${id}`);
-                                toast.dismiss(); // Dismiss the toast after deletion
-                                toast.success("Category deleted successfully!");
-                                fetchData();
-                            } catch (error) {
-                                toast.dismiss(); // Dismiss the toast if error occurs
-                                toast.error("Error deleting expens!");
-                                console.error("Error deleting expens:", error);
-                            }
-                        }}
-                    >
-                        Yes
-                    </button>
-                    <button
-                        className="bg-gray-300 text-black px-3 py-1 rounded"
-                        onClick={() => toast.dismiss()}
-                    >
-                        No
-                    </button>
-                </div>
-            </div>,
-            {
-                position: "top-center",
-                autoClose: false,
-                closeOnClick: false,
-                closeButton: false,
-                draggable: false
-            }
-        );
-    };
-
-    // function formatDate(dateString) {
-    //     return new Date(dateString).toLocaleDateString();
-    // }
-
-    function filterData(data) {
-        const now = new Date();
-        let filteredData = data;
-
-        switch (filter) {
-            case "7 Days":
-                filteredData = data.filter((item) => {
-                    const itemDate = new Date(item.timestamp);
-                    return (now - itemDate) / (1000 * 60 * 60 * 24) <= 7;
-                });
-                break;
-            case "1 Month":
-                filteredData = data.filter((item) => {
-                    const itemDate = new Date(item.timestamp);
-                    return (now - itemDate) / (1000 * 60 * 60 * 24) <= 30;
-                });
-                break;
-            case "3 Months":
-                filteredData = data.filter((item) => {
-                    const itemDate = new Date(item.timestamp);
-                    return (now - itemDate) / (1000 * 60 * 60 * 24) <= 90;
-                });
-                break;
-            case "All Transactions":
-            default:
-                break;
-        }
-
-        return filteredData;
-    }
-
-    function calculateTotalPrice(filteredData) {
-        return filteredData.reduce((total, item) => {
-            return total + parseFloat(item.price || 0);
-        }, 0);
-    }
-
-    const handleFilterChange = (event) => {
-        setFilter(event.target.value);
-    };
-
-    const filteredData = filterData(data);
-    const totalPrice = calculateTotalPrice(filteredData);
 
     return (
-        <div className="container-fluid mx-auto px-4 py-8 max-[425px]:px-0 max-[1023px]:mx-0">
-            <div>
-                <div className=" flex justify-between items-center max-[370px]:block max-[425px]:px-5 ">
-                    <div className="max-[370px]:flex max-[370px]:justify-center">
-                        <select
-                            id="type"
-                            className=" w-[200px] p-2 border border-gray-300 rounded-md shadow-sm"
-                            onChange={handleFilterChange}
-                        >
-                            <option>7 Days</option>
-                            <option>1 Month</option>
-                            <option>3 Months</option>
-                            <option>All Transactions</option>
-                        </select>
-                    </div>
-                    <div className="max-[370px]:flex max-[370px]:justify-center max-[370px]:pt-5">
-                        <p className="text-lg font-semibold">
-                            Total Price: <span className="text-blue-600 max-[425px]:block">₹ {totalPrice.toFixed(2)}</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <ToastContainer />
-            <form
-                className="form-wrapper flex flex-col md:flex-row mt-12 bg-white p-6 shadow-md rounded-lg max-[425px]:p-0"
-                onSubmit={handleSubmit}>
-
-                <div className="form-column w-full md:w-1/3 md:px-4 max-[767px]:grid justify-center">
-                    <div className="mb-4 flex items-center max-[1023px]:block">
-                        <label htmlFor="date" className="block text-gray-700 font-medium mb-1 md:w-24">
-                            Date
-                        </label>
+        <div className="m-4">
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 mb-4">
+                <div className="grid grid-cols-2 gap-4">
+                    <div>
+                        <label htmlFor="title" className="block mb-1">Title</label>
                         <input
-                            id="date"
-                            type="date"
-                            className="flex-1 border border-gray-300 rounded-md p-2 max-[1023px]:w-52"
-                            value={form.date}
-                            onChange={handleChange}
-                            disabled
-                        />
-                    </div>
-                    <div className="mb-4 flex items-center max-[1023px]:block">
-                        <label htmlFor="title" className="block text-gray-700 font-medium mb-1 md:w-24">
-                            Title
-                        </label>
-                        <input
-                            id="title"
                             type="text"
-                            className="flex-1 border border-gray-300 rounded-md p-2 block w-0 max-[1023px]:w-52"
+                            id="title"
                             value={form.title}
                             onChange={handleChange}
+                            className="w-full p-2 border rounded"
+                            required
                         />
                     </div>
-                    <div className="mb-4 flex items-center max-[1023px]:block">
-                        <label htmlFor="price" className="block text-gray-700 font-medium mb-1 md:w-24">
-                            Price
-                        </label>
+                    <div>
+                        <label htmlFor="price" className="block mb-1">Price</label>
                         <input
-                            id="price"
                             type="number"
-                            className="flex-1 border border-gray-300 rounded-md p-2 no-spinner block w-0 max-[1023px]:w-52"
+                            id="price"
                             value={form.price}
                             onChange={handleChange}
+                            className="w-full p-2 border rounded"
+                            required
                         />
                     </div>
-                    <div className="mb-4 flex items-center max-[1023px]:block">
-                        <label htmlFor="description" className="block text-gray-700 font-medium mb-1 md:w-24">
-                            Description
-                        </label>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                    <div>
+                        <label htmlFor="date" className="block mb-1">Date</label>
+                        <input
+                            type="date"
+                            id="date"
+                            value={form.date}
+                            onChange={handleChange}
+                            className="w-full p-2 border rounded"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="description" className="block mb-1">Description</label>
                         <textarea
                             id="description"
-                            className="flex-1 border border-gray-300 rounded-md p-2 resize-none"
-                            rows="4"
                             value={form.description}
                             onChange={handleChange}
-                        ></textarea>
-                    </div>
-                    <div className="mb-4 flex justify-center md:justify-center">
-                        <button
-                            type="Add"
-                            className="submit-button bg-blue-500 text-white py-2 px-20 rounded-full hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                            {isUpdateMode ? "Update" : "Add"}
-                        </button>
-
-                    </div>
-                </div>
-
-                <div className="w-full md:w-2/3 px-4 mt-4 md:mt-0 max-[425px]:px-0">
-                    <div className="overflow-x-auto">
-                        <table className="min-w-full bg-white">
-                            <thead>
-                                <tr className="bg-gray-200">
-                                    <th className="py-2 px-4 text-start border-b rounded-tl-md">Sr. No.</th>
-                                    <th className="py-2 px-4 border-b text-start">Date</th>
-                                    <th className="py-2 px-4 border-b text-start">Title</th>
-                                    <th className="py-2 px-4 border-b text-start">Price</th>
-                                    <th className="py-2 px-4 border-b text-start">Description</th>
-                                    <th className="py-2 px-4 border-b text-start rounded-tr-md">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {currentExpenses?.map((item, index) => (
-                                    <tr key={index}>
-                                        <td className="py-2 px-4 border-b text-start">
-                                            {item.srno}
-                                        </td>
-                                        <td className="py-2 px-4 border-b text-start">
-                                            {item.date}
-                                        </td>
-                                        <td className="py-2 px-4 border-b text-start">
-                                            {item.title}
-                                        </td>
-                                        <td className="py-2 px-4 border-b text-start">
-                                            {item.price}
-                                        </td>
-                                        <td className="py-2 px-4 border-b text-start">
-                                            {item.description}
-                                        </td>
-                                        <td className="py-2 px-4 border-b text-start">
-                                            <div className="flex gap-3">
-                                                <img
-                                                    className="cursor-pointer"
-                                                    src={upd}
-                                                    alt="update icon"
-                                                    width="20px"
-                                                    title="Update Your Order"
-                                                    onClick={() => handleUpdateClick(item)}
-                                                />
-                                                <img
-                                                    className="cursor-pointer"
-                                                    src={cross}
-                                                    alt="cross icon"
-                                                    title="Delete Your Order"
-                                                    onClick={() => handleDelete(item._id)}
-                                                />
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                        <Pagination
-                            totalPages={totalPages}
-                            currentPage={currentPage}
-                            onPageChange={setCurrentPage}
+                            className="w-full p-2 border rounded"
+                            rows="1"
                         />
                     </div>
                 </div>
+                <button
+                    type="submit"
+                    className="bg-blue-500 text-white py-2 px-4 rounded"
+                >
+                    {isUpdateMode ? "Update Expense" : "Add Expense"}
+                </button>
             </form>
+            <div className="my-4">
+                <select value={filter} onChange={handleFilterChange} className="p-2 border rounded">
+                    <option value="All Transactions">All Transactions</option>
+                    <option value="7 Days">Last 7 Days</option>
+                    <option value="1 Month">Last 1 Month</option>
+                    <option value="3 Months">Last 3 Months</option>
+                </select>
+            </div>
+            <div className="my-4">
+                <h2 className="text-xl font-bold">Total Price: {totalPrice.toFixed(2)}</h2>
+            </div>
+            <div className="my-4">
+                <Line data={getChartData(filteredData)} />
+            </div>
+            <table className="w-full border">
+                <thead>
+                    <tr>
+                        <th className="border px-4 py-2">Sr No</th>
+                        <th className="border px-4 py-2">Date</th>
+                        <th className="border px-4 py-2">Title</th>
+                        <th className="border px-4 py-2">Price</th>
+                        <th className="border px-4 py-2">Description</th>
+                        <th className="border px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {currentExpenses.map((item, index) => (
+                        <tr key={item._id}>
+                            <td className="border px-4 py-2">{item.srno}</td>
+                            <td className="border px-4 py-2">{item.date}</td>
+                            <td className="border px-4 py-2">{item.title}</td>
+                            <td className="border px-4 py-2">{item.price}</td>
+                            <td className="border px-4 py-2">{item.description}</td>
+                            <td className="border px-4 py-2">
+                                <button
+                                    className="text-blue-500 mr-2"
+                                    onClick={() => handleUpdateClick(item)}
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    className="text-red-500"
+                                    onClick={() => handleDelete(item._id)}
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={setCurrentPage} />
+            <ToastContainer />
         </div>
     );
 };
