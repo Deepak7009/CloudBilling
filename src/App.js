@@ -8,6 +8,7 @@ import GenerateCSV from "./components/GenerateCSV";
 import Expensises from "./components/Expensises";
 import Login from "./login&register/Login";
 import Register from "./login&register/Register";
+import Categories from "./components/Categories";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/category" element={<Category />} />
         <Route path="/history" element={<OrderHistory />} />
         <Route path="/expensises" element={<Expensises />} />
+        <Route path="/categories" element={<Categories />} />
       </Routes>
 
       {/* <Category/> */}
