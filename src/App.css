@@ -212,3 +212,10 @@
 .no-spinner {
    -moz-appearance: textfield;
 }
+
+@media (min-width: 768px) {
+   .col-md-2 {
+       flex: 1 1 auto;
+       width: 17.666667%;
+   }
+}

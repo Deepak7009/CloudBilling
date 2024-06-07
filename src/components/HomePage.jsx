@@ -80,7 +80,7 @@ function RestaurantManagementApp() {
             <main className="flex flex-grow bg-gray-200 p-4">
                 <div className="flex flex-col md:flex-row w-full">
                     <Sidebar
-                        items={items}
+                        //items={items}
                         setSelectedCategory={setSelectedCategory}
                         setSearchQuery={setSearchQuery}
                     />
