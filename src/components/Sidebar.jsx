@@ -54,7 +54,7 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
           {categories?.map((category, index) => (
             <li
               key={index}
-              className="mt-2 sidebar-item md:pb-2 ms-5 md:ms-0 md:text-[20px] text-[17px] font-semibold"
+              className="mt-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold"
             >
               <button
                 className="text-left w-full"
