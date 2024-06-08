@@ -42,7 +42,7 @@ const SearchBar = ({
             <input
               type="text"
               className="border border-gray-400 rounded px-4 py-2"
-              placeholder="Search..."
+              placeholder="Search 🔍..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />

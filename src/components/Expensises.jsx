@@ -169,10 +169,13 @@ const Expensises = () => {
    };
 
    return (
-      <div className="container-fluid mx-auto px-4 py-8 max-[425px]:px-0 max-[1023px]:mx-0">
+      <div className="container-fluid mx-auto px-4 py-2 max-[425px]:px-0 max-[1023px]:mx-0">
          <ToastContainer />
+         <h1 className="text-3xl font-bold mt-2 text-center text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
+               Expensises
+            </h1>
          <form
-            className="form-wrapper flex flex-col md:flex-row mt-12 bg-white p-6 shadow-md rounded-lg max-[425px]:p-0"
+            className="form-wrapper flex flex-col md:flex-row mt-6 bg-white p-6 shadow-md rounded-lg max-[425px]:p-0"
             onSubmit={handleSubmit}>
 
             <div className="form-column w-full md:w-1/3 md:px-4 max-[767px]:grid justify-center">
@@ -235,7 +238,7 @@ const Expensises = () => {
                </div>
             </div>
 
-            <div className="w-full md:w-2/3 px-4 mt-4 md:mt-0 max-[425px]:px-0">
+            <div className="w-full md:w-2/3 px-4 md:mt-0 max-[425px]:px-0">
                <div className="overflow-x-auto">
                   <table className="min-w-full bg-white">
                      <thead>
