@@ -3,7 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
-import "./category.css";
+import "./Product.css";
 import { baseUrl } from "../utils/Const";
 import update from "../assets/images/svg/updateicon.svg";
 import cross from "../assets/images/svg/crossicon.svg";
@@ -132,13 +132,13 @@ const AddProduct = () => {
     <div className="container-fluid mx-auto px-4">
       <ToastContainer />
       <form
-        className="form-wrapper flex flex-col md:flex-row mt-12"
-        onSubmit={handleSubmit}
+            className="form-wrapper flex flex-col md:flex-row mt-12 bg-white p-6 shadow-md rounded-lg max-[425px]:p-0"
+            onSubmit={handleSubmit}
       >
-        <div className="form-column w-full md:w-1/3 px-4">
-          <div className="mb-2 flex flex-wrap justify-between">
+            <div className="form-column bg-gray-100 w-full pt-2 md:w-1/3 md:px-4 max-[767px]:grid justify-center">
+            <div className="mb-2 flex  flex-wrap justify-between">
             <div className="input-group w-full md:w-5/12 mb-4 md:mb-0">
-              <label htmlFor="productid" className="block font-medium">
+              <label htmlFor="productid" className="block text-gray-700 font-medium">
                 Product ID
               </label>
               <input
@@ -150,8 +150,8 @@ const AddProduct = () => {
               />
             </div>
             <div className="input-group w-full md:w-5/12">
-              <label htmlFor="name" className="block font-medium">
-                Name
+              <label htmlFor="name" className="block font-medium text-gray-700">
+                Product Name
               </label>
               <input
                 type="text"
@@ -163,7 +163,7 @@ const AddProduct = () => {
             </div>
           </div>
           <div className="mb-3">
-            <label htmlFor="category" className="block font-medium">
+            <label htmlFor="category" className="block font-medium text-gray-700">
               Category of Food
             </label>
             <select
@@ -182,12 +182,12 @@ const AddProduct = () => {
           </div>
           <div className="mb-2 flex flex-wrap justify-between">
             <div className="input-group w-full md:w-5/12 mb-4 md:mb-0">
-              <label htmlFor="type" className="block font-medium">
+              <label htmlFor="type" className="block font-medium text-gray-700">
                 Type
               </label>
               <select
                 id="type"
-                className="form-select mt-1 w-full"
+                className="form-input mt-1 w-full"
                 value={formData.type}
                 onChange={handleChange}
               >
@@ -197,11 +197,11 @@ const AddProduct = () => {
               </select>
             </div>
             <div className="input-group w-full md:w-5/12">
-              <label htmlFor="price" className="block font-medium">
+              <label htmlFor="price" className="block font-medium text-gray-700">
                 Price
               </label>
               <input
-                type="text"
+                type="number"
                 id="price"
                 className="form-input mt-1 w-full"
                 value={formData.price}
@@ -211,12 +211,12 @@ const AddProduct = () => {
           </div>
           <div className="mb-2 flex flex-wrap justify-between">
             <div className="input-group w-full md:w-5/12 mb-4 md:mb-0">
-              <label htmlFor="unit" className="block font-medium">
+              <label htmlFor="unit" className="block font-medium text-gray-700">
                 Unit
               </label>
               <select
                 id="unit"
-                className="form-select mt-1 w-full"
+                className="form-input mt-1 w-full"
                 value={formData.unit}
                 onChange={handleChange}
               >
@@ -226,7 +226,7 @@ const AddProduct = () => {
               </select>
             </div>
             <div className="input-group w-full md:w-5/12">
-              <label htmlFor="stock" className="block font-medium">
+              <label htmlFor="stock" className="block font-medium text-gray-700">
                 Stock
               </label>
               <input
@@ -240,12 +240,12 @@ const AddProduct = () => {
           </div>
           <div className="mb-3 flex flex-wrap justify-between">
             <div className="input-group w-full">
-              <label htmlFor="description" className="block font-medium">
+              <label htmlFor="description" className="block font-medium text-gray-700">
                 Description
               </label>
               <textarea
                 id="description"
-                className="form-textarea mt-1 w-full"
+                className="form-textarea mt-1 w-full resize-none"
                 rows="4"
                 value={formData.description}
                 onChange={handleChange}
@@ -261,12 +261,12 @@ const AddProduct = () => {
             </button>
           </div>
         </div>
-        <div className="w-full md:w-2/3 px-4 mt-4 md:mt-0">
+        <div className="w-full  md:w-2/3 px-4 md:mt-0">
           <div className="overflow-x-auto">
-            <table className="min-w-full bg-white">
+            <table className="min-w-full bg-gray-100">
               <thead>
-                <tr className="">
-                  <th className="py-2 px-4 text-start border-b">Product ID</th>
+                <tr className="bg-gray-200">
+                  <th className="py-2 px-4 text-start border-b rounded-tl-lg">Product ID</th>
                   <th className="py-2 px-4 border-b text-start">Name</th>
                   <th className="py-2 px-4 border-b text-start">Type</th>
                   <th className="py-2 px-4 border-b text-start">Category</th>

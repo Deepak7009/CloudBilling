@@ -79,114 +79,6 @@
    }
 }
 
-
-
-@keyframes ring {
-   0% {
-      transform: rotate(0deg);
-   }
-
-   1% {
-      transform: rotate(30deg);
-   }
-
-   3% {
-      transform: rotate(-28deg);
-   }
-
-   5% {
-      transform: rotate(34deg);
-   }
-
-   7% {
-      transform: rotate(-32deg);
-   }
-
-   9% {
-      transform: rotate(30deg);
-   }
-
-   11% {
-      transform: rotate(-28deg);
-   }
-
-   13% {
-      transform: rotate(26deg);
-   }
-
-   15% {
-      transform: rotate(-24deg);
-   }
-
-   17% {
-      transform: rotate(22deg);
-   }
-
-   19% {
-      transform: rotate(-20deg);
-   }
-
-   21% {
-      transform: rotate(18deg);
-   }
-
-   23% {
-      transform: rotate(-16deg);
-   }
-
-   25% {
-      transform: rotate(14deg);
-   }
-
-   27% {
-      transform: rotate(-12deg);
-   }
-
-   29% {
-      transform: rotate(10deg);
-   }
-
-   31% {
-      transform: rotate(-8deg);
-   }
-
-   33% {
-      transform: rotate(6deg);
-   }
-
-   35% {
-      transform: rotate(-4deg);
-   }
-
-   37% {
-      transform: rotate(2deg);
-   }
-
-   39% {
-      transform: rotate(-1deg);
-   }
-
-   41% {
-      transform: rotate(1deg);
-   }
-
-   43% {
-      transform: rotate(0deg);
-   }
-
-   100% {
-      transform: rotate(0deg);
-   }
-}
-
-.bell-icon {
-   cursor: pointer;
-}
-
-.bell-icon:hover {
-   animation: ring 1.5s ease-in-out infinite;
-}
-
 #timeline {
    animation: grow 1s ease-in-out infinite alternate;
 }
@@ -203,6 +95,7 @@
 
 
 /* Expensises component css  */
+
 .no-spinner::-webkit-outer-spin-button,
 .no-spinner::-webkit-inner-spin-button {
    -webkit-appearance: none;
@@ -213,12 +106,17 @@
    -moz-appearance: textfield;
 }
 
+
+/* Admin */
+
 @media (min-width: 768px) {
    .col-md-2 {
       flex: 1 1 auto;
       width: 17.666667%;
    }
 }
+
+/* Profile */
 
 .QrCode{
    margin-right: 70px;
