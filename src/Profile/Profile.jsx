@@ -44,7 +44,8 @@ const Profile = () => {
    };
 
    return (
-      <div className="relative min-h-screen bg-gray-100 p-6 mb-6">
+      <div className="relative min-h-screen bg-gray-100 px-6 py-4 mb-6">
+
          <div className={`max-w-4xl mx-auto bg-white py-8 px-4 rounded-lg shadow-md mb-6 transition ${isPopupOpen ? 'blur' : ''}`} style={{ zIndex: 1 }}>
 
             {/* Header */}
@@ -59,19 +60,19 @@ const Profile = () => {
                      />
                   </div>
                   <div className="ml-4 items-center">
-                     <h2 className="text-3xl font-semibold text-teal-600">Cloud Rashoi</h2>
-                     <p className="text-gray-800">Location: Hisar, Haryana</p>
-                     <p className="text-gray-800">Contact: 9876543210</p>
-                     <p className="text-gray-800">Email: abc123@gmail.com </p>
+                     <h2 className="text-3xl font-semibold text-teal-600 font-serif">Cloud Rashoi</h2>
+                     <p className="text-gray-800 font-serif">Location: <span className='font-bold'>Hisar, Haryana </span> </p>
+                     <p className="text-gray-800 font-serif">Contact:<span className='font-bold'>9876543210 </span> </p>
+                     <p className="text-gray-800 font-serif">Email: <span className='font-bold'>abc123@gmail.com </span> </p>
                   </div>
                </div>
 
                {/* Opening Hours Section */}
                <div className='time flex'>
                   <div className="mb-6">
-                     <h3 className="text-xl font-semibold text-teal-600">Opening Hours</h3>
-                     <p className="mt-2 text-gray-600">Monday - Friday: 10:00 AM - 10:00 PM</p>
-                     <p className="text-gray-600">Saturday - Sunday: 11:00 AM - 11:00 PM</p>
+                     <h3 className="text-xl font-semibold text-teal-600 font-serif">Opening Hours</h3>
+                     <p className="mt-2 text-gray-600 font-serif">Monday - Friday: 10:00 AM - 10:00 PM</p>
+                     <p className="text-gray-600 font-serif">Saturday - Sunday: 11:00 AM - 11:00 PM</p>
                   </div>
                </div>
 
@@ -80,7 +81,7 @@ const Profile = () => {
             <div className='flex justify-between items-center mt-6'>
                <div className='admin mt-4'>
                   <div className='flex items-center'>
-                     <h1 className='mb-2 text-teal-600 font-bold text-xl'>Admin</h1>
+                     <h1 className='mb-2 text-teal-600 font-bold text-xl font-serif'>Admin</h1>
                      <img
                         className="cursor-pointer ml-2"
                         src={edit}
@@ -90,9 +91,9 @@ const Profile = () => {
                         onClick={handleEditClick}
                      />
                   </div>
-                  <h1 className='font-bold'>Name : {adminDetails.name}</h1>
-                  <h1 className='font-bold'>Mobile : {adminDetails.mobile}</h1>
-                  <h1 className='font-bold'>Mail : {adminDetails.email}</h1>
+                  <h1 className='font-serif'>Name : <span className='font-bold'>{adminDetails.name}</span></h1>
+                  <h1 className='font-serif'>Mobile : <span className='font-bold'>{adminDetails.mobile}</span></h1>
+                  <h1 className='font-serif'>Mail :<span className='font-bold'> {adminDetails.email}</span></h1>
                </div>
 
                <div className="QrCode">

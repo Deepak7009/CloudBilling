@@ -171,7 +171,7 @@ const Expensises = () => {
    return (
       <div className="container-fluid mx-auto px-4 py-2 max-[425px]:px-0 max-[1023px]:mx-0">
          <ToastContainer />
-         <h1 className="text-3xl font-bold mt-2 text-center text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
+         <h1 className="text-3xl font-bold mt-2 font-serif text-center text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
                Expensises
             </h1>
          <form

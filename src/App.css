@@ -44,7 +44,7 @@
 }
 
 .sidebar-item::before {
-   @apply absolute bottom-[0px] right-0 h-[3px] bg-green-500;
+   @apply absolute bottom-[0px] right-0 h-[3px] bg-teal-600;
    content: '';
    width: 0;
    transition: width 0.3s ease;

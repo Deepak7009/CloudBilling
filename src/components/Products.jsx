@@ -93,7 +93,7 @@ function Products() {
    return (
       <div className="container mx-auto px-4 py-8">
          <ToastContainer />
-         <h1 className="text-3xl font-bold mb-6 text-center text-teal-600 bg-gray-100 py-2 px-6 rounded-full shadow-md">
+         <h1 className="text-3xl font-bold font-serif mb-6 text-center text-teal-600 bg-gray-100 py-2 px-6 rounded-full shadow-md">
             Products
          </h1>
          <div className="overflow-x-auto">

@@ -131,7 +131,7 @@ const AddProduct = () => {
    return (
       <div className="container-fluid mx-auto px-4">
          <ToastContainer />
-         <h1 className="text-3xl font-bold mt-4 text-center text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
+         <h1 className="text-3xl font-bold mt-4 text-center font-serif text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
             Add Products
          </h1>
          <form

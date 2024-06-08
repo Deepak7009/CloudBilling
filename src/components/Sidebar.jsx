@@ -45,7 +45,7 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
    return (
       <div className="flex flex-col lg:max-w-[210px] min-[767px]:max-w-[150px] w-full bg-white p-4 rounded shadow-md mb-4 md:mb-0 md:mr-4">
          <div className="sticky top-0 bg-white z-10">
-            <p className="md:text-[25px] sticky top-0 bg-white z-10 text-[20px] md:block hidden font-bold mb-4">
+            <p className="md:text-[25px] sticky top-0 text-teal-600 bg-white font-serif z-10 text-[20px] md:block hidden font-bold mb-4">
                Categories
             </p>
          </div>
@@ -54,7 +54,7 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
                {categories?.map((category, index) => (
                   <li
                      key={index}
-                     className="mt-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold"
+                     className="mt-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold font-serif"
                   >
                      <button
                         className="text-left w-full"
