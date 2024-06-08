@@ -24,15 +24,28 @@ const Profile = () => {
       setAdminDetails({ ...adminDetails, [name]: value });
    };
 
-   const handleSubmit = (e) => {
+   const handleSubmit = async (e) => {
       e.preventDefault();
       // Perform any additional actions such as API calls here
+      try {
+         const response = await fetch('http://localhost:5000/api/admin/your-admin-id', {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(adminDetails)
+         });
+         const data = await response.json();
+         console.log('Updated admin:', data);
+      } catch (error) {
+         console.error('Error updating admin:', error);
+      }
       setIsPopupOpen(false);
    };
 
    return (
-      <div className="min-h-screen bg-gray-100 p-6 mb-6">
-         <div className="max-w-4xl mx-auto bg-white py-8 px-4 rounded-lg shadow-md mb-6">
+      <div className="relative min-h-screen bg-gray-100 p-6 mb-6">
+         <div className={`max-w-4xl mx-auto bg-white py-8 px-4 rounded-lg shadow-md mb-6 transition ${isPopupOpen ? 'blur' : ''}`} style={{ zIndex: 1 }}>
 
             {/* Header */}
             <div className="flex justify-between items-center">
@@ -96,8 +109,9 @@ const Profile = () => {
 
          {/* Popup */}
          {isPopupOpen && (
-            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-               <div className="bg-white p-6 rounded-lg shadow-lg">
+            <div className="fixed inset-0 flex justify-center items-center z-50">
+               <div className="absolute inset-0 bg-gray-600 bg-opacity-50"></div>
+               <div className="relative bg-white p-6 rounded-lg shadow-lg z-50">
                   <h2 className="text-xl font-bold mb-4">Edit Admin Details</h2>
                   <form onSubmit={handleSubmit}>
                      <div className="mb-4">
@@ -148,7 +162,6 @@ const Profile = () => {
                   </form>
                </div>
             </div>
-
          )}
       </div>
    );

@@ -8,7 +8,7 @@ import { baseUrl } from "../utils/Const";
 import update from "../assets/images/svg/updateicon.svg";
 import cross from "../assets/images/svg/crossicon.svg";
 
-const Category = () => {
+const AddProduct = () => {
   const [formData, setFormData] = useState({
     productid: "",
     name: "",
@@ -37,7 +37,7 @@ const Category = () => {
     if (isUpdateMode) {
       try {
         const response =
-          await axios.put(`${baseUrl}category/${updateId}`,
+          await axios.put(`${baseUrl}product/${updateId}`,
             formData
           );
         toast.success("Data updated successfully!");
@@ -60,8 +60,8 @@ const Category = () => {
       }
     } else {
       try {
-        const response = await axios.post(`${baseUrl}category`, formData);
-        toast.success("Category added successfully!");
+        const response = await axios.post(`${baseUrl}product`, formData);
+        toast.success("Product added successfully!");
         setFormData({
           productid: "",
           name: "",
@@ -80,16 +80,16 @@ const Category = () => {
         ) {
           toast.error("Product ID already exists!");
         } else {
-          toast.error("Error adding category!");
+          toast.error("Error adding Product!");
         }
-        console.error("Error adding category:", error);
+        console.error("Error adding Product:", error);
       }
     }
   };
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}getdata`);
+      const response = await axios.get(`${baseUrl}get-products`);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -109,7 +109,7 @@ const Category = () => {
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "Do you want to delete this category?",
+      text: "Do you want to delete this product?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes",
@@ -117,12 +117,12 @@ const Category = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`${baseUrl}category/${id}`);
-          toast.success("Category deleted successfully!");
+          await axios.delete(`${baseUrl}product/${id}`);
+          toast.success("Product deleted successfully!");
           fetchData();
         } catch (error) {
-          toast.error("Error deleting category!");
-          console.error("Error deleting category:", error);
+          toast.error("Error deleting product!");
+          console.error("Error deleting product:", error);
         }
       }
     });
@@ -333,4 +333,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default AddProduct;

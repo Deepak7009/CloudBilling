@@ -32,7 +32,7 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
 
    const fetchProducts = async (category) => {
       try {
-         const response = await axios.get(`${baseUrl}items`, {
+         const response = await axios.get(`${baseUrl}products`, {
             params: { category }
          });
          setItems(response.data);

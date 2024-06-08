@@ -16,7 +16,7 @@ const AdminPanel = () => {
          <div className="row gap-6 items-center justify-center">
             <div className='col-md-2 mb-6'>
                <Link
-                  to="/category"
+                  to=""
                   className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
                >
                   <img title="Structure" src={structure} alt="Structure" width="50px" />
@@ -26,7 +26,7 @@ const AdminPanel = () => {
 
             <div className='col-md-2 mb-6'>
                <Link
-                  to="/history"
+                  to=""
                   className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
                >
                   <img title="Offer" src={offer} alt="Offer" width="50px" />
@@ -46,7 +46,7 @@ const AdminPanel = () => {
 
             <div className='col-md-2 mb-6'>
                <Link
-                  to="/category"
+                  to="/add-product"
                   className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
                >
                   <img title="Add Product" src={productIcon} alt="product" width="50px" />
@@ -66,7 +66,7 @@ const AdminPanel = () => {
 
             <div className='col-md-2 mb-6'>
                <Link
-                  to="/history"
+                  to=""
                   className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
                >
                   <img title="Invoice" src={invoice} alt="Invoice" width="50px" />
@@ -76,7 +76,7 @@ const AdminPanel = () => {
 
             <div className='col-md-2 mb-6'>
                <Link
-                  to="/history"
+                  to=""
                   className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
                >
                   <img title="Add Customer" src={customer} alt="Customer" width="50px" />
@@ -86,7 +86,7 @@ const AdminPanel = () => {
 
             <div className='col-md-2 mb-6'>
                <Link
-                  to="/history"
+                  to=""
                   className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
                >
                   <img title="Customers" src={customers} alt="Customer" width="50px" />
@@ -106,7 +106,7 @@ const AdminPanel = () => {
 
             <div className='col-md-2 mb-6'>
                <Link
-                  to="/expensises"
+                  to=""
                   className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
                >
                   <img title="Analytics" src={analytics} alt="Expenses" width="50px" />

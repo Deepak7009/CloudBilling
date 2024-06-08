@@ -56,7 +56,7 @@ const Navbar = () => {
                </div>
                <div className="flex items-center space-x-4">
 
-                  <Link to="/category" className="flex items-center space-x-1 hover:text-red-600 transition duration-300">
+                  <Link to="/add-product" className="flex items-center space-x-1 hover:text-red-600 transition duration-300">
                      <img title="Add Product"
                         src={productIcon} alt="history icon" width="30" height="30"
                      />
@@ -108,7 +108,7 @@ const Navbar = () => {
                      <span className="font-bold">9099012488</span>
                   </div>
 
-                  <Link to="/category" className="flex items-center space-x-2">
+                  <Link to="/add-product" className="flex items-center space-x-2">
                      <img src={productIcon} alt="history icon" width="40" height="40"
                      />
                      <span>Add Product</span>

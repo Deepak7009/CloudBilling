@@ -226,3 +226,6 @@
 .admin{
    margin-left: 70px;
 }
+.blur {
+   filter: blur(3px);
+}

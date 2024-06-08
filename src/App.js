@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Category from "./components/Category";
+import AddProduct from "./components/AddProduct";
 import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 import OrderHistory from "./components/OrderHistory";
@@ -22,7 +22,7 @@ function App() {
       {/* <GenerateCSV /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/category" element={<Category />} />
+        <Route path="/add-product" element={<AddProduct />} />
         <Route path="/history" element={<OrderHistory />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/expensises" element={<Expensises />} />
