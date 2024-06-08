@@ -127,3 +127,7 @@
 .blur {
    filter: blur(3px);
 }
+
+.ab{
+   clip-path: circle(50% at 50% 50%);
+}

@@ -12,15 +12,17 @@ import { Link } from 'react-router-dom';
 
 const AdminPanel = () => {
    return (
-      <div className="container-fluid mx-auto px-4 py-2 bg-gray-50 h-screen">
+      <div className="container-fluid mx-auto px-4 py-2 bg-gray-100 h-screen">
          <h1 className="text-3xl font-bold font-serif mb-6 text-center text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
             Admin Panel
          </h1>
+
          <div className="row gap-6 items-center justify-center">
+
             <div className='col-md-2 mb-6'>
                <Link
                   to=""
-                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
+                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                >
                   <img title="Structure" src={structure} alt="Structure" width="50px" />
                   <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Structure</h2>
@@ -30,7 +32,7 @@ const AdminPanel = () => {
             <div className='col-md-2 mb-6'>
                <Link
                   to=""
-                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
+                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                >
                   <img title="Offer" src={offer} alt="Offer" width="50px" />
                   <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Offer</h2>
@@ -40,7 +42,7 @@ const AdminPanel = () => {
             <div className='col-md-2 mb-6'>
                <Link
                   to="/history"
-                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
+                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                >
                   <img title="Add Category" src={historyIcon} alt="Category" width="50px" />
                   <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Category</h2>
@@ -50,7 +52,7 @@ const AdminPanel = () => {
             <div className='col-md-2 mb-6'>
                <Link
                   to="/add-product"
-                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
+                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                >
                   <img title="Add Product" src={productIcon} alt="product" width="50px" />
                   <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Product</h2>
@@ -60,7 +62,7 @@ const AdminPanel = () => {
             <div className='col-md-2 mb-6'>
                <Link
                   to="/products"
-                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
+                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                >
                   <img title="Products" src={productIcon} alt="product" width="50px" />
                   <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">All Products</h2>
@@ -70,7 +72,7 @@ const AdminPanel = () => {
             <div className='col-md-2 mb-6'>
                <Link
                   to=""
-                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
+                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                >
                   <img title="Invoice" src={invoice} alt="Invoice" width="50px" />
                   <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Invoice</h2>
@@ -80,7 +82,7 @@ const AdminPanel = () => {
             <div className='col-md-2 mb-6'>
                <Link
                   to=""
-                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
+                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                >
                   <img title="Add Customer" src={customer} alt="Customer" width="50px" />
                   <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Customer</h2>
@@ -90,7 +92,7 @@ const AdminPanel = () => {
             <div className='col-md-2 mb-6'>
                <Link
                   to=""
-                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
+                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                >
                   <img title="Customers" src={customers} alt="Customer" width="50px" />
                   <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">All Customers</h2>
@@ -100,7 +102,7 @@ const AdminPanel = () => {
             <div className='col-md-2 mb-6'>
                <Link
                   to="/expensises"
-                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
+                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                >
                   <img title="Expenses" src={expense} alt="Expenses" width="50px" />
                   <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Expenses</h2>
@@ -110,7 +112,7 @@ const AdminPanel = () => {
             <div className='col-md-2 mb-6'>
                <Link
                   to=""
-                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 mt-5"
+                  className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                >
                   <img title="Analytics" src={analytics} alt="Expenses" width="50px" />
                   <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Analytics</h2>
