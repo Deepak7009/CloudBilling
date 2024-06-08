@@ -14,7 +14,7 @@ const SearchBar = ({
   };
 
   return (
-    <div className="flex flex-row justify-between bg-white p-4 mb-4">
+    <div className="flex flex-row justify-between bg-white p-3 mb-4 rounded">
       <p className="text-lg font-bold">Search Items</p>
       <div className="flex items-center space-x-2">
         <div className="lg:hidden">
