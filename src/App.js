@@ -10,13 +10,14 @@ import Login from "./login&register/Login";
 import Register from "./login&register/Register";
 import AdminPanel from "./Admin/AdminPanel";
 import Products from "./components/Products";
+import Profile from "./Profile/Profile";
 
 
 function App() {
   return (
     <>
-      {/* <Login/>
-    <Register/> */}
+      {/*<Register />
+      <Login />*/}
       <Navbar />
       {/* <GenerateCSV /> */}
       <Routes>
@@ -26,6 +27,7 @@ function App() {
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/expensises" element={<Expensises />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/profile" element={<Profile />} />
 
       </Routes>
 

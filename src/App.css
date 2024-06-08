@@ -215,7 +215,14 @@
 
 @media (min-width: 768px) {
    .col-md-2 {
-       flex: 1 1 auto;
-       width: 17.666667%;
+      flex: 1 1 auto;
+      width: 17.666667%;
    }
+}
+
+.QrCode{
+   margin-right: 70px;
+}
+.admin{
+   margin-left: 70px;
 }
