@@ -23,7 +23,7 @@ const Register = () => {
     try {
       const response = await axios.post(`${baseUrl}register`, formData);
       console.log(response.data); // Assuming your backend returns { msg: "User registered successfully" }
-      navigate('/');
+      navigate('/login');
     } catch (error) {
       console.error("Error:", error);
     }

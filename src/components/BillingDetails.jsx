@@ -15,6 +15,7 @@ const BillingDetails = ({
   const [message, setMessage] = useState("");
 
   const handlePlaceOrder = async () => {
+    const totalAmount = calculateTotal();
     const billData = {
       name: billingDetails.name,
       mobile: billingDetails.mobile,
@@ -25,6 +26,7 @@ const BillingDetails = ({
       })),
       section,
       index,
+      totalAmount,
     };
     console.log("asd", billData);
 
