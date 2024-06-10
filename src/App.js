@@ -8,6 +8,7 @@ import GenerateCSV from "./components/GenerateCSV";
 import Expensises from "./components/Expensises";
 import Login from "./login&register/Login";
 import Register from "./login&register/Register";
+import Categories from "./components/Categories";
 import AdminPanel from "./Admin/AdminPanel";
 import Products from "./components/Products";
 import Profile from "./Profile/Profile";
@@ -32,6 +33,8 @@ function App() {
         <Route path="/history" element={<OrderHistory />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/expensises" element={<Expensises />} />
+        <Route path="/categories" element={<Categories />} />
+
         <Route path="/products" element={<Products />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/table" element={<CustomTable />} />
