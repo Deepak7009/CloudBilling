@@ -11,7 +11,9 @@ import Register from "./login&register/Register";
 import AdminPanel from "./Admin/AdminPanel";
 import Products from "./components/Products";
 import Profile from "./Profile/Profile";
-
+import CustomTable from "./components/CustomTable";
+import Structure from "./components/Structure";
+import Process from "./components/Process";
 
 function App() {
   return (
@@ -28,10 +30,10 @@ function App() {
         <Route path="/expensises" element={<Expensises />} />
         <Route path="/products" element={<Products />} />
         <Route path="/profile" element={<Profile />} />
-
+        <Route path="/table" element={<CustomTable />} />
+        <Route path="/process" element={<Process />} />
+        <Route path="/structure" element={<Structure />} />
       </Routes>
-
-      {/* <Category/> */}
     </>
   );
 }

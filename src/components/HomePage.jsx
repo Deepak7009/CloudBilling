@@ -5,9 +5,15 @@ import ItemList from './ItemList';
 import BillingDetails from './BillingDetails';
 import BillModal from './BillModal';
 import { ItemsContext } from '../context/ItemsContext';
+import { useLocation } from "react-router-dom";
 
-function RestaurantManagementApp() {
-    const [selectedCategory, setSelectedCategory] = useState('Beverages');
+function HomePage() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const section = queryParams.get("section");
+  const index = queryParams.get("index");
+
+  const [selectedCategory, setSelectedCategory] = useState('Beverages');
     const [searchQuery, setSearchQuery] = useState('');
     const [orderItems, setOrderItems] = useState([]);
     const [billingDetails, setBillingDetails] = useState({
@@ -18,17 +24,19 @@ function RestaurantManagementApp() {
     const [isBillModalOpen, setIsBillModalOpen] = useState(false);
     const { items } = useContext(ItemsContext);
 
+
     const removeFromOrder = (itemToRemove) => {
         setOrderItems(orderItems.filter(item => item !== itemToRemove));
     };
 
     const allItems = Object.values(items).flat();
 
-    const filteredItems = searchQuery
+      const filteredItems = searchQuery
         ? allItems.filter((item) =>
             item.productName.toLowerCase().includes(searchQuery.toLowerCase())
         )
         : items[selectedCategory] || [];
+
 
     const addToOrder = (item) => {
         const existingItem = orderItems.find(orderItem => orderItem.productName === item.productName);
@@ -43,16 +51,16 @@ function RestaurantManagementApp() {
         }
     };
 
-    const calculateTotal = () => {
+        const calculateTotal = () => {
         return orderItems.reduce((total, item) => total + (item.price * item.quantity), 0);
     };
 
-    const handleBillingChange = (e) => {
+        const handleBillingChange = (e) => {
         const { name, value } = e.target;
         setBillingDetails({ ...billingDetails, [name]: value });
     };
 
-    const generateBillSlip = () => {
+     const generateBillSlip = () => {
         let billText = `Bill Details\n`;
         billText += `Name: ${billingDetails.name}\n`;
         billText += `Mobile: ${billingDetails.mobile}\n`;
@@ -75,7 +83,7 @@ function RestaurantManagementApp() {
         setIsBillModalOpen(false);
     };
 
-    return (
+ return (
         <div className="flex flex-col h-screen">
             <main className="flex flex-grow bg-gray-200 p-4">
                 <div className="flex flex-col md:flex-row w-full">
@@ -120,4 +128,4 @@ function RestaurantManagementApp() {
     );
 }
 
-export default RestaurantManagementApp;
+export default HomePage;

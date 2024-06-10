@@ -3,6 +3,8 @@ import { baseUrl } from "../utils/Const";
 import axios from "axios";
 
 const BillingDetails = ({
+  section,
+  index,
   billingDetails,
   handleBillingChange,
   orderItems,
@@ -21,6 +23,8 @@ const BillingDetails = ({
         quantity: item.quantity,
         price: item.price,
       })),
+      section,
+      index,
     };
     console.log("asd", billData);
 
