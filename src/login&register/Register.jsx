@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom'; 
 import { baseUrl } from "../utils/Const";
 
 const Register = () => {
-  // State for form data
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,6 +23,7 @@ const Register = () => {
     try {
       const response = await axios.post(`${baseUrl}register`, formData);
       console.log(response.data); // Assuming your backend returns { msg: "User registered successfully" }
+      navigate('/login');
     } catch (error) {
       console.error("Error:", error);
     }

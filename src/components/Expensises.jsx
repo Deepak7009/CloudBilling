@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { baseUrl } from "../utils/Const";
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+
 import upd from "../assets/images/edit.png";
 import cross from "../assets/images/svg/crossicon.svg";
 
@@ -23,16 +24,13 @@ const Expensises = () => {
    const [isUpdateMode, setIsUpdateMode] = useState(false);
    const [updateId, setUpdateId] = useState(null);
 
-   const [filter, setFilter] = useState("All Transactions");
-
    const [currentPage, setCurrentPage] = useState(1);
    const expensesPerPage = 15;
    const totalPages = Math.ceil(data.length / expensesPerPage);
 
    const indexOfLastExpense = currentPage * expensesPerPage;
    const indexOfFirstExpense = indexOfLastExpense - expensesPerPage;
-
-   const [currentExpenses, setCurrentExpenses] = useState([]);
+   const currentExpenses = data.slice(indexOfFirstExpense, indexOfLastExpense);
 
    const Pagination = ({ totalPages, currentPage, onPageChange }) => (
       <div className="flex justify-center my-4">
@@ -147,6 +145,7 @@ const Expensises = () => {
                         await axios.delete(`${baseUrl}expens/${id}`);
                         toast.dismiss(); // Dismiss the toast after deletion
                         toast.success("Expensises deleted successfully!");
+
                         fetchData();
                      } catch (error) {
                         toast.dismiss(); // Dismiss the toast if error occurs
@@ -321,6 +320,7 @@ const Expensises = () => {
             </div>
 
             <div className="w-full md:w-2/3 px-4 mt-4 md:mt-0 max-[425px]:px-0">
+
                <div className="overflow-x-auto">
                   <table className="min-w-full bg-white">
                      <thead>
@@ -335,6 +335,7 @@ const Expensises = () => {
                      </thead>
                      <tbody>
                         {currentExpensesToShow.map((item, index) => (
+
                            <tr key={index}>
                               <td className="py-2 px-4 border-b text-start">
                                  {item.srno}

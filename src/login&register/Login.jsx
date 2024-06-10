@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import { baseUrl } from '../utils/Const';
 
 const Login = () => {
   // State for form data and error message
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -28,6 +30,8 @@ const Login = () => {
 
       // Redirect or do other actions after successful login
       console.log('Login successful');
+      navigate("/home");
+
     } catch (error) {
       setError('Invalid credentials'); // Update error message based on actual error
       console.error('Error:', error);
