@@ -5,18 +5,18 @@ import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 import OrderHistory from "./components/OrderHistory";
 import GenerateCSV from "./components/GenerateCSV";
-import Login from "./login&register/Login";
-import Register from "./login&register/Register";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
     <>
-    <Login/>
-    <Register/>
       <Navbar />
       {/* <GenerateCSV /> */}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
         <Route path="/category" element={<Category />} />
         <Route path="/history" element={<OrderHistory />} />
       </Routes>

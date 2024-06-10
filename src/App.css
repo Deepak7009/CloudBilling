@@ -72,39 +72,119 @@
 
 
 @media screen {
+
    .address,
-   .thanks{
+   .thanks {
       display: none;
    }
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
 
+input[type=number] {
+   -moz-appearance: textfield;
+}
 
 @keyframes ring {
-   0% { transform: rotate(0deg); }
-   1% { transform: rotate(30deg); }
-   3% { transform: rotate(-28deg); }
-   5% { transform: rotate(34deg); }
-   7% { transform: rotate(-32deg); }
-   9% { transform: rotate(30deg); }
-   11% { transform: rotate(-28deg); }
-   13% { transform: rotate(26deg); }
-   15% { transform: rotate(-24deg); }
-   17% { transform: rotate(22deg); }
-   19% { transform: rotate(-20deg); }
-   21% { transform: rotate(18deg); }
-   23% { transform: rotate(-16deg); }
-   25% { transform: rotate(14deg); }
-   27% { transform: rotate(-12deg); }
-   29% { transform: rotate(10deg); }
-   31% { transform: rotate(-8deg); }
-   33% { transform: rotate(6deg); }
-   35% { transform: rotate(-4deg); }
-   37% { transform: rotate(2deg); }
-   39% { transform: rotate(-1deg); }
-   41% { transform: rotate(1deg); }
-   43% { transform: rotate(0deg); }
-   100% { transform: rotate(0deg); }
+   0% {
+      transform: rotate(0deg);
+   }
+
+   1% {
+      transform: rotate(30deg);
+   }
+
+   3% {
+      transform: rotate(-28deg);
+   }
+
+   5% {
+      transform: rotate(34deg);
+   }
+
+   7% {
+      transform: rotate(-32deg);
+   }
+
+   9% {
+      transform: rotate(30deg);
+   }
+
+   11% {
+      transform: rotate(-28deg);
+   }
+
+   13% {
+      transform: rotate(26deg);
+   }
+
+   15% {
+      transform: rotate(-24deg);
+   }
+
+   17% {
+      transform: rotate(22deg);
+   }
+
+   19% {
+      transform: rotate(-20deg);
+   }
+
+   21% {
+      transform: rotate(18deg);
+   }
+
+   23% {
+      transform: rotate(-16deg);
+   }
+
+   25% {
+      transform: rotate(14deg);
+   }
+
+   27% {
+      transform: rotate(-12deg);
+   }
+
+   29% {
+      transform: rotate(10deg);
+   }
+
+   31% {
+      transform: rotate(-8deg);
+   }
+
+   33% {
+      transform: rotate(6deg);
+   }
+
+   35% {
+      transform: rotate(-4deg);
+   }
+
+   37% {
+      transform: rotate(2deg);
+   }
+
+   39% {
+      transform: rotate(-1deg);
+   }
+
+   41% {
+      transform: rotate(1deg);
+   }
+
+   43% {
+      transform: rotate(0deg);
+   }
+
+   100% {
+      transform: rotate(0deg);
+   }
 }
 
 .bell-icon {
@@ -117,9 +197,36 @@
 
 #timeline {
    animation: grow 1s ease-in-out infinite alternate;
- }
- 
- @keyframes grow {
-   from { stroke-dasharray: 0 10; }
-   to { stroke-dasharray: 10 10; }
- }
+}
+
+@keyframes grow {
+   from {
+      stroke-dasharray: 0 10;
+   }
+
+   to {
+      stroke-dasharray: 10 10;
+   }
+}
+
+.img {
+   background-image: url('./assets/images/pexels-ella-olsson-572949-1640774.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position-y: 20%;
+}
+
+.img2 {
+   background-image: url('./assets/images/pexels-ella-olsson-572949-1640774.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: 20%;
+}
+
+.register_background {
+   background-color: #18181a9c;
+}
+
+::placeholder {
+   color: black !important;
+}
