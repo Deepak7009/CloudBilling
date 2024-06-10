@@ -29,7 +29,7 @@ const Navbar = () => {
                >
                   <i className="fas fa-bars"></i>
                </button>
-               <Link to='/' >
+               <Link to='/home' >
                   <img width={100} height={100} src={gif} alt="" />
                </Link>
 
