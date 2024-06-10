@@ -1,184 +1,139 @@
-import React, { useState } from 'react';
-import Sidebar from './Sidebar';
-import SearchBar from './SearchBar';
-import ItemList from './ItemList';
-import BillingDetails from './BillingDetails';
-import BillModal from './BillModal';
+import React, { useState, useContext } from "react";
+import Sidebar from "./Sidebar";
+import SearchBar from "./SearchBar";
+import ItemList from "./ItemList";
+import BillingDetails from "./BillingDetails";
+import BillModal from "./BillModal";
+import { ItemsContext } from "../context/ItemsContext";
+import { useLocation } from "react-router-dom";
 
-function RestaurantManagementApp() {
-    const [selectedCategory, setSelectedCategory] = useState('Beverages');
-    const [searchQuery, setSearchQuery] = useState('');
-    const [orderItems, setOrderItems] = useState([]);
-    const [billingDetails, setBillingDetails] = useState({
-        name: '',
-        mobile: '',
-        address: '',
-        locality: '',
-    });
-    const [billSlip, setBillSlip] = useState('');
-    const [isBillModalOpen, setIsBillModalOpen] = useState(false);
+function HomePage() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const section = queryParams.get("section");
+  const index = queryParams.get("index");
 
-    const items = {
-        Beverages: [
-            { name: 'Coffee', description: 'Hot / Cold', price: 100 },
-            { name: 'Tea', description: 'Hot / Cold', price: 30 },
-            { name: 'Juice', description: 'Fresh / Packaged', price: 50 },
-            { name: 'Smoothie', description: 'Fruit / Veggie', price: 60 },
-            { name: 'Milkshake', description: 'Chocolate / Vanilla', price: 70 },
-            { name: 'Soda', description: 'Coke / Pepsi', price: 25 },
-        ],
-        Desserts: [
-            { name: 'Ice Cream', description: 'Vanilla / Chocolate', price: 50 },
-            { name: 'Cake', description: 'Slice', price: 500 },
-            { name: 'Brownie', description: 'With / Without Nuts', price: 40 },
-            { name: 'Pudding', description: 'Chocolate / Vanilla', price: 35 },
-            { name: 'Pastry', description: 'Chocolate / Strawberry', price: 45 },
-            { name: 'Cookies', description: 'Chocolate Chip / Oatmeal', price: 30 },
-        ],
-        Snacks: [
-            { name: 'French Fries', description: 'Regular / Large', price: 99 },
-            { name: 'Nachos', description: 'Cheese / Jalapeno', price: 70 },
-            { name: 'Spring Rolls', description: 'Veg / Non-Veg', price: 80 },
-            { name: 'Samosa', description: '2 pieces', price: 40 },
-        ],
-        Sandwiches: [
-            { name: 'Veg Sandwich', description: 'Grilled / Plain', price: 60 },
-            { name: 'Chicken Sandwich', description: 'Grilled / Plain', price: 80 },
-            { name: 'Club Sandwich', description: 'Triple Layer', price: 100 },
-            { name: 'Paneer Sandwich', description: 'Grilled / Plain', price: 90 },
-        ],
-        Pizza: [
-            { name: 'Margherita', description: 'Regular / Large', price: 150 },
-            { name: 'Pepperoni', description: 'Regular / Large', price: 200 },
-            { name: 'Veggie Delight', description: 'Regular / Large', price: 170 },
-            { name: 'BBQ Chicken', description: 'Regular / Large', price: 220 },
-        ],
-        Burgers: [
-            { name: 'Veg Burger', description: 'With Cheese / Without Cheese', price: 60 },
-            { name: 'Chicken Burger', description: 'With Cheese / Without Cheese', price: 80 },
-            { name: 'Cheese Burger', description: 'Double Cheese', price: 100 },
-            { name: 'Paneer Burger', description: 'With Cheese / Without Cheese', price: 100 },
-        ],
-        Rice: [
-            { name: 'Fried Rice', description: 'Veg / Non-Veg', price: 90 },
-            { name: 'Biryani', description: 'Chicken / Mutton', price: 120 },
-            { name: 'Jeera Rice', description: 'With Dal', price: 70 },
-            { name: 'Plain Rice', description: 'Steamed', price: 50 },
-        ],
-        Combos: [
-            { name: 'Burger Combo', description: 'Burger + Fries + Drink', price: 150 },
-            { name: 'Pizza Combo', description: 'Pizza + Garlic Bread + Drink', price: 200 },
-            { name: 'Sandwich Combo', description: 'Sandwich + Chips + Drink', price: 130 },
-            { name: 'Rice Combo', description: 'Rice + Curry + Drink', price: 140 },
-        ],
-    };
+  const [selectedCategory, setSelectedCategory] = useState("Beverages");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [orderItems, setOrderItems] = useState([]);
+  const [billingDetails, setBillingDetails] = useState({
+    name: "",
+    mobile: "",
+  });
+  const [billSlip, setBillSlip] = useState("");
+  const [isBillModalOpen, setIsBillModalOpen] = useState(false);
+  const { items } = useContext(ItemsContext);
 
-    const removeFromOrder = (itemToRemove) => {
-        setOrderItems(orderItems.filter(item => item !== itemToRemove));
-    };
+  const removeFromOrder = (itemToRemove) => {
+    setOrderItems(orderItems.filter((item) => item !== itemToRemove));
+  };
 
-    const allItems = Object.values(items).flat();
+  const allItems = Object.values(items).flat();
 
-    const filteredItems = searchQuery
-        ? allItems.filter((item) =>
-            item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredItems = searchQuery
+    ? allItems.filter((item) =>
+        item.productName.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : items[selectedCategory] || [];
+
+  const addToOrder = (item) => {
+    const existingItem = orderItems.find(
+      (orderItem) => orderItem.productName === item.productName
+    );
+    if (existingItem) {
+      setOrderItems(
+        orderItems.map((orderItem) =>
+          orderItem.productName === item.productName
+            ? { ...orderItem, quantity: orderItem.quantity + 1 }
+            : orderItem
         )
-        : items[selectedCategory] || [];
+      );
+    } else {
+      setOrderItems([...orderItems, { ...item, quantity: 1 }]);
+    }
+  };
 
+  const calculateTotal = () => {
+    return orderItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  };
 
-    const addToOrder = (item) => {
-        const existingItem = orderItems.find(orderItem => orderItem.name === item.name);
-        if (existingItem) {
-            setOrderItems(orderItems.map(orderItem =>
-                orderItem.name === item.name
-                    ? { ...orderItem, quantity: orderItem.quantity + 1 }
-                    : orderItem
-            ));
-        } else {
-            setOrderItems([...orderItems, { ...item, quantity: 1 }]);
-        }
-    };
+  const handleBillingChange = (e) => {
+    const { name, value } = e.target;
+    setBillingDetails({ ...billingDetails, [name]: value });
+  };
 
-    const calculateTotal = () => {
-        return orderItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-    };
+  const generateBillSlip = () => {
+    let billText = `Bill Details\n`;
+    billText += `Name: ${billingDetails.name}\n`;
+    billText += `Mobile: ${billingDetails.mobile}\n`;
+    billText += `\nOrder Summary\n`;
+    orderItems.forEach((item) => {
+      billText += `${item.productName} x ${item.quantity} = ₹${
+        item.price * item.quantity
+      }\n`;
+    });
+    billText += `\nTotal: ₹${calculateTotal()}\n`;
 
-    const handleBillingChange = (e) => {
-        const { name, value } = e.target;
-        setBillingDetails({ ...billingDetails, [name]: value });
-    };
+    setBillSlip(billText);
+    setIsBillModalOpen(true);
+  };
 
-    const generateBillSlip = () => {
-        let billText = `Bill Details\n`;
-        billText += `Name: ${billingDetails.name}\n`;
-        billText += `Mobile: ${billingDetails.mobile}\n`;
-        billText += `Address: ${billingDetails.address}\n`;
-        billText += `Locality: ${billingDetails.locality}\n`;
-        billText += `\nOrder Summary\n`;
-        orderItems.forEach(item => {
-            billText += `${item.name} x ${item.quantity} = ₹${item.price * item.quantity}\n`;
-        });
-        billText += `\nTotal: ₹${calculateTotal()}\n`;
+  const shareOnWhatsApp = () => {
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(billSlip)}`;
+    window.open(whatsappUrl, "_blank");
+  };
 
-        setBillSlip(billText);
-        setIsBillModalOpen(true);
-    };
+  const closeModal = () => {
+    setIsBillModalOpen(false);
+  };
 
-    const shareOnWhatsApp = () => {
-        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(billSlip)}`;
-        window.open(whatsappUrl, '_blank');
-    };
-
-    const closeModal = () => {
-        setIsBillModalOpen(false);
-    };
-
-    return (
-
-      <div className="flex flex-col h-screen">
-        {/* <Navbar /> */}
-        <main className="flex flex-grow bg-gray-200 p-4">
-          <div className="flex flex-col md:flex-row w-full">
-            <Sidebar
-              items={items}
+  return (
+    <div className="flex flex-col h-screen">
+      <main className="flex flex-grow bg-gray-200 p-4">
+        <div className="flex flex-col md:flex-row w-full">
+          <Sidebar
+            //items={items}
+            setSelectedCategory={setSelectedCategory}
+            setSearchQuery={setSearchQuery}
+          />
+          <div className="flex flex-col w-full lg:w-1/2 xl:w-2/3">
+            <SearchBar
+              selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
+              searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
+              items={items}
             />
-            <div className="flex flex-col w-full lg:w-1/2 xl:w-2/3">
-              <SearchBar
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-                items={items}
-              />
-              <ItemList filteredItems={filteredItems} addToOrder={addToOrder} />
-            </div>
-           
-              <BillingDetails
-                billingDetails={billingDetails}
-                handleBillingChange={handleBillingChange}
-                orderItems={orderItems}
-                calculateTotal={calculateTotal}
-                generateBillSlip={generateBillSlip}
-                removeFromOrder={removeFromOrder}
-              />
-         
+            <ItemList filteredItems={filteredItems} addToOrder={addToOrder} />
           </div>
-        </main>
 
-
-        {isBillModalOpen && (
-          <BillModal
+          <BillingDetails
+            section={section}
+            index={index}
             billingDetails={billingDetails}
+            handleBillingChange={handleBillingChange}
             orderItems={orderItems}
             calculateTotal={calculateTotal}
-            closeModal={closeModal}
-            shareOnWhatsApp={shareOnWhatsApp}
+            generateBillSlip={generateBillSlip}
+            removeFromOrder={removeFromOrder}
           />
-        )}
-      </div>
-    );
+        </div>
+      </main>
+
+      {isBillModalOpen && (
+        <BillModal
+          billingDetails={billingDetails}
+          orderItems={orderItems}
+          calculateTotal={calculateTotal}
+          closeModal={closeModal}
+          shareOnWhatsApp={shareOnWhatsApp}
+        />
+      )}
+    </div>
+  );
 }
 
-export default RestaurantManagementApp;
+export default HomePage;
