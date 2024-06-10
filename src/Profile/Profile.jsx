@@ -1,16 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 import logo from "../assets/images/webp/giphy.webp";
 import QrCodeImg from '../assets/images/Qrcode 1.png';
 import edit from "../assets/images/edit.png";
-import email from "../assets/images/email.png";
+import emailIcon from "../assets/images/email.png";
+import { baseUrl } from '../utils/Const';
 
 const Profile = () => {
    const [isPopupOpen, setIsPopupOpen] = useState(false);
    const [adminDetails, setAdminDetails] = useState({
-      name: 'Abcde',
-      mobile: '9876543210',
-      email: 'abc12@gmail.com'
+      name: '',
+      mobile: '',
+      email: ''
    });
+
+   const [name, setName] = useState('');
+   const [email, setEmail] = useState('');
+   const [userId, setUserId] = useState("");
+
+
+
+   useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+         const decodedToken = jwtDecode(token);
+         console.log("Decoded Token:", decodedToken);
+
+         if (decodedToken.user) {
+            const userId = decodedToken.user.id;
+            console.log("Extracted UserId:", userId);
+
+            setUserId(userId);
+
+            if (userId) {
+               axios.get(`${baseUrl}user/${userId}`)
+                  .then(response => {
+                     setAdminDetails(response.data);
+                     //setName(response.data.name);
+                     //setEmail(response.data.email);
+                     console.log("Admin Details:", response.data);
+                  })
+                  .catch(error => {
+                     console.error('Error fetching user data:', error);
+                  });
+            } else {
+               console.error('Error: userId is missing in the decoded token');
+            }
+         } else {
+            console.error('Error: user object is missing in the decoded token');
+         }
+      }
+   }, []);
 
    const handleEditClick = () => {
       setIsPopupOpen(true);
@@ -27,29 +68,12 @@ const Profile = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      // Perform any additional actions such as API calls here
-      try {
-         const response = await fetch('http://localhost:5000/api/admin/your-admin-id', {
-            method: 'PUT',
-            headers: {
-               'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(adminDetails)
-         });
-         const data = await response.json();
-         console.log('Updated admin:', data);
-      } catch (error) {
-         console.error('Error updating admin:', error);
-      }
-      setIsPopupOpen(false);
+      // Add logic to update user details
    };
 
    return (
       <div className="relative min-h-screen bg-gray-100 px-6 py-4 mb-6">
-
          <div className={`max-w-4xl mx-auto bg-white py-8 px-4 rounded-lg shadow-md mb-6 transition ${isPopupOpen ? 'blur' : ''}`} style={{ zIndex: 1 }}>
-
-            {/* Header */}
             <div className="flex justify-between">
                <div className='flex'>
                   <div className="">
@@ -78,14 +102,12 @@ const Profile = () => {
                         9876543210
                      </p>
                      <p className="text-gray-800 font-serif font-bold pt-2 flex">
-                     <img src={email} alt="email" width="30px"
-                     className='mr-2' /> 
-                         abc123@gmail.com
+                        <img src={emailIcon} alt="email" width="30px" className='mr-2' />
+                        cloudrashoi7@gmail.com
                      </p>
                   </div>
                </div>
 
-               {/* Opening Hours Section */}
                <div className='flex'>
                   <div className="mb-6">
                      <h3 className="text-xl font-semibold text-teal-600 font-serif">Opening Hours</h3>
@@ -93,7 +115,6 @@ const Profile = () => {
                      <p className="text-gray-600 font-serif">Saturday - Sunday: 11:00 AM - 11:00 PM</p>
                   </div>
                </div>
-
             </div>
 
             <div className='flex justify-between items-center mt-6'>
@@ -109,9 +130,14 @@ const Profile = () => {
                         onClick={handleEditClick}
                      />
                   </div>
-                  <h1 className='font-serif'>Name : <span className='font-bold'>{adminDetails.name}</span></h1>
-                  <h1 className='font-serif'>Mobile : <span className='font-bold'>{adminDetails.mobile}</span></h1>
-                  <h1 className='font-serif'>Mail :<span className='font-bold'> {adminDetails.email}</span></h1>
+
+                  <div>
+                     <h1 className='font-serif'>Name : <span className='font-bold'>{adminDetails.name}</span></h1>
+                     <h1 className='font-serif'>Mobile : <span className='font-bold'>{adminDetails.mobile}</span></h1>
+                     <h1 className='font-serif'>Mail :<span className='font-bold'> {adminDetails.email}</span></h1>
+                  </div>
+
+
                </div>
 
                <div className="QrCode">
@@ -123,10 +149,8 @@ const Profile = () => {
                   />
                </div>
             </div>
-
          </div>
 
-         {/* Popup */}
          {isPopupOpen && (
             <div className="fixed inset-0 flex justify-center items-center z-50">
                <div className="absolute inset-0 bg-gray-600 bg-opacity-50"></div>

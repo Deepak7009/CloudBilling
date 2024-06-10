@@ -23,7 +23,9 @@ function App() {
       <Navbar />
       {/* <GenerateCSV /> */}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Register />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/history" element={<OrderHistory />} />
         <Route path="/admin" element={<AdminPanel />} />
