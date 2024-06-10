@@ -12,10 +12,10 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const Categories = () => {
     const [form, setForm] = useState({
-        srno: "",
-        title: "",
-        price: "",
-        description: ""
+        srNo: "",
+        newTitle: "",
+        newStatus: "",
+        newDescription: ""
     });
 
     const [data, setData] = useState([]);
@@ -25,13 +25,13 @@ const Categories = () => {
     const [filter, setFilter] = useState("All Transactions");
 
     const [currentPage, setCurrentPage] = useState(1);
-    const expensesPerPage = 15;
-    const totalPages = Math.ceil(data.length / expensesPerPage);
+    const CategoryesPerPage = 15;
+    const totalPages = Math.ceil(data.length / CategoryesPerPage);
 
-    const indexOfLastExpense = currentPage * expensesPerPage;
-    const indexOfFirstExpense = indexOfLastExpense - expensesPerPage;
+    const indexOfLastCategorye = currentPage * CategoryesPerPage;
+    const indexOfFirstCategorye = indexOfLastCategorye - CategoryesPerPage;
 
-    // const [currentExpenses, setCurrentExpenses] = useState([]);
+    // const [currentCategoryes, setCurrentCategoryes] = useState([]);
 
     const Pagination = ({ totalPages, currentPage, onPageChange }) => (
         <div className="flex justify-center my-4">
@@ -73,13 +73,13 @@ const Categories = () => {
         e.preventDefault();
         if (isUpdateMode) {
             try {
-                await axios.put(`${baseUrl}expens/${updateId}`, form);
+                await axios.put(`${baseUrl}newcategories/${updateId}`, form);
                 toast.success("Data updated successfully!");
                 setForm({
-                    srno: "",
-                    title: "",
-                    price: "",
-                    description: ""
+                    srNo: "",
+                    newTitle: "",
+                    newStatus: "",
+                    newDescription: ""
                 });
                 setIsUpdateMode(false);
                 setUpdateId(null);
@@ -90,30 +90,30 @@ const Categories = () => {
             }
         } else {
             try {
-                const newForm = { ...form, srno: data.length + 1 };
-                await axios.post(`${baseUrl}expenses`, newForm);
-                toast.success("Expens added successfully!");
+                const newForm = { ...form, srNo: data.length + 1 };
+                await axios.post(`${baseUrl}newcategories`, newForm);
+                toast.success("Category added successfully!");
                 setForm({
-                    srno: "",
-                    title: "",
-                    price: "",
-                    description: ""
+                    srNo: "",
+                    newTitle: "",
+                    newStatus: "",
+                    newDescription: ""
                 });
                 fetchData();
             } catch (error) {
-                if (error.response && error.response.data.message === "Expens already exists") {
-                    toast.error("Expens already exists!");
+                if (error.response && error.response.data.message === "Category already exists") {
+                    toast.error("Category already exists!");
                 } else {
-                    toast.error("Error adding expens!");
+                    toast.error("Error adding Category!");
                 }
-                console.error("Error adding expens:", error);
+                console.error("Error adding Category:", error);
             }
         }
     };
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`${baseUrl}expenses`);
+            const response = await axios.get(`${baseUrl}newcategories`);
             setData(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -141,7 +141,7 @@ const Categories = () => {
                         className="bg-red-500 text-white px-3 py-1 rounded mr-2"
                         onClick={async () => {
                             try {
-                                await axios.delete(`${baseUrl}expens/${id}`);
+                                await axios.delete(`${baseUrl}newcategories/${id}`);
                                 toast.dismiss(); // Dismiss the toast after deletion
                                 toast.success("Category deleted successfully!");
                                 fetchData();
@@ -207,7 +207,7 @@ const Categories = () => {
             labels,
             datasets: [
                 {
-                    label: 'Expenses',
+                    label: 'Categoryes',
                     data: prices,
                     borderColor: 'rgba(75, 192, 192, 1)',
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -220,7 +220,7 @@ const Categories = () => {
 
     const filteredData = filterData(data);
     const totalPrice = filteredData.reduce((total, item) => total + parseFloat(item.price || 0), 0);
-    const currentExpensesToShow = filteredData.slice(indexOfFirstExpense, indexOfLastExpense);
+    const currentCategoryesToShow = filteredData.slice(indexOfFirstCategorye, indexOfLastCategorye);
 
     return (
         <div className="container-fluid mx-auto px-4 py-8 max-[425px]:px-0 max-[1023px]:mx-0">
@@ -240,7 +240,7 @@ const Categories = () => {
                     </div>
                     <div className="max-[370px]:flex max-[370px]:justify-center max-[370px]:pt-5">
                         <p className="text-lg font-semibold">
-                            Total Price: <span className="text-blue-600 max-[425px]:block">₹ {totalPrice.toFixed(2)}</span>
+                            Category: <span className="text-blue-600 max-[425px]:block">₹ {totalPrice.toFixed(2)}</span>
                         </p>
                     </div>
                 </div>
@@ -252,39 +252,42 @@ const Categories = () => {
 
                 <div className="form-column w-full md:w-1/3 md:px-4 max-[767px] justify-center text-center">
                     <div className="mb-4 flex items-center max-[1023px]:block">
-                        <label htmlFor="title" className="block text-gray-700 font-medium mb-1 md:w-24">
+                        <label htmlFor="newTitle" className="block text-gray-700 font-medium mb-1 md:w-24">
                             Title
                         </label>
                         <input
-                            id="title"
+                            id="newTitle"
                             type="text"
                             className="flex-1 border border-gray-300 rounded-md p-2 block w-0 max-[1023px]:w-52 mx-auto"
-                            value={form.title}
+                            value={form.newTitle}
                             onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-4 flex items-center max-[1023px]:block">
-                        <label htmlFor="price" className="block text-gray-700 font-medium mb-1 md:w-24">
+                        <label htmlFor="newStatus" className="block text-gray-700 font-medium mb-1 md:w-24">
                             Status
                         </label>
                         <input
-                            id="price"
-                            type="number"
+                            id="newStatus"
+                            type="text"
                             className="flex-1 border border-gray-300 rounded-md p-2 no-spinner block w-0 max-[1023px]:w-52 mx-auto"
-                            value={form.price}
+                            value={form.newStatus}
                             onChange={handleChange}
+                            required
                         />
                     </div>
                     <div className="mb-4 flex items-center max-[1023px]:block">
-                        <label htmlFor="description" className="block text-gray-700 font-medium mb-1 md:w-24">
+                        <label htmlFor="newDescription" className="block text-gray-700 font-medium mb-1 md:w-24">
                             Description
                         </label>
                         <textarea
-                            id="description"
+                            id="newDescription"
                             className="flex-1 border border-gray-300 rounded-md p-2 resize-none"
                             rows="4"
-                            value={form.description}
+                            value={form.newDescription}
                             onChange={handleChange}
+                            required
                         ></textarea>
                     </div>
                     <div className="mb-4 flex justify-center md:justify-center">
@@ -314,19 +317,19 @@ const Categories = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {currentExpensesToShow.map((item, index) => (
+                                {currentCategoryesToShow.map((item, index) => (
                                     <tr key={index}>
                                         <td className="py-2 px-4 border-b text-start">
-                                            {item.srno}
+                                            {item.srNo}
                                         </td>
                                         <td className="py-2 px-4 border-b text-start">
-                                            {item.title}
+                                            {item.newTitle}
                                         </td>
                                         <td className="py-2 px-4 border-b text-start">
-                                            {item.status}
+                                            {item.newStatus}
                                         </td>
                                         <td className="py-2 px-4 border-b text-start">
-                                            {item.description}
+                                            {item.newDescription}
                                         </td>
                                         <td className="py-2 px-4 border-b text-start">
                                             <div className="flex gap-3">

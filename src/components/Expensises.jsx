@@ -277,6 +277,7 @@ const Expensises = () => {
                      className="flex-1 border border-gray-300 rounded-md p-2 block w-0 max-[1023px]:w-52 mx-auto"
                      value={form.title}
                      onChange={handleChange}
+                     required
                   />
                </div>
                <div className="mb-4 flex items-center max-[1023px]:block">
@@ -289,6 +290,7 @@ const Expensises = () => {
                      className="flex-1 border border-gray-300 rounded-md p-2 no-spinner block w-0 max-[1023px]:w-52 mx-auto"
                      value={form.price}
                      onChange={handleChange}
+                     required
                   />
                </div>
                <div className="mb-4 flex items-center max-[1023px]:block">
@@ -301,6 +303,7 @@ const Expensises = () => {
                      rows="4"
                      value={form.description}
                      onChange={handleChange}
+                     required
                   ></textarea>
                </div>
                <div className="mb-4 flex justify-center md:justify-center">
