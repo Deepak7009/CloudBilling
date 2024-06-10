@@ -17,7 +17,7 @@ const BillingDetails = ({
       name: billingDetails.name,
       mobile: billingDetails.mobile,
       orderItems: orderItems?.map((item) => ({
-        name: item.name,
+        name: item.productName,
         quantity: item.quantity,
         price: item.price,
       })),
@@ -36,8 +36,8 @@ const BillingDetails = ({
   };
 
   return (
-    <div className="flex flex-col md:w-1/3 w-full xl:w-1/3 lg:w-1/3 bg-white px-4 pt-2 rounded shadow-md mt-4 md:mt-0 md:ml-4">
-      <p className="text-lg font-bold mb-4">Billing Details</p>
+    <div className="flex flex-col md:w-1/3 w-full xl:w-1/3 lg:w-1/3 bg-white px-4 pt-2 rounded shadow-md md:mt-0 md:ml-4">
+      <p className="text-lg text-teal-600 font-bold font-serif mb-4">Billing Details</p>
       <div className="flex flex-col space-y-4 mb-4">
         <div className="flex items-center">
           <label className="w-1/4 text-right pr-4 xl:block hidden">Name:</label>
@@ -55,7 +55,7 @@ const BillingDetails = ({
             Mobile:
           </label>
           <input
-            type="text"
+            type="tel"
             name="mobile"
             placeholder="Enter Mobile No..."
             value={billingDetails.mobile}
@@ -65,7 +65,7 @@ const BillingDetails = ({
         </div>
       </div>
 
-      <p className="text-lg font-bold mb-4">Order Summary</p>
+      <p className="text-lg font-bold mb-4 text-teal-600 font-serif">Order Summary</p>
       <div className="overflow-x-auto overflow-auto max-h-[200px]  example">
         <table className="min-w-full divide-y divide-gray-200">
           <thead>
@@ -79,7 +79,8 @@ const BillingDetails = ({
           <tbody className="bg-white divide-y divide-gray-200 text-sm">
             {orderItems?.map((item) => (
               <tr key={item.name}>
-                <td className="py-1 px-3">{item.name}</td>
+
+                <td className="py-1 px-3">{item.productName}</td>
                 <td className="py-1 px-3 text-center">{item.quantity}</td>
                 <td className="py-1 px-3 text-center">
                   ₹{item.price * item.quantity}
@@ -103,7 +104,7 @@ const BillingDetails = ({
       </div>
       {message && <p className="text-red-500 mt-2">{message}</p>}
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-2"
+        className="bg-teal-600 hover:bg-teal-700 text-white font-bold font-serif py-2 px-4 rounded-full my-2"
         onClick={handlePlaceOrder}
       >
         Place Order
