@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+// import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { baseUrl } from "../utils/Const";
 
 const Login = () => {
@@ -29,26 +29,26 @@ const Login = () => {
     }
   };
 
-  const handleGoogleSuccess = async (response) => {
-    try {
-      const res = await axios.post(`${baseUrl}auth/google/callback`, {
-        token: response.credential,
-      });
-      localStorage.setItem("token", res.data.token);
-      navigate("/home");
-    } catch (error) {
-      setError("Google login failed");
-      console.error("Error:", error);
-    }
-  };
+  // const handleGoogleSuccess = async (response) => {
+  //   try {
+  //     const res = await axios.post(`${baseUrl}auth/google/callback`, {
+  //       token: response.credential,
+  //     });
+  //     localStorage.setItem("token", res.data.token);
+  //     navigate("/home");
+  //   } catch (error) {
+  //     setError("Google login failed");
+  //     console.error("Error:", error);
+  //   }
+  // };
 
-  const handleGoogleFailure = (error) => {
-    console.error("Google login error:", error);
-    setError("Google login failed");
-  };
+  // const handleGoogleFailure = (error) => {
+  //   console.error("Google login error:", error);
+  //   setError("Google login failed");
+  // };
 
   return (
-    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+    // <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <div className="img2">
         <div className="flex justify-center z-[1] items-center h-screen">
           <div className="backdrop-blur-[2px]">
@@ -87,16 +87,16 @@ const Login = () => {
                 here
               </p>
             </form>
-            <GoogleLogin
+            {/* <GoogleLogin
               onSuccess={handleGoogleSuccess}
               onFailure={handleGoogleFailure}
               cookiePolicy={"single_host_origin"}
-            />
+            /> */}
           </div>
         </div>
-        {error && <p className="text-red-500">{error}</p>}
+        {/* {error && <p className="text-red-500">{error}</p>} */}
       </div>
-    </GoogleOAuthProvider>
+    // </GoogleOAuthProvider>
   );
 };
 
