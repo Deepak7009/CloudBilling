@@ -23,7 +23,7 @@ function App() {
       <Navbar />
       {/* <GenerateCSV /> */}
       <Routes>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/resto" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Register />} />
         <Route path="/add-product" element={<AddProduct />} />
@@ -32,7 +32,7 @@ function App() {
         <Route path="/expensises" element={<Expensises />} />
         <Route path="/products" element={<Products />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/table" element={<CustomTable />} />
+        <Route path="/home" element={<CustomTable />} />
         <Route path="/process" element={<Process />} />
         <Route path="/structure" element={<Structure />} />
       </Routes>
