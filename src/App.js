@@ -11,7 +11,7 @@ import Register from "./login&register/Register";
 import Categories from "./components/Categories";
 import AdminPanel from "./components/Admin/AdminPanel";
 import Products from "./components/Products";
-import Profile from "./Profile/Profile";
+import Profile from "./components/Profile";
 import CustomTable from "./components/CustomTable";
 import Structure from "./components/Structure";
 import Process from "./components/Process";

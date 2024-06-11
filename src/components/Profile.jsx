@@ -76,8 +76,8 @@ const Profile = () => {
 
 
    return (
-      <div className="relative min-h-screen bg-gray-100 px-6 py-4 mb-6">
-         <div className={`max-w-4xl mx-auto bg-white py-8 px-4 rounded-lg shadow-md mb-6 transition ${isPopupOpen ? 'blur' : ''}`} style={{ zIndex: 1 }}>
+      <div className="container-fluid bg-gray-100 py-4 mb-6">
+         <div className={`container bg-white py-8 px-4 rounded-lg shadow-md mb-6 transition ${isPopupOpen ? 'blur' : ''}`}>
             <div className="flex justify-between">
                <div className='flex'>
                   <div className="">
@@ -88,8 +88,19 @@ const Profile = () => {
                         className=""
                      />
                   </div>
-                  <div className="ml-4 items-center">
-                     <h2 className="text-3xl font-semibold text-teal-600 font-serif">{adminDetails.restaruant}</h2>
+                  <div className=" rastaurant-details ml-4 items-center">
+                     <div className='flex'>
+                        <h2 className="text-3xl font-semibold text-teal-600 font-serif">{adminDetails.restaruant}</h2>
+                        <img
+                           className="cursor-pointer ml-3"
+                           src={edit}
+                           alt="update icon"
+                           width="35px"
+                           title="Update Your Profile"
+                           onClick={handleEditClick}
+
+                        />
+                     </div>
                      <p className="text-gray-800 font-serif font-bold flex items-center pt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="32" height="32" className="mr-2">
                            <path fill="#e3e2e1" d="M54.01 58.74C54.01 61.65 44.15 64 32 64c-12.15 0-22.01-2.35-22.01-5.26 0-2.6 7.9-4.74 18.26-5.18h7.5c10.37.44 18.26 2.58 18.26 5.18z"></path>
@@ -115,8 +126,8 @@ const Profile = () => {
                <div className='flex'>
                   <div className="mb-6">
                      <h3 className="text-xl font-semibold text-teal-600 font-serif">Opening Hours</h3>
-                     <p className="mt-2 text-gray-600 font-serif">Monday - Friday: 10:00 AM - 10:00 PM</p>
-                     <p className="text-gray-600 font-serif">Saturday - Sunday: 11:00 AM - 11:00 PM</p>
+                     <p className="mt-2 text-gray-600 font-serif">Monday - Friday: {adminDetails.openingHours?.mondayFriday}</p>
+                     <p className="text-gray-600 font-serif">Saturday - Sunday: {adminDetails.openingHours?.saturdaySunday}</p>
                   </div>
                </div>
             </div>
@@ -130,7 +141,7 @@ const Profile = () => {
                         src={edit}
                         alt="update icon"
                         width="20px"
-                        title="Update Your Order"
+                        title="Update Your Profile"
                         onClick={handleEditClick}
                      />
                   </div>
@@ -145,7 +156,8 @@ const Profile = () => {
 
                <div className="QrCode">
                   <img
-                     src={QrCodeImg}
+                     src={adminDetails.qrCodeImageUrl || QrCodeImg}
+
                      alt="QR Code"
                      width="150px"
                      className="mt-2"
@@ -158,27 +170,52 @@ const Profile = () => {
             <div className="fixed inset-0 flex justify-center items-center z-50">
                <div className="absolute inset-0 bg-gray-600 bg-opacity-50"></div>
                <div className="relative bg-white p-6 rounded-lg shadow-lg z-50">
-                  <h2 className="text-xl font-bold mb-4">Edit Admin Details</h2>
+                  <h2 className="text-xl font-bold mb-4 text-teal-600 font-serif">Edit Admin Details</h2>
                   <form onSubmit={handleSubmit}>
-                     <div className="mb-4">
-                        <label className="block text-gray-700">Name</label>
-                        <input
-                           type="text"
-                           name="owner"
-                           value={adminDetails.owner}
-                           onChange={handleInputChange}
-                           className="mt-1 p-2 border rounded w-full"
-                        />
+                     <div className='flex space-x-4'>
+                        <div className="mb-4">
+                           <label className="block text-gray-700">Restaruant Name</label>
+                           <input
+                              type="text"
+                              name="restaruant"
+                              value={adminDetails.restaruant}
+                              onChange={handleInputChange}
+                              className="mt-1 p-2 border rounded w-full"
+                           />
+                        </div>
+                        <div className="mb-4">
+                           <label className="block text-gray-700">Address </label>
+                           <input
+                              type="text"
+                              name="address"
+                              value={adminDetails.address}
+                              onChange={handleInputChange}
+                              className="mt-1 p-2 border rounded w-full"
+                           />
+                        </div>
                      </div>
-                     <div className="mb-4">
-                        <label className="block text-gray-700">Mobile</label>
-                        <input
-                           type="text"
-                           name="mobile"
-                           value={adminDetails.mobile}
-                           onChange={handleInputChange}
-                           className="mt-1 p-2 border rounded w-full"
-                        />
+
+                     <div className='flex space-x-4'>
+                        <div className="mb-4">
+                           <label className="block text-gray-700">Name</label>
+                           <input
+                              type="text"
+                              name="owner"
+                              value={adminDetails.owner}
+                              onChange={handleInputChange}
+                              className="mt-1 p-2 border rounded w-full"
+                           />
+                        </div>
+                        <div className="mb-4">
+                           <label className="block text-gray-700">Mobile</label>
+                           <input
+                              type="text"
+                              name="mobile"
+                              value={adminDetails.mobile}
+                              onChange={handleInputChange}
+                              className="mt-1 p-2 border rounded w-full"
+                           />
+                        </div>
                      </div>
                      <div className="mb-4">
                         <label className="block text-gray-700">Email</label>
