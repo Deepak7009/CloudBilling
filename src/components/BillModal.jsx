@@ -66,7 +66,7 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                      <p className="flex justify-between bill-total text-lg font-semibold mt-4">
                         <span>Sub Total :</span> <span>₹{calculateTotal()}</span></p>
 
-                     <div className='discount flex print:block'>
+                     <div className='discount flex print:hidden'>
                         <div className="mt-2 print:flex justify-between">
 
                            <label htmlFor="discount" className="font-semibold pl-1">Discount:</label>
