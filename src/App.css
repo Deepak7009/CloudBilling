@@ -72,7 +72,6 @@
 
 
 @media screen {
-
    .address,
    .thanks {
       display: none;
@@ -118,16 +117,15 @@
 
 /* Profile */
 
-.QrCode{
+.QrCode {
    margin-right: 70px;
 }
-.admin{
+
+.admin {
    margin-left: 70px;
 }
+
 .blur {
    filter: blur(3px);
 }
 
-.ab{
-   clip-path: circle(50% at 50% 50%);
-}

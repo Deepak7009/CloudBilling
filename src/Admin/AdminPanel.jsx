@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 const AdminPanel = () => {
    return (
-      <div className="container-fluid mx-auto px-4 py-2 bg-gray-100 h-screen">
+      <div className="container mx-auto px-4 py-2 bg-gray-100">
          <h1 className="text-3xl font-bold font-serif mb-6 text-center text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
             Admin Panel
          </h1>
