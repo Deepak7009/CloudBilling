@@ -54,7 +54,7 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                         </div>
                      </div>
 
-                     <h3 className="text-lg font-semibold mt-4 text-center">Order Details :</h3>
+                     <h3 className="text-lg font-semibold mt-2 text-center">Order Details :</h3>
                      <ul className="list-disc list-inside mb-2 max-h-[100px] overflow-auto print:max-h-full">
                         {orderItems.map((item, index) => (
                            <li key={item.productName} className="flex justify-between">
@@ -69,7 +69,7 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                      <div className='discount flex print:hidden'>
                         <div className="mt-2 print:flex justify-between">
 
-                           <label htmlFor="discount" className="font-semibold pl-1">Discount:</label>
+                           <label htmlFor="discount" className=" font-semibold pl-1">Discount:</label>
                            <input
                               type="number"
                               id="discount"
@@ -79,8 +79,8 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                            />
 
                         </div>
-                        <div className="mt-2 print:flex justify-between">
-                           <label htmlFor="gst" className="font-semibold pl-2">GST (%):</label>
+                        <div className=" mt-2 print:flex justify-between">
+                           <label htmlFor="gst" className=" font-semibold pl-2">GST (%):</label>
                            <input
                               type="number"
                               id="gst"

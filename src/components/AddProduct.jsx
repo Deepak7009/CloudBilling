@@ -7,6 +7,8 @@ import "./Product.css";
 import { baseUrl } from "../utils/Const";
 import update from "../assets/images/svg/updateicon.svg";
 import cross from "../assets/images/svg/crossicon.svg";
+import { jwtDecode } from 'jwt-decode';
+
 
 const AddProduct = () => {
    const [formData, setFormData] = useState({
@@ -23,6 +25,18 @@ const AddProduct = () => {
    const [data, setData] = useState([]);
    const [isUpdateMode, setIsUpdateMode] = useState(false);
    const [updateId, setUpdateId] = useState(null);
+   const [userId, setUserId] = useState("");
+
+   useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+         const decodedToken = jwtDecode(token);
+         if (decodedToken.user) {
+            setUserId(decodedToken.user.id);
+         }
+      }
+   }, []);
+   
 
    const handleChange = (e) => {
       const { id, value } = e.target;
@@ -60,7 +74,7 @@ const AddProduct = () => {
          }
       } else {
          try {
-            const response = await axios.post(`${baseUrl}product`, formData);
+            const response = await axios.post(`${baseUrl}product/${userId}`, formData);
             toast.success("Product added successfully!");
             setFormData({
                productid: "",
@@ -89,16 +103,20 @@ const AddProduct = () => {
 
    const fetchData = async () => {
       try {
-         const response = await axios.get(`${baseUrl}get-products`);
+         const response = await axios.get(`${baseUrl}get-products/${userId}`);
          setData(response.data);
       } catch (error) {
          console.error("Error fetching data:", error);
       }
    };
-
+   
    useEffect(() => {
-      fetchData();
-   }, []);
+      if (userId) {
+         fetchData();
+      }
+   }, [userId]);
+   
+    
 
    const handleUpdateClick = (item) => {
       setFormData(item);
@@ -281,7 +299,7 @@ const AddProduct = () => {
                         </tr>
                      </thead>
                      <tbody>
-                        {data.map((item, index) => (
+                        {data?.map((item, index) => (
                            <tr key={index}>
                               <td className="py-2 px-4 border-b text-start">
                                  {item.productid}
