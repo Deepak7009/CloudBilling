@@ -9,7 +9,7 @@ import Expensises from "./components/Expensises";
 import Login from "./components/Login";
 import Register from "./login&register/Register";
 import Categories from "./components/Categories";
-import AdminPanel from "./Admin/AdminPanel";
+import AdminPanel from "./components/Admin/AdminPanel";
 import Products from "./components/Products";
 import Profile from "./Profile/Profile";
 import CustomTable from "./components/CustomTable";

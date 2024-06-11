@@ -129,3 +129,6 @@
    filter: blur(3px);
 }
 
+.adminepanel{
+   border-radius: 45px;
+}
