@@ -5,9 +5,9 @@ import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 import OrderHistory from "./components/OrderHistory";
 import GenerateCSV from "./components/GenerateCSV";
-import Expensises from "./components/Expensises";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Expensises from "./components/Expensises";
 import Categories from "./components/Categories";
 import AdminPanel from "./components/Admin/AdminPanel";
 import Products from "./components/Products";
@@ -24,11 +24,9 @@ function App() {
       <Navbar />
       {/* <GenerateCSV /> */}
       <Routes>
-
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<HomePage />} />
-
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/history" element={<OrderHistory />} />
         <Route path="/admin" element={<AdminPanel />} />
