@@ -5,12 +5,13 @@ import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 import OrderHistory from "./components/OrderHistory";
 import GenerateCSV from "./components/GenerateCSV";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import Expensises from "./components/Expensises";
-import Login from "./login&register/Login";
-import Register from "./login&register/Register";
-import AdminPanel from "./Admin/AdminPanel";
+import Categories from "./components/Categories";
+import AdminPanel from "./components/Admin/AdminPanel";
 import Products from "./components/Products";
-import Profile from "./Profile/Profile";
+import Profile from "./components/Profile";
 import CustomTable from "./components/CustomTable";
 import Structure from "./components/Structure";
 import Process from "./components/Process";
@@ -23,13 +24,16 @@ function App() {
       <Navbar />
       {/* <GenerateCSV /> */}
       <Routes>
-        <Route path="/resto" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Register />} />
+
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/history" element={<OrderHistory />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/expensises" element={<Expensises />} />
+        <Route path="/categories" element={<Categories />} />
+
         <Route path="/products" element={<Products />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/home" element={<CustomTable />} />

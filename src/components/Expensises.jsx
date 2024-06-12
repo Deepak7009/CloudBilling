@@ -3,8 +3,12 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { baseUrl } from "../utils/Const";
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import upd from "../assets/images/edit.png";
 import cross from "../assets/images/svg/crossicon.svg";
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const Expensises = () => {
    const [form, setForm] = useState({
@@ -19,13 +23,16 @@ const Expensises = () => {
    const [isUpdateMode, setIsUpdateMode] = useState(false);
    const [updateId, setUpdateId] = useState(null);
 
+   const [filter, setFilter] = useState("All Transactions");
+
    const [currentPage, setCurrentPage] = useState(1);
    const expensesPerPage = 15;
    const totalPages = Math.ceil(data.length / expensesPerPage);
 
    const indexOfLastExpense = currentPage * expensesPerPage;
    const indexOfFirstExpense = indexOfLastExpense - expensesPerPage;
-   const currentExpenses = data.slice(indexOfFirstExpense, indexOfLastExpense);
+
+   const [currentExpenses, setCurrentExpenses] = useState([]);
 
    const Pagination = ({ totalPages, currentPage, onPageChange }) => (
       <div className="flex justify-center my-4">
@@ -139,7 +146,7 @@ const Expensises = () => {
                      try {
                         await axios.delete(`${baseUrl}expens/${id}`);
                         toast.dismiss(); // Dismiss the toast after deletion
-                        toast.success("Category deleted successfully!");
+                        toast.success("Expensises deleted successfully!");
                         fetchData();
                      } catch (error) {
                         toast.dismiss(); // Dismiss the toast if error occurs
@@ -168,17 +175,85 @@ const Expensises = () => {
       );
    };
 
+   const filterData = (data) => {
+      const now = new Date();
+      switch (filter) {
+         case "7 Days":
+            return data.filter((item) => {
+               const itemDate = new Date(item.date);
+               return (now - itemDate) / (1000 * 60 * 60 * 24) <= 7;
+            });
+         case "1 Month":
+            return data.filter((item) => {
+               const itemDate = new Date(item.date);
+               return (now - itemDate) / (1000 * 60 * 60 * 24) <= 30;
+            });
+         case "3 Months":
+            return data.filter((item) => {
+               const itemDate = new Date(item.date);
+               return (now - itemDate) / (1000 * 60 * 60 * 24) <= 90;
+            });
+         case "All Transactions":
+         default:
+            return data;
+      }
+   };
+
+   const handleFilterChange = (event) => {
+      setFilter(event.target.value);
+   };
+
+   const getChartData = (data) => {
+      const labels = data.map(item => item.date);
+      const prices = data.map(item => parseFloat(item.price));
+      return {
+         labels,
+         datasets: [
+            {
+               label: 'Expenses',
+               data: prices,
+               borderColor: 'rgba(75, 192, 192, 1)',
+               backgroundColor: 'rgba(75, 192, 192, 0.2)',
+               fill: true,
+               tension: 0.4,
+            }
+         ],
+      };
+   };
+
+   const filteredData = filterData(data);
+   const totalPrice = filteredData.reduce((total, item) => total + parseFloat(item.price || 0), 0);
+   const currentExpensesToShow = filteredData.slice(indexOfFirstExpense, indexOfLastExpense);
+
    return (
-      <div className="container-fluid mx-auto px-4 py-2 max-[425px]:px-0 max-[1023px]:mx-0">
+      <div className="container-fluid mx-auto px-4 py-8 max-[425px]:px-0 max-[1023px]:mx-0">
+         <div>
+            <div className=" flex justify-between items-center max-[370px]:block max-[425px]:px-5 ">
+               <div className="max-[370px]:flex max-[370px]:justify-center">
+                  <select
+                     id="type"
+                     className=" w-[200px] p-2 border border-gray-300 rounded-md shadow-sm"
+                     onChange={handleFilterChange}
+                  >
+                     <option>All Transactions</option>
+                     <option>7 Days</option>
+                     <option>1 Month</option>
+                     <option>3 Months</option>
+                  </select>
+               </div>
+               <div className="max-[370px]:flex max-[370px]:justify-center max-[370px]:pt-5">
+                  <p className="text-lg font-semibold">
+                     Total Price: <span className="text-blue-600 max-[425px]:block">₹ {totalPrice.toFixed(2)}</span>
+                  </p>
+               </div>
+            </div>
+         </div>
          <ToastContainer />
-         <h1 className="text-3xl font-bold mt-2 font-serif text-center text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
-               Expensises
-            </h1>
          <form
-            className="form-wrapper flex flex-col md:flex-row mt-6 bg-white p-6 shadow-md rounded-lg max-[425px]:p-0"
+            className="form-wrapper flex flex-col md:flex-row mt-12 bg-white shadow-md rounded-lg max-[425px]:p-0"
             onSubmit={handleSubmit}>
 
-            <div className="form-column w-full md:w-1/3 md:px-4 max-[767px]:grid justify-center">
+            <div className="form-column w-full md:w-1/3 md:px-4 max-[767px] justify-center text-center">
                <div className="mb-4 flex items-center max-[1023px]:block">
                   <label htmlFor="date" className="block text-gray-700 font-medium mb-1 md:w-24">
                      Date
@@ -199,9 +274,10 @@ const Expensises = () => {
                   <input
                      id="title"
                      type="text"
-                     className="flex-1 border border-gray-300 rounded-md p-2 block w-0 max-[1023px]:w-52"
+                     className="flex-1 border border-gray-300 rounded-md p-2 block w-0 max-[1023px]:w-52 mx-auto"
                      value={form.title}
                      onChange={handleChange}
+                     required
                   />
                </div>
                <div className="mb-4 flex items-center max-[1023px]:block">
@@ -211,9 +287,10 @@ const Expensises = () => {
                   <input
                      id="price"
                      type="number"
-                     className="flex-1 border border-gray-300 rounded-md p-2 no-spinner block w-0 max-[1023px]:w-52"
+                     className="flex-1 border border-gray-300 rounded-md p-2 no-spinner block w-0 max-[1023px]:w-52 mx-auto"
                      value={form.price}
                      onChange={handleChange}
+                     required
                   />
                </div>
                <div className="mb-4 flex items-center max-[1023px]:block">
@@ -226,6 +303,7 @@ const Expensises = () => {
                      rows="4"
                      value={form.description}
                      onChange={handleChange}
+                     required
                   ></textarea>
                </div>
                <div className="mb-4 flex justify-center md:justify-center">
@@ -236,9 +314,13 @@ const Expensises = () => {
                   </button>
 
                </div>
+
+               <div className=" flex justify-center items-center h-[35vh]">
+                  <Line data={getChartData(filteredData)} />
+               </div>
             </div>
 
-            <div className="w-full md:w-2/3 px-4 md:mt-0 max-[425px]:px-0">
+            <div className="w-full md:w-2/3 px-4 mt-4 md:mt-0 max-[425px]:px-0">
                <div className="overflow-x-auto">
                   <table className="min-w-full bg-white">
                      <thead>
@@ -252,7 +334,7 @@ const Expensises = () => {
                         </tr>
                      </thead>
                      <tbody>
-                        {currentExpenses?.map((item, index) => (
+                        {currentExpensesToShow.map((item, index) => (
                            <tr key={index}>
                               <td className="py-2 px-4 border-b text-start">
                                  {item.srno}

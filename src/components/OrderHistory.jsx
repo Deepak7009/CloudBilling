@@ -72,7 +72,7 @@ const OrderHistory = () => {
    const totalPrice = calculateTotalPrice(filteredData);
 
    return (
-      <>
+      <div className=" container py-3">
          <div className="px-3 py-2 bg-gray-100">
             <h1 className="text-3xl font-bold font-serif mt-2 text-center text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
                Order History
@@ -140,7 +140,7 @@ const OrderHistory = () => {
                </div>
             </div>
          </div>
-      </>
+      </div>
    );
 };
 
