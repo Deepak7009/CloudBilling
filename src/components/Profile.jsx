@@ -87,32 +87,25 @@ const Profile = () => {
       }
    };
 
+   
+
    return (
       <div className="container-fluid bg-gray-100 py-4 mb-6">
-         <div className={`container bg-white py-8  rounded-lg shadow-md mb-6 transition ${isPopupOpen ? 'blur' : ''}`}>
-          
-            <div className="flex flex-wrap justify-between">
-              
-               <div className="flex mb-4 md:mb-0">
-                  <div className="">
+         <div className={`bg-white py-8  rounded-lg shadow-md mb-6 transition ${isPopupOpen ? 'blur' : ''}`}>
+
+            <div className="flex max-md:block justify-around">
+
+               <div className="flex max-md:justify-around max-sm:block mb-4 md:mb-0">
+                  <div className=" max-sm:flex justify-center">
                      <img
                         src={logo}
                         alt="Company Logo"
-                        width="250px"
-                        className=""
+                        className="w-[250px] max-lg:w-[150px] max-md:w-[250px]"
                      />
                   </div>
-                  <div className="">
+                  <div className=" max-sm:grid mt-2 justify-center">
                      <div className='flex items-center'>
                         <h2 className="text-3xl font-semibold text-teal-600 font-serif">{adminDetails.restaurant}</h2>
-                        <img
-                           className="cursor-pointer ml-3"
-                           src={edit}
-                           alt="update icon"
-                           width="30px"
-                           title="Update Your Profile"
-                           onClick={handleEditClick}
-                        />
                      </div>
                      <p className="text-gray-800 font-serif font-bold flex items-center pt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="32" height="32" className="mr-2">
@@ -137,22 +130,20 @@ const Profile = () => {
 
                </div>
 
-               <div className=" mb-4 md:mb-0 mr-5">
+               <div className="mb-4 max-md:grid justify-center  md:mb-0">
                   <div className="mb-6">
-                     <h3 className="text-xl font-semibold text-teal-600 font-serif">Opening Hours</h3>
+                     <h3 className="text-2xl font-semibold text-teal-600 font-serif">Opening Hours</h3>
                      <p className="mt-2 text-gray-600 font-serif">Monday - Friday: {adminDetails.openingHours?.mondayFriday}</p>
                      <p className="text-gray-600 font-serif">Saturday - Sunday: {adminDetails.openingHours?.saturdaySunday}</p>
                   </div>
                </div>
 
-
-
             </div>
 
-            <div className="flex justify-between items-center mt-6">
-               <div className="admin mt-4 w-full md:w-1/2 mb-4 md:mb-0">
-                  <div className="flex items-center">
-                     <h1 className="mb-2 text-teal-600 font-bold text-xl font-serif">Admin</h1>
+            <div className="flex justify-around items-center max-sm:block mt-4">
+               <div className="admin my-4 md:mb-0">
+                  <div className="flex items-center max-sm:justify-center">
+                     <h1 className="mb-2 text-teal-600 font-bold text-2xl font-serif">Admin</h1>
                      <img
                         className="cursor-pointer ml-2"
                         src={edit}
@@ -163,14 +154,14 @@ const Profile = () => {
                      />
                   </div>
 
-                  <div>
+                  <div className=' max-sm:grid justify-center'>
                      <h1 className="font-serif">Name : <span className="font-bold">{adminDetails.owner}</span></h1>
                      <h1 className="font-serif">Mobile : <span className="font-bold">{adminDetails.mobile}</span></h1>
                      <h1 className="font-serif">Mail :<span className="font-bold"> {adminDetails.email}</span></h1>
                   </div>
                </div>
 
-               <div className="QrCode w-full md:w-1/2 mb-4 md:mb-0">
+               <div className="mb-4 md:mb-0 max-sm:flex justify-center">
                   <img
                      src={adminDetails.qrCodeImageUrl || QrCodeImg}
                      alt="QR Code"
@@ -178,7 +169,12 @@ const Profile = () => {
                      className="mt-2"
                   />
                </div>
+
+
             </div>
+
+
+
          </div>
 
          <ProfileEdit
