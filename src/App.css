@@ -248,3 +248,9 @@ input[type=number] {
 ::placeholder {
    color: black !important;
 }
+
+.modal-container {
+   max-height: 100vh;
+   overflow-y: auto;
+ }
+ 

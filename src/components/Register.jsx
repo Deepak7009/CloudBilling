@@ -6,7 +6,7 @@ import { baseUrl } from "../utils/Const";
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    restaruant: "",
+    restaurant: "",
     owner: "",
     mobile: "",
     address: "",
@@ -51,8 +51,8 @@ const Register = () => {
             <div className="flex lg:gap-3 lg:flex-row flex-col">
               <input
                 type="text"
-                name="restaruant"
-                placeholder="Restaruant Name"
+                name="restaurant"
+                placeholder="Restaurant's Name"
                 onChange={handleChange}
                 className="appearance-none border-2 border-gray-300 rounded-md bg-transparent py-2 px-4 mb-4 w-full transform transition duration-500 hover:scale-105 focus:outline-none focus:border-[#000000d0] focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
               />{" "}
