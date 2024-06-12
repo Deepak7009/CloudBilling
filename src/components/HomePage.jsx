@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import SearchBar from "./SearchBar";
 import ItemList from "./ItemList";
@@ -6,12 +6,15 @@ import BillingDetails from "./BillingDetails";
 import BillModal from "./BillModal";
 import { ItemsContext } from "../context/ItemsContext";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { baseUrl } from "../utils/Const";
 
 function HomePage() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const section = queryParams.get("section");
   const index = queryParams.get("index");
+  const orderId = queryParams.get("orderId");
 
   const [selectedCategory, setSelectedCategory] = useState("Beverages");
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,6 +26,28 @@ function HomePage() {
   const [billSlip, setBillSlip] = useState("");
   const [isBillModalOpen, setIsBillModalOpen] = useState(false);
   const { items } = useContext(ItemsContext);
+
+  useEffect(() => {
+    if (orderId) {
+      fetchOrderDetails(orderId);
+    }
+  }, [orderId]);
+
+  const fetchOrderDetails = async (orderId) => {
+    try {
+      const response = await axios.get(`${baseUrl}bills/${orderId}`);
+      const order = response.data;
+      console.log("Order", order)
+      setBillingDetails({
+        name: order.name,
+        mobile: order.mobile,
+      });
+      setOrderItems(order.orderItems);
+      console.log("SetOrder", order.orderItems)
+    } catch (error) {
+      console.error("Error fetching order details:", error);
+    }
+  };
 
   const removeFromOrder = (itemToRemove) => {
     setOrderItems(orderItems.filter((item) => item !== itemToRemove));
@@ -95,7 +120,6 @@ function HomePage() {
       <main className="flex flex-grow bg-gray-200 p-4">
         <div className="flex flex-col md:flex-row w-full">
           <Sidebar
-            //items={items}
             setSelectedCategory={setSelectedCategory}
             setSearchQuery={setSearchQuery}
           />
@@ -109,7 +133,6 @@ function HomePage() {
             />
             <ItemList filteredItems={filteredItems} addToOrder={addToOrder} />
           </div>
-
           <BillingDetails
             section={section}
             index={index}
@@ -119,6 +142,7 @@ function HomePage() {
             calculateTotal={calculateTotal}
             generateBillSlip={generateBillSlip}
             removeFromOrder={removeFromOrder}
+            orderId={orderId} // Pass orderId for updates
           />
         </div>
       </main>

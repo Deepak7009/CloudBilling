@@ -17,7 +17,7 @@ const CustomTable = () => {
     setActiveItems((prev) =>
       prev.includes(itemIdentifier) ? prev : [...prev, itemIdentifier]
     );
-    navigate(`/home?section=${section}&index=${index+1}`);
+    navigate(`/resto?section=${section}&index=${index+1}`);
   };
 
   return (

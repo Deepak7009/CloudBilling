@@ -24,6 +24,7 @@ function App() {
       <Navbar />
       {/* <GenerateCSV /> */}
       <Routes>
+
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<HomePage />} />
@@ -35,7 +36,7 @@ function App() {
 
         <Route path="/products" element={<Products />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/table" element={<CustomTable />} />
+        <Route path="/home" element={<CustomTable />} />
         <Route path="/process" element={<Process />} />
         <Route path="/structure" element={<Structure />} />
       </Routes>
