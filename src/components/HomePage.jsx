@@ -8,6 +8,7 @@ import { ItemsContext } from "../context/ItemsContext";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../utils/Const";
+import { jwtDecode } from 'jwt-decode';
 
 function HomePage() {
   const location = useLocation();
@@ -15,6 +16,19 @@ function HomePage() {
   const section = queryParams.get("section");
   const index = queryParams.get("index");
   const orderId = queryParams.get("orderId");
+
+  const [userId, setUserId] = useState("");
+
+  
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+       const decodedToken = jwtDecode(token);
+       if (decodedToken.user) {
+          setUserId(decodedToken.user.id);
+       }
+    }
+ }, []);
 
   const [selectedCategory, setSelectedCategory] = useState("Beverages");
   const [searchQuery, setSearchQuery] = useState("");
@@ -35,7 +49,7 @@ function HomePage() {
 
   const fetchOrderDetails = async (orderId) => {
     try {
-      const response = await axios.get(`${baseUrl}bills/${orderId}`);
+      const response = await axios.get(`${baseUrl}bills/${userId}`);
       const order = response.data;
       console.log("Order", order)
       setBillingDetails({
@@ -57,8 +71,8 @@ function HomePage() {
 
   const filteredItems = searchQuery
     ? allItems.filter((item) =>
-        item.productName.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+      item.productName.toLowerCase().includes(searchQuery.toLowerCase())
+    )
     : items[selectedCategory] || [];
 
   const addToOrder = (item) => {
@@ -96,9 +110,8 @@ function HomePage() {
     billText += `Mobile: ${billingDetails.mobile}\n`;
     billText += `\nOrder Summary\n`;
     orderItems.forEach((item) => {
-      billText += `${item.productName} x ${item.quantity} = ₹${
-        item.price * item.quantity
-      }\n`;
+      billText += `${item.productName} x ${item.quantity} = ₹${item.price * item.quantity
+        }\n`;
     });
     billText += `\nTotal: ₹${calculateTotal()}\n`;
 
