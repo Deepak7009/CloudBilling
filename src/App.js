@@ -1,4 +1,3 @@
-// App.js
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import AddProduct from "./components/AddProduct";
@@ -6,8 +5,8 @@ import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 import OrderHistory from "./components/OrderHistory";
 import GenerateCSV from "./components/GenerateCSV";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Login from "./components/Login&Register/Login";
+import Register from "./components/Login&Register/Register";
 import Expensises from "./components/Expensises";
 import Categories from "./components/Categories";
 import AdminPanel from "./components/Admin/AdminPanel";

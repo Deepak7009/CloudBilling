@@ -20,7 +20,7 @@ const AdminPanel = () => {
 
             <div className="row gap-6 items-center justify-center">
 
-               <div className='col-md-2 mb-6'>
+               {/*<div className='col-md-2 mb-6'>
                   <Link
                      to=""
                      className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -28,8 +28,8 @@ const AdminPanel = () => {
                      <img title="Structure" src={structure} alt="Structure" width="50px" />
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Structure</h2>
                   </Link>
-               </div>
-
+               </div>*/}
+{/*
                <div className='col-md-2 mb-6'>
                   <Link
                      to=""
@@ -38,7 +38,7 @@ const AdminPanel = () => {
                      <img title="Offer" src={offer} alt="Offer" width="50px" />
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Offer</h2>
                   </Link>
-               </div>
+               </div>*/}
 
                <div className='col-md-2 mb-6'>
                   <Link
@@ -79,7 +79,7 @@ const AdminPanel = () => {
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Invoice</h2>
                   </Link>
                </div>
-
+{/*
                <div className='col-md-2 mb-6'>
                   <Link
                      to=""
@@ -88,9 +88,9 @@ const AdminPanel = () => {
                      <img title="Add Customer" src={customer} alt="Customer" width="50px" />
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Customer</h2>
                   </Link>
-               </div>
+               </div>*/}
 
-               <div className='col-md-2 mb-6'>
+               {/*<div className='col-md-2 mb-6'>
                   <Link
                      to=""
                      className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -98,7 +98,7 @@ const AdminPanel = () => {
                      <img title="Customers" src={customers} alt="Customer" width="50px" />
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">All Customers</h2>
                   </Link>
-               </div>
+               </div>*/}
 
                <div className='col-md-2 mb-6'>
                   <Link

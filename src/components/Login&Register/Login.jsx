@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 // import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { baseUrl } from "../utils/Const";
-import { useAuth } from "./authentication/AuthContext";
+import { baseUrl } from "../../utils/Const";
+import { useAuth } from "../authentication/AuthContext";
 
 const Login = () => {
 

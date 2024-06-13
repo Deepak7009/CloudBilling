@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { baseUrl } from "../utils/Const";
+import { baseUrl } from "../../utils/Const";
 
 const Register = () => {
   const navigate = useNavigate();

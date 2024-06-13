@@ -6,8 +6,11 @@ import gif from "../assets/images/webp/giphy.webp";
 import notificationIcon from '../assets/images/notification.gif';
 import callIcon from '../assets/images/customer-service.gif';
 import productIcon from '../assets/images/add-product.png';
-import admin from '../assets/images/management-consulting.gif';
+//import admin from '../assets/images/management-consulting.gif';
 import logout from '../assets/images/log-out.gif';
+import admin from '../assets/images/admin.gif'
+import profile from '../assets/images/profile.gif'
+
 
 const Navbar = () => {
    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -60,20 +63,24 @@ const Navbar = () => {
                         <span className="font-bold">9876543210</span>
                      </div>
                      <Link to="/add-product" className="flex items-center space-x-1 hover:text-red-600 transition duration-300">
-                        <img title="Add Product" src={productIcon} alt="Add Product Icon" width="30" height="30" />
+                        <img title="Add Product" src={productIcon} alt="Add Product Icon" width="30" />
                      </Link>
                      <Link to="/history">
-                        <img title="Order History" src={historyIcon} alt="Order History Icon" width="30" height="30" />
+                        <img title="Order History" src={historyIcon} alt="Order History Icon" width="30" />
                      </Link>
                      <Link to="/" className="flex items-center space-x-2">
-                        <img title="Notifications" src={notificationIcon} alt="Notifications Icon" width="28" height="28" />
+                        <img title="Notifications" src={notificationIcon} alt="Notifications Icon" width="28" />
                      </Link>
                      <Link to="/admin" className="flex items-center space-x-2">
-                        <img title="Admin Panel" src={admin} alt="Admin Panel Icon" width="28" height="28" />
+                        <img title="Admin Panel" src={admin} alt="Admin Panel Icon" width="28" />
                      </Link>
                      <Link to="/profile" className="flex items-center space-x-2">
-                        <img title="Logout" src={logout} alt="Logout Icon" width="28" height="28" />
+                        <img title="Profile" src={profile} alt="Profile Icon" width="30" />
                      </Link>
+                     <Link to="" className="flex items-center space-x-2">
+                        <img title="Logout" src={logout} alt="Logout Icon" width="28" />
+                     </Link>
+
                   </div>
                )}
             </div>
@@ -103,6 +110,10 @@ const Navbar = () => {
                   {/* Conditional rendering for other links */}
                   {!(location.pathname === '/' || location.pathname === '/register') && (
                      <div>
+                        <Link to="/profile" className="flex items-center space-x-2">
+                           <img title="Profile" src={profile} alt="Profile Icon" width="30" />
+                           <span>Profile </span>
+                        </Link>
                         <div className="flex items-center space-x-2">
                            <span>
                               <img src={callIcon} alt="Call Icon" width="36" height="36" />
