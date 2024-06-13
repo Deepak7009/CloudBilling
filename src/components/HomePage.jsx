@@ -18,7 +18,6 @@ function HomePage() {
   const orderId = queryParams.get("orderId");
 
   const [userId, setUserId] = useState("");
-
   
   useEffect(() => {
     const token = localStorage.getItem('token');
