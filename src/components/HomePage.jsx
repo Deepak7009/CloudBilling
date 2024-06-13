@@ -47,16 +47,18 @@ function HomePage() {
   }, [orderId]);
 
   const fetchOrderDetails = async (orderId) => {
+    orderId && console.log("orderId =>", orderId)
     try {
-      const response = await axios.get(`${baseUrl}bills/${userId}`);
-      const order = response.data;
+      const response = await axios.get(`${baseUrl}billss/${orderId}`);
+      const order = response?.data;
+
       console.log("Order", order)
       setBillingDetails({
-        name: order.name,
-        mobile: order.mobile,
+        name: order?.name,
+        mobile: order?.mobile,
       });
-      setOrderItems(order.orderItems);
-      console.log("SetOrder", order.orderItems)
+      order.length > 0 && setOrderItems(order?.orderItems);
+      //console.log("SetOrder", order?.orderItems)
     } catch (error) {
       console.error("Error fetching order details:", error);
     }
