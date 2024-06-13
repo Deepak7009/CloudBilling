@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import update from "../assets/images/svg/updateicon.svg";
+import { jwtDecode } from 'jwt-decode';
 
 function Structure() {
   const [formData, setFormData] = useState({
@@ -19,6 +20,17 @@ function Structure() {
   }
 
   const [data, setData] = useState([]);
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken.user) {
+        setUserId(decodedToken.user.id);
+      }
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -30,7 +42,7 @@ function Structure() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}getStructure`);
+      const response = await axios.get(`${baseUrl}getStructure/${userId}`);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -38,8 +50,10 @@ function Structure() {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (userId) {
+      fetchData();
+    }
+  }, [userId]);
 
   const handleDelete = async (id) => {
     Swal.fire({
@@ -66,7 +80,7 @@ function Structure() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${baseUrl}structure`, formData);
+      const response = await axios.post(`${baseUrl}structure/${userId}`, formData);
       toast.success("Structure added successfully!");
       setFormData({
         number: "",

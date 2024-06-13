@@ -2,15 +2,27 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../utils/Const';
 import { ItemsContext } from '../context/ItemsContext';
+import { jwtDecode } from 'jwt-decode';
 
 const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
    const [categories, setCategories] = useState([]);
    const { setItems } = useContext(ItemsContext);
+   const [userId, setUserId] = useState("");
+
+   useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+         const decodedToken = jwtDecode(token);
+         if (decodedToken.user) {
+            setUserId(decodedToken.user.id);
+         }
+      }
+   }, []);
 
    useEffect(() => {
       const fetchCategories = async () => {
          try {
-            const response = await axios.get(`${baseUrl}categories`);
+            const response = await axios.get(`${baseUrl}categories/${userId}`);
             const uniqueCategories = [...new Set(response.data.map(item => item.category))];
             setCategories(uniqueCategories);
 
@@ -27,12 +39,15 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
          }
       };
 
-      fetchCategories();
-   }, []);
+      if (userId) {
+         fetchCategories();
+      }
+
+   }, [userId]);
 
    const fetchProducts = async (category) => {
       try {
-         const response = await axios.get(`${baseUrl}products`, {
+         const response = await axios.get(`${baseUrl}products/${userId}`, {
             params: { category }
          });
          setItems(response.data);
