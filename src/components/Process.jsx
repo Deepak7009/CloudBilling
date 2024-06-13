@@ -40,7 +40,7 @@ const Process = () => {
   };
 
   const handleAddItem = (section, index, orderId) => {
-    navigate(`/resto?section=${section}&index=${index}&orderId=${orderId}`);
+    navigate(`/home?section=${section}&index=${index}&orderId=${orderId}`);
   };
 
   // Calculate the items to display based on the current page
