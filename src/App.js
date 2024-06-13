@@ -15,6 +15,7 @@ import Profile from "./Profile/Profile";
 import CustomTable from "./components/CustomTable";
 import Structure from "./components/Structure";
 import Process from "./components/Process";
+import RegistationType from "./components/RegistationType";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/expensises" element={<Expensises />} />
         <Route path="/categories" element={<Categories />} />
-
+        <Route path="/registationtype" element={<RegistationType />} />
         <Route path="/products" element={<Products />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/table" element={<CustomTable />} />
