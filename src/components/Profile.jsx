@@ -87,8 +87,6 @@ const Profile = () => {
       }
    };
 
-
-
    return (
       <div className="container-fluid bg-gray-100 py-4 mb-6">
          <div className={`bg-white rounded-lg shadow-md mb-6 pb-2 transition ${isPopupOpen ? 'blur' : ''}`}>
