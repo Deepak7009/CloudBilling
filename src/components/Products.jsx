@@ -5,6 +5,7 @@ import upd from "../assets/images/edit.png";
 import cross from "../assets/images/svg/crossicon.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { jwtDecode } from 'jwt-decode';
 
 function Products() {
    const [products, setProducts] = useState([]);
@@ -12,15 +13,27 @@ function Products() {
    const [error, setError] = useState(null);
    const [currentPage, setCurrentPage] = useState(1);
    const itemsPerPage = 12;
+   const [userId, setUserId] = useState("");
 
    useEffect(() => {
-
-      fetchData();
+      const token = localStorage.getItem('token');
+      if (token) {
+         const decodedToken = jwtDecode(token);
+         if (decodedToken.user) {
+            setUserId(decodedToken.user.id);
+         }
+      }
    }, []);
+
+   useEffect(() => {
+      if (userId) {
+         fetchData();
+      }
+   }, [userId]);
 
    const fetchData = async () => {
       try {
-         const response = await axios.get(`${baseUrl}get-product-data`);
+         const response = await axios.get(`${baseUrl}get-product-data/${userId}`);
          setProducts(response.data);
          setLoading(false);
       } catch (error) {
@@ -29,6 +42,8 @@ function Products() {
          setLoading(false);
       }
    };
+
+
 
    const handleUpdate = (id) => {
       console.log("Update product with ID:", id);
