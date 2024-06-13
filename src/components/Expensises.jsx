@@ -7,6 +7,8 @@ import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import upd from "../assets/images/edit.png";
 import cross from "../assets/images/svg/crossicon.svg";
+import { jwtDecode } from 'jwt-decode';
+
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -24,6 +26,7 @@ const Expensises = () => {
    const [updateId, setUpdateId] = useState(null);
 
    const [filter, setFilter] = useState("All Transactions");
+   const [userId, setUserId] = useState("");
 
    const [currentPage, setCurrentPage] = useState(1);
    const expensesPerPage = 15;
@@ -32,7 +35,7 @@ const Expensises = () => {
    const indexOfLastExpense = currentPage * expensesPerPage;
    const indexOfFirstExpense = indexOfLastExpense - expensesPerPage;
 
-   const [currentExpenses, setCurrentExpenses] = useState([]);
+   // const [currentExpenses, setCurrentExpenses] = useState([]);
 
    const Pagination = ({ totalPages, currentPage, onPageChange }) => (
       <div className="flex justify-center my-4">
@@ -62,6 +65,32 @@ const Expensises = () => {
       </div>
    );
 
+   useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+         const decodedToken = jwtDecode(token);
+         if (decodedToken.user) {
+            setUserId(decodedToken.user.id);
+         }
+      }
+   }, []);
+
+   const fetchData = async () => {
+      try {
+         const response = await axios.get(`${baseUrl}expenses/${userId}`);
+         setData(response.data);
+         // console.log(response.data)
+      } catch (error) {
+         console.error("Error fetching data:", error);
+      }
+   };
+
+   useEffect(() => {
+      if (userId) {
+         fetchData();
+      }
+   }, [userId]);
+
    const handleChange = (e) => {
       const { id, value } = e.target;
       setForm((prevData) => ({
@@ -72,60 +101,37 @@ const Expensises = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      if (isUpdateMode) {
-         try {
-            await axios.put(`${baseUrl}expens/${updateId}`, form);
-            toast.success("Data updated successfully!");
-            setForm({
-               srno: "",
-               date: new Date().toISOString().split('T')[0],
-               title: "",
-               price: "",
-               description: ""
-            });
-            setIsUpdateMode(false);
-            setUpdateId(null);
-            fetchData();
-         } catch (error) {
-            toast.error("Error updating data!");
-            console.error("Error updating category:", error);
-         }
-      } else {
-         try {
-            const newForm = { ...form, srno: data.length + 1 };
-            await axios.post(`${baseUrl}expenses`, newForm);
-            toast.success("Expens added successfully!");
-            setForm({
-               srno: "",
-               date: new Date().toISOString().split('T')[0],
-               title: "",
-               price: "",
-               description: ""
-            });
-            fetchData();
-         } catch (error) {
-            if (error.response && error.response.data.message === "Expens already exists") {
-               toast.error("Expens already exists!");
-            } else {
-               toast.error("Error adding expens!");
-            }
-            console.error("Error adding expens:", error);
-         }
-      }
-   };
-
-   const fetchData = async () => {
       try {
-         const response = await axios.get(`${baseUrl}expenses`);
-         setData(response.data);
+         if (isUpdateMode) {
+            const response = await axios.put(`${baseUrl}expens/${updateId}`, form);
+            setData(prevData =>
+               prevData.map(item => item._id === updateId ? { ...item, ...form } : item)
+            );
+            toast.success("Data updated successfully!");
+         } else {
+            const newForm = { ...form, srno: data.length + 1 };
+            const response = await axios.post(`${baseUrl}expenses/${userId}`, newForm);
+            setData(prevData => [...prevData, response.data]);
+            toast.success("Expens added successfully!");
+         }
+         setForm({
+            srno: "",
+            date: new Date().toISOString().split('T')[0],
+            title: "",
+            price: "",
+            description: ""
+         });
+         setIsUpdateMode(false);
+         setUpdateId(null);
       } catch (error) {
-         console.error("Error fetching data:", error);
+         const errorMessage = isUpdateMode ? "Error updating data!" : "Error adding expens!";
+         toast.error(errorMessage);
+         console.error(errorMessage, error);
       }
+      fetchData();
    };
 
-   useEffect(() => {
-      fetchData();
-   }, []);
+
 
    const handleUpdateClick = (item) => {
       setForm(item);
@@ -145,11 +151,11 @@ const Expensises = () => {
                   onClick={async () => {
                      try {
                         await axios.delete(`${baseUrl}expens/${id}`);
-                        toast.dismiss(); // Dismiss the toast after deletion
+                        setData(prevData => prevData.filter(item => item._id !== id));
+                        toast.dismiss();
                         toast.success("Expensises deleted successfully!");
-                        fetchData();
                      } catch (error) {
-                        toast.dismiss(); // Dismiss the toast if error occurs
+                        toast.dismiss();
                         toast.error("Error deleting expens!");
                         console.error("Error deleting expens:", error);
                      }
@@ -174,6 +180,7 @@ const Expensises = () => {
          }
       );
    };
+
 
    const filterData = (data) => {
       const now = new Date();
