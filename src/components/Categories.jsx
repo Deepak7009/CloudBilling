@@ -7,6 +7,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import upd from "../assets/images/edit.png";
 import cross from "../assets/images/svg/crossicon.svg";
+import { jwtDecode } from 'jwt-decode';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -23,6 +24,7 @@ const Categories = () => {
     const [updateId, setUpdateId] = useState(null);
 
     const [filter, setFilter] = useState("All Transactions");
+    const [userId, setUserId] = useState("");
 
     const [currentPage, setCurrentPage] = useState(1);
     const CategoryesPerPage = 15;
@@ -32,6 +34,18 @@ const Categories = () => {
     const indexOfFirstCategorye = indexOfLastCategorye - CategoryesPerPage;
 
     // const [currentCategoryes, setCurrentCategoryes] = useState([]);
+
+
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            if (decodedToken.user) {
+                setUserId(decodedToken.user.id);
+            }
+        }
+    }, []);
 
     const Pagination = ({ totalPages, currentPage, onPageChange }) => (
         <div className="flex justify-center my-4">
@@ -69,6 +83,21 @@ const Categories = () => {
         }));
     };
 
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`${baseUrl}newcategories/${userId}`);
+            setData(response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    useEffect(() => {
+        if (userId) {
+            fetchData();
+        }
+    }, [userId]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (isUpdateMode) {
@@ -91,7 +120,7 @@ const Categories = () => {
         } else {
             try {
                 const newForm = { ...form, srNo: data.length + 1 };
-                await axios.post(`${baseUrl}newcategories`, newForm);
+                await axios.post(`${baseUrl}newcategories/${userId}`, newForm);
                 toast.success("Category added successfully!");
                 setForm({
                     srNo: "",
@@ -111,18 +140,7 @@ const Categories = () => {
         }
     };
 
-    const fetchData = async () => {
-        try {
-            const response = await axios.get(`${baseUrl}newcategories`);
-            setData(response.data);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     const handleUpdateClick = (item) => {
         setForm(item);
@@ -177,17 +195,17 @@ const Categories = () => {
         switch (filter) {
             case "7 Days":
                 return data.filter((item) => {
-                    const itemDate = new Date(item.date);
+                    const itemDate = new Date(item.timestamp);
                     return (now - itemDate) / (1000 * 60 * 60 * 24) <= 7;
                 });
             case "1 Month":
                 return data.filter((item) => {
-                    const itemDate = new Date(item.date);
+                    const itemDate = new Date(item.timestamp);
                     return (now - itemDate) / (1000 * 60 * 60 * 24) <= 30;
                 });
             case "3 Months":
                 return data.filter((item) => {
-                    const itemDate = new Date(item.date);
+                    const itemDate = new Date(item.timestamp);
                     return (now - itemDate) / (1000 * 60 * 60 * 24) <= 90;
                 });
             case "All Transactions":
@@ -195,6 +213,7 @@ const Categories = () => {
                 return data;
         }
     };
+    
 
     const handleFilterChange = (event) => {
         setFilter(event.target.value);

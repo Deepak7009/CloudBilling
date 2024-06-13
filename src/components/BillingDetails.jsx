@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { baseUrl } from "../utils/Const";
 import axios from "axios";
+import { jwtDecode } from 'jwt-decode';
 
 const BillingDetails = ({
   section,
@@ -11,10 +12,20 @@ const BillingDetails = ({
   calculateTotal,
   generateBillSlip,
   removeFromOrder,
-  orderId, // Add orderId as a prop
-
+  orderId
 }) => {
   const [message, setMessage] = useState("");
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken.user) {
+        setUserId(decodedToken.user.id);
+      }
+    }
+  }, []);
 
   const handlePlaceOrder = async () => {
     const totalAmount = calculateTotal();
@@ -33,11 +44,13 @@ const BillingDetails = ({
     console.log("asd", billData);
 
     try {
+      const response = await axios.post(`${baseUrl}bill/${userId}`, billData);
+      setMessage("Order placed successfully!");
       if (orderId) {
         await axios.put(`${baseUrl}updateBill/${orderId}`, billData);
         setMessage("Order updated successfully!");
       } else {
-        await axios.post(`${baseUrl}bill`, billData);
+        await axios.post(`${baseUrl}bill/${userId}`, billData);
         setMessage("Order placed successfully!");
       }
       generateBillSlip();
