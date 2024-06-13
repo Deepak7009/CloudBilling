@@ -8,6 +8,7 @@ import { ItemsContext } from "../context/ItemsContext";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../utils/Const";
+import { jwtDecode } from "jwt-decode";
 
 function HomePage() {
   const location = useLocation();
@@ -15,6 +16,18 @@ function HomePage() {
   const section = queryParams.get("section");
   const index = queryParams.get("index");
   const orderId = queryParams.get("orderId");
+
+  const [userId, setUserId] = useState("");
+  
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+       const decodedToken = jwtDecode(token);
+       if (decodedToken.user) {
+          setUserId(decodedToken.user.id);
+       }
+    }
+ }, []);
 
   const [selectedCategory, setSelectedCategory] = useState("Beverages");
   const [searchQuery, setSearchQuery] = useState("");
@@ -34,16 +47,18 @@ function HomePage() {
   }, [orderId]);
 
   const fetchOrderDetails = async (orderId) => {
+    orderId && console.log("orderId =>", orderId)
     try {
-      const response = await axios.get(`${baseUrl}bills/${orderId}`);
-      const order = response.data;
+      const response = await axios.get(`${baseUrl}billss/${orderId}`);
+      const order = response?.data;
+
       console.log("Order", order)
       setBillingDetails({
-        name: order.name,
-        mobile: order.mobile,
+        name: order?.name,
+        mobile: order?.mobile,
       });
-      setOrderItems(order.orderItems);
-      console.log("SetOrder", order.orderItems)
+      order.length > 0 && setOrderItems(order?.orderItems);
+      //console.log("SetOrder", order?.orderItems)
     } catch (error) {
       console.error("Error fetching order details:", error);
     }

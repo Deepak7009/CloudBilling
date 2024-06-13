@@ -14,14 +14,19 @@ const Process = () => {
     try {
       const response = await axios.get(`${baseUrl}bills`);
       setData(response.data);
+
+      console.log("Bills :", data)
+
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (userId) {
+      fetchData();
+    }
+  }, [userId]);
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString();
