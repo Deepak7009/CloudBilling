@@ -57,8 +57,10 @@ function HomePage() {
         name: order?.name,
         mobile: order?.mobile,
       });
-      order.length > 0 && setOrderItems(order?.orderItems);
-      //console.log("SetOrder", order?.orderItems)
+      // order.length > 0 && setOrderItems(order?.orderItems);
+       setOrderItems(order?.orderItems);
+
+      console.log("SetOrder", order?.orderItems)
     } catch (error) {
       console.error("Error fetching order details:", error);
     }

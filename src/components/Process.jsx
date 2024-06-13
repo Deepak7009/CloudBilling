@@ -2,17 +2,28 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../utils/Const";
 import { useNavigate } from "react-router-dom";
-
+import { jwtDecode } from 'jwt-decode';
 
 const Process = () => {
   const [data, setData] = useState([]);
+  const [userId, setUserId] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken.user) {
+        setUserId(decodedToken.user.id);
+      }
+    }
+  }, []);
+
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}bills`);
+      const response = await axios.get(`${baseUrl}bills/${userId}`);
       setData(response.data);
 
       console.log("Bills :", data)
