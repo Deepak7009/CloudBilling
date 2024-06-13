@@ -12,8 +12,7 @@ const BillingDetails = ({
   calculateTotal,
   generateBillSlip,
   removeFromOrder,
-  orderId, // Add orderId as a prop
-
+  orderId
 }) => {
   const [message, setMessage] = useState("");
   const [userId, setUserId] = useState("");
@@ -51,7 +50,7 @@ const BillingDetails = ({
         await axios.put(`${baseUrl}updateBill/${orderId}`, billData);
         setMessage("Order updated successfully!");
       } else {
-        await axios.post(`${baseUrl}bill`, billData);
+        await axios.post(`${baseUrl}bill/${userId}`, billData);
         setMessage("Order placed successfully!");
       }
       generateBillSlip();
