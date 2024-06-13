@@ -11,10 +11,21 @@ const Process = () => {
   const itemsPerPage = 10;
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      if (decodedToken.user) {
+        setUserId(decodedToken.user.id);
+      }
+    }
+  }, []);
+
   const fetchData = async () => {
     try {
       const response = await axios.get(`${baseUrl}bills/${userId}`);
       setData(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
