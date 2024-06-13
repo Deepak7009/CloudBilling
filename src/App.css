@@ -44,7 +44,7 @@
 }
 
 .sidebar-item::before {
-   @apply absolute bottom-[0px] right-0 h-[3px] bg-teal-600;
+   @apply absolute bottom-[0px] right-0 h-[3px] bg-green-500;
    content: '';
    width: 0;
    transition: width 0.3s ease;
@@ -72,10 +72,21 @@
 
 
 @media screen {
+
    .address,
    .thanks {
       display: none;
    }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+
+input[type=number] {
+   -moz-appearance: textfield;
 }
 
 #timeline {
@@ -92,43 +103,48 @@
    }
 }
 
-
-/* Expensises component css  */
-
-.no-spinner::-webkit-outer-spin-button,
-.no-spinner::-webkit-inner-spin-button {
-   -webkit-appearance: none;
-   margin: 0;
+.img {
+   background-image: url('./assets/images/pexels-ella-olsson-572949-1640774.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position-y: 20%;
 }
 
-.no-spinner {
-   -moz-appearance: textfield;
+.img2 {
+   background-image: url('./assets/images/pexels-ella-olsson-572949-1640774.jpg');
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: 20%;
 }
 
-
-/* Admin */
-
-@media (min-width: 768px) {
-   .col-md-2 {
-      flex: 1 1 auto;
-      width: 17.666667%;
-   }
+.register_background {
+   background-color: #18181a9c;
 }
 
 /* Profile */
 
-.QrCode {
+/*.QrCode {
    margin-right: 70px;
 }
 
 .admin {
    margin-left: 70px;
-}
+}*/
 
 .blur {
    filter: blur(3px);
 }
 
-.adminepanel{
+.adminepanel {
    border-radius: 45px;
 }
+
+::placeholder {
+   color: black !important;
+}
+
+.modal-container {
+   max-height: 100vh;
+   overflow-y: auto;
+ }
+ 

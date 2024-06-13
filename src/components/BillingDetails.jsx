@@ -12,6 +12,8 @@ const BillingDetails = ({
   calculateTotal,
   generateBillSlip,
   removeFromOrder,
+  orderId, // Add orderId as a prop
+
 }) => {
   const [message, setMessage] = useState("");
   const [userId, setUserId] = useState("");
@@ -32,7 +34,7 @@ const BillingDetails = ({
       name: billingDetails.name,
       mobile: billingDetails.mobile,
       orderItems: orderItems?.map((item) => ({
-        name: item.productName,
+        productName: item.productName,
         quantity: item.quantity,
         price: item.price,
       })),
@@ -45,8 +47,14 @@ const BillingDetails = ({
     try {
       const response = await axios.post(`${baseUrl}bill/${userId}`, billData);
       setMessage("Order placed successfully!");
+      if (orderId) {
+        await axios.put(`${baseUrl}updateBill/${orderId}`, billData);
+        setMessage("Order updated successfully!");
+      } else {
+        await axios.post(`${baseUrl}bill`, billData);
+        setMessage("Order placed successfully!");
+      }
       generateBillSlip();
-      console.log("AS", response);
     } catch (error) {
       setMessage("Error placing order. Please try again.");
       console.error("Error placing order:", error);
@@ -125,7 +133,7 @@ const BillingDetails = ({
         className="bg-teal-600 hover:bg-teal-700 text-white font-bold font-serif py-2 px-4 rounded-full my-2"
         onClick={handlePlaceOrder}
       >
-        Place Order
+        {orderId ? "Update Order" : "Place Order"}
       </button>
     </div>
   );
