@@ -3,7 +3,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import logo from "../assets/images/webp/giphy.webp";
 import QrCodeImg from '../assets/images/Qrcode 1.png';
-import edit from "../assets/images/edit.png";
+import edit from "../assets/images/update-profile.gif";
 import emailIcon from "../assets/images/email.png";
 import { baseUrl } from '../utils/Const';
 import ProfileEdit from './ProfileEdit';
@@ -87,11 +87,22 @@ const Profile = () => {
       }
    };
 
-   
+
 
    return (
       <div className="container-fluid bg-gray-100 py-4 mb-6">
-         <div className={`bg-white py-8  rounded-lg shadow-md mb-6 transition ${isPopupOpen ? 'blur' : ''}`}>
+         <div className={`bg-white rounded-lg shadow-md mb-6 pb-2 transition ${isPopupOpen ? 'blur' : ''}`}>
+            <div className='flex justify-end items-center pt-3 mr-5'>
+               <span className='text-lg font-bold text-gray-700'>Edit</span>
+               <img
+                  className="cursor-pointer ml-2"
+                  src={edit}
+                  alt="update icon"
+                  width="30px"
+                  title="Update Your Profile"
+                  onClick={handleEditClick}
+               />
+            </div>
 
             <div className="flex max-md:block justify-around">
 
@@ -144,14 +155,6 @@ const Profile = () => {
                <div className="admin my-4 md:mb-0">
                   <div className="flex items-center max-sm:justify-center">
                      <h1 className="mb-2 text-teal-600 font-bold text-2xl font-serif">Admin</h1>
-                     <img
-                        className="cursor-pointer ml-2"
-                        src={edit}
-                        alt="update icon"
-                        width="20px"
-                        title="Update Your Profile"
-                        onClick={handleEditClick}
-                     />
                   </div>
 
                   <div className=' max-sm:grid justify-center'>
@@ -170,10 +173,7 @@ const Profile = () => {
                   />
                </div>
 
-
             </div>
-
-
 
          </div>
 

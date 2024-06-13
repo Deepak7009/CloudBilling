@@ -60,7 +60,7 @@ const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChang
                   </div>
 
                   <div className="w-full px-4">
-                     <h3 className="text-center text-xl mb-2 text-teal-700 font-semibold font-serif">Opening Hours</h3>
+                     <h3 className="text-center text-xl mb-2 text-teal-700 font-semibold font-serif">Opening Hours 🕜</h3>
                      <div className="flex flex-wrap -mx-4">
                         <div className="w-full md:w-1/2 px-4 mb-4">
                            <label className="block text-gray-700 font-semibold font-serif mb-2">Monday-Friday</label>
