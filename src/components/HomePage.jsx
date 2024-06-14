@@ -8,7 +8,7 @@ import { ItemsContext } from "../context/ItemsContext";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../utils/Const";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 function HomePage() {
   const location = useLocation();
@@ -47,16 +47,20 @@ function HomePage() {
   }, [orderId]);
 
   const fetchOrderDetails = async (orderId) => {
+    orderId && console.log("orderId =>", orderId)
     try {
-      const response = await axios.get(`${baseUrl}bills/${userId}`);
-      const order = response.data;
+      const response = await axios.get(`${baseUrl}billss/${orderId}`);
+      const order = response?.data;
+
       console.log("Order", order)
       setBillingDetails({
-        name: order.name,
-        mobile: order.mobile,
+        name: order?.name,
+        mobile: order?.mobile,
       });
-      setOrderItems(order.orderItems);
-      console.log("SetOrder", order.orderItems)
+      // order.length > 0 && setOrderItems(order?.orderItems);
+       setOrderItems(order?.orderItems);
+
+      console.log("SetOrder", order?.orderItems)
     } catch (error) {
       console.error("Error fetching order details:", error);
     }
@@ -70,8 +74,8 @@ function HomePage() {
 
   const filteredItems = searchQuery
     ? allItems.filter((item) =>
-      item.productName.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+        item.productName.toLowerCase().includes(searchQuery.toLowerCase())
+      )
     : items[selectedCategory] || [];
 
   const addToOrder = (item) => {
@@ -109,8 +113,9 @@ function HomePage() {
     billText += `Mobile: ${billingDetails.mobile}\n`;
     billText += `\nOrder Summary\n`;
     orderItems.forEach((item) => {
-      billText += `${item.productName} x ${item.quantity} = ₹${item.price * item.quantity
-        }\n`;
+      billText += `${item.productName} x ${item.quantity} = ₹${
+        item.price * item.quantity
+      }\n`;
     });
     billText += `\nTotal: ₹${calculateTotal()}\n`;
 

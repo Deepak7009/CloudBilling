@@ -6,7 +6,6 @@ import { baseUrl } from "../../utils/Const";
 import { useAuth } from "../authentication/AuthContext";
 
 const Login = () => {
-
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -23,35 +22,39 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${baseUrl}login`, formData);
-      const { token } = response.data;
+      const { token, registrationType } = response.data;
       localStorage.setItem("token", token);
+      localStorage.setItem("registrationType", registrationType);
       login(token);
       console.log("Login successful");
-      navigate("/home");
+      if (registrationType === "store") {
+        navigate("/home");
+      } else {
+        navigate("/table");
+      }
     } catch (error) {
       setError("Invalid credentials");
       console.error("Error:", error);
     }
   };
 
+  // const handleGoogleSuccess = async (response) => {
+  //   try {
+  //     const res = await axios.post(`${baseUrl}auth/google/callback`, {
+  //       token: response.credential,
+  //     });
+  //     localStorage.setItem("token", res.data.token);
+  //     navigate("/home");
+  //   } catch (error) {
+  //     setError("Google login failed");
+  //     console.error("Error:", error);
+  //   }
+  // };
 
-   // const handleGoogleSuccess = async (response) => {
-   //   try {
-   //     const res = await axios.post(`${baseUrl}auth/google/callback`, {
-   //       token: response.credential,
-   //     });
-   //     localStorage.setItem("token", res.data.token);
-   //     navigate("/home");
-   //   } catch (error) {
-   //     setError("Google login failed");
-   //     console.error("Error:", error);
-   //   }
-   // };
-
-   // const handleGoogleFailure = (error) => {
-   //   console.error("Google login error:", error);
-   //   setError("Google login failed");
-   // };
+  // const handleGoogleFailure = (error) => {
+  //   console.error("Google login error:", error);
+  //   setError("Google login failed");
+  // };
 
   return (
     // <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
@@ -93,20 +96,12 @@ const Login = () => {
               here
             </p>
           </form>
-          {/* <GoogleLogin
-
-              onSuccess={handleGoogleSuccess}
-              onFailure={handleGoogleFailure}
-              cookiePolicy={"single_host_origin"}
-            /> */}
-
         </div>
       </div>
-      {/* {error && <p className="text-red-500">{error}</p>} */}
+      {error && <p className="text-red-500">{error}</p>}
     </div>
     // </GoogleOAuthProvider>
   );
-
 };
 
 export default Login;

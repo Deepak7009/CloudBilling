@@ -19,6 +19,9 @@ const Navbar = () => {
    const toggleSidebar = () => {
       setIsSidebarOpen(!isSidebarOpen);
    };
+    const logoutbtn = () => {
+      localStorage.removeItem("token");
+    };
 
    return (
       <div>
@@ -129,7 +132,7 @@ const Navbar = () => {
                            <img src={historyIcon} alt="Order History Icon" width="40" height="40" />
                            <span>Order History</span>
                         </Link>
-                        <Link to="/" className="flex items-center space-x-2">
+                        <Link to="/home" className="flex items-center space-x-2">
                            <img src={notificationIcon} alt="Notifications Icon" width="40" height="40" />
                            <span>Notifications</span>
                         </Link>
@@ -137,7 +140,7 @@ const Navbar = () => {
                            <img src={admin} alt="Admin Panel Icon" width="40" height="40" />
                            <span>Admin Panel</span>
                         </Link>
-                        <Link to="/profile" className="flex items-center space-x-2">
+                        <Link to="/profile" className="flex items-center space-x-2" onClick={logoutbtn}>
                            <img src={logout} alt="Logout Icon" width="40" height="40" />
                            <span>Logout</span>
                         </Link>
