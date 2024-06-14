@@ -1,10 +1,49 @@
-import React, { useState, useRef } from 'react';
-import QrCode from '../assets/images/Qrcode 1.png'
+import React, { useEffect, useState, useRef } from 'react';
+import axios from 'axios';
+import QrCode from '../assets/images/Qrcode 1.png';
+import { jwtDecode } from 'jwt-decode';
+import { baseUrl } from '../utils/Const';
+
+
 
 const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, shareOnWhatsApp }) => {
    const [discount, setDiscount] = useState(0);
+   const [userId, setUserId] = useState("");
+   const [rastroDetails, setRastroDetails] = useState({});
+
+
    const [gst, setGST] = useState(0);
    const billRef = useRef(null);
+
+   useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+         const decodedToken = jwtDecode(token);
+         console.log("Decoded Token:", decodedToken);
+
+         if (decodedToken.user) {
+            const userId = decodedToken.user.id;
+            console.log("Extracted UserId:", userId);
+
+            setUserId(userId);
+
+            if (userId) {
+               axios.get(`${baseUrl}user/${userId}`)
+                  .then(response => {
+                     setRastroDetails(response.data);
+                     console.log("Admin Details:", response.data);
+                  })
+                  .catch(error => {
+                     console.error('Error fetching user data:', error);
+                  });
+            } else {
+               console.error('Error: userId is missing in the decoded token');
+            }
+         } else {
+            console.error('Error: user object is missing in the decoded token');
+         }
+      }
+   }, []);
 
    const handleDiscountChange = (e) => {
       const value = parseFloat(e.target.value);
@@ -29,20 +68,19 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
    };
 
    return (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-         <div className="bg-white p-6 rounded shadow-md w-2/4 max-w-[450px]">
-
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
+         <div className="bg-white p-4 md:p-6 rounded shadow-md w-full max-w-[450px] mx-2 sm:mx-4">
             <div className="bill-slip bg-gray-100 p-4 rounded" ref={billRef}>
                <div className='print:max-w-[200px]'>
                   <div className='bill'>
                      <h2 className="text-center text-2xl font-bold">
-                        CLOUD RASHOI
+                        {rastroDetails.restaurant}
                      </h2>
                      <div className='address print:border-b-2 border-dotted border-gray-500 print:py-2'>
                         <p className='text-center '>
-                           <span className='block'>123 Main Street</span>
-                           <span className='block'>Hisar, Haryana 125001</span>
-                           <span>+91 9876543210</span>
+                           {/*<span className='block'>123 Main Street</span>*/}
+                           <span className='block'>{rastroDetails.address}</span>
+                           <span>+91 {rastroDetails.mobile}</span>
                         </p>
                      </div>
                      <div className="bill-details mt-3 print:border-b-2 border-dotted border-gray-500 print:py-1">
@@ -66,25 +104,23 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                      <p className="flex justify-between bill-total text-lg font-semibold mt-4">
                         <span>Sub Total :</span> <span>₹{calculateTotal()}</span></p>
 
-                     <div className='discount flex print:hidden'>
-                        <div className="mt-2 print:flex justify-between">
-
-                           <label htmlFor="discount" className=" font-semibold pl-1">Discount:</label>
+                     <div className='discount flex flex-col sm:flex-row sm:justify-between print:hidden'>
+                        <div className="mt-2 sm:mt-0">
+                           <label htmlFor="discount" className="font-semibold pl-1">Discount:</label>
                            <input
                               type="number"
                               id="discount"
-                              className="border border-gray-300 print:text-end print:p-0 rounded p-1 max-w-[150px] print:border-none"
+                              className="border border-gray-300 rounded p-1 max-w-[150px] print:border-none"
                               value={discount}
                               onChange={handleDiscountChange}
                            />
-
                         </div>
-                        <div className=" mt-2 print:flex justify-between">
-                           <label htmlFor="gst" className=" font-semibold pl-2">GST (%):</label>
+                        <div className="mt-2 sm:mt-0">
+                           <label htmlFor="gst" className="font-semibold pl-1">GST (%):</label>
                            <input
                               type="number"
                               id="gst"
-                              className="border border-gray-300 print:text-end print:p-0 rounded p-1 ml-2 max-w-[150px] print:border-none"
+                              className="border border-gray-300 rounded p-1 max-w-[150px] print:border-none"
                               value={gst}
                               onChange={handleGSTChange}
                            />
@@ -99,29 +135,28 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                      <p className='text-xl'>Thanks for visiting !!</p>
 
                      <div className='flex justify-center mt-2'>
-                        <img src={QrCode} alt='' />
+                        <img src={QrCode} alt='' className='w-24 h-24' />
                      </div>
                      <p className='text-lg'> Scan to pay your bill </p>
                   </div>
-
                </div>
             </div>
 
-            <div className="flex flex-row justify-between mt-4">
+            <div className="flex flex-col sm:flex-row justify-between mt-4">
                <button
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0 sm:mr-2"
                   onClick={shareOnWhatsApp}
                >
                   Share on WhatsApp
                </button>
                <button
-                  className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0 sm:mr-2"
                   onClick={handlePrint}
                >
                   Print
                </button>
                <button
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mb-2 sm:mb-0 sm:mr-2"
                   onClick={closeModal}
                >
                   Close

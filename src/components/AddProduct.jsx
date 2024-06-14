@@ -23,6 +23,7 @@ const AddProduct = () => {
    });
 
    const [data, setData] = useState([]);
+   const [category, setCategory] = useState([]);
    const [isUpdateMode, setIsUpdateMode] = useState(false);
    const [updateId, setUpdateId] = useState(null);
    const [userId, setUserId] = useState("");
@@ -36,7 +37,7 @@ const AddProduct = () => {
          }
       }
    }, []);
-   
+
 
    const handleChange = (e) => {
       const { id, value } = e.target;
@@ -109,14 +110,31 @@ const AddProduct = () => {
          console.error("Error fetching data:", error);
       }
    };
-   
+
    useEffect(() => {
       if (userId) {
          fetchData();
       }
    }, [userId]);
-   
-    
+
+
+   const fetchCategories = async () => {
+      try {
+         const response = await axios.get(`${baseUrl}newcategories/${userId}`);
+         setCategory(response.data);
+         console.log(response.data)
+      } catch (error) {
+         console.error("Error fetching data:", error);
+      }
+   };
+
+   useEffect(() => {
+      if (userId) {
+         fetchCategories();
+      }
+   }, [userId]);
+
+
 
    const handleUpdateClick = (item) => {
       setFormData(item);
@@ -194,11 +212,11 @@ const AddProduct = () => {
                      onChange={handleChange}
                   >
                      <option>Select</option>
-                     <option value="Pizza">Pizza</option>
-                     <option value="Sandwich">Sandwich</option>
-                     <option value="Shakes">Shakes</option>
-                     <option value="Snacks">Snacks</option>
-                     <option value="Combo">Combo</option>
+                     {category.map((cat) => (
+                        <option key={cat._id} value={cat.newTitle}>
+                           {cat.newTitle}
+                        </option>
+                     ))}
                   </select>
                </div>
                <div className="mb-2 flex flex-wrap justify-between">

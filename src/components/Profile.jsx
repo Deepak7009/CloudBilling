@@ -3,9 +3,11 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import logo from "../assets/images/webp/giphy.webp";
 import QrCodeImg from '../assets/images/Qrcode 1.png';
-import edit from "../assets/images/edit.png";
+import edit from "../assets/images/update-profile.gif";
 import emailIcon from "../assets/images/email.png";
 import { baseUrl } from '../utils/Const';
+import ProfileEdit from './ProfileEdit';
+
 
 const Profile = () => {
    const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -53,7 +55,18 @@ const Profile = () => {
 
    const handleInputChange = (e) => {
       const { name, value } = e.target;
-      setAdminDetails({ ...adminDetails, [name]: value });
+      const keys = name.split('.');
+      if (keys.length > 1) {
+         setAdminDetails(prevDetails => ({
+            ...prevDetails,
+            [keys[0]]: {
+               ...prevDetails[keys[0]],
+               [keys[1]]: value
+            }
+         }));
+      } else {
+         setAdminDetails({ ...adminDetails, [name]: value });
+      }
    };
 
    const handleSubmit = async (e) => {
@@ -74,22 +87,35 @@ const Profile = () => {
       }
    };
 
-
    return (
-      <div className="relative min-h-screen bg-gray-100 px-6 py-4 mb-6">
-         <div className={`max-w-4xl mx-auto bg-white py-8 px-4 rounded-lg shadow-md mb-6 transition ${isPopupOpen ? 'blur' : ''}`} style={{ zIndex: 1 }}>
-            <div className="flex justify-between">
-               <div className='flex'>
-                  <div className="">
+      <div className="container-fluid bg-gray-100 py-4 mb-6">
+         <div className={`bg-white rounded-lg shadow-md mb-6 pb-2 transition ${isPopupOpen ? 'blur' : ''}`}>
+            <div className='flex justify-end items-center pt-3 mr-5'>
+               <span className='text-lg font-bold text-gray-700'>Edit</span>
+               <img
+                  className="cursor-pointer ml-2"
+                  src={edit}
+                  alt="update icon"
+                  width="30px"
+                  title="Update Your Profile"
+                  onClick={handleEditClick}
+               />
+            </div>
+
+            <div className="flex max-md:block justify-around">
+
+               <div className="flex max-md:justify-around max-sm:block mb-4 md:mb-0">
+                  <div className=" max-sm:flex justify-center">
                      <img
                         src={logo}
                         alt="Company Logo"
-                        width="250px"
-                        className=""
+                        className="w-[250px] max-lg:w-[150px] max-md:w-[250px]"
                      />
                   </div>
-                  <div className="ml-4 items-center">
-                     <h2 className="text-3xl font-semibold text-teal-600 font-serif">{adminDetails.restaruant}</h2>
+                  <div className=" max-sm:grid mt-2 justify-center">
+                     <div className='flex items-center'>
+                        <h2 className="text-3xl font-semibold text-teal-600 font-serif">{adminDetails.restaurant}</h2>
+                     </div>
                      <p className="text-gray-800 font-serif font-bold flex items-center pt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="32" height="32" className="mr-2">
                            <path fill="#e3e2e1" d="M54.01 58.74C54.01 61.65 44.15 64 32 64c-12.15 0-22.01-2.35-22.01-5.26 0-2.6 7.9-4.74 18.26-5.18h7.5c10.37.44 18.26 2.58 18.26 5.18z"></path>
@@ -110,105 +136,53 @@ const Profile = () => {
                         {adminDetails.email}
                      </p>
                   </div>
+
                </div>
 
-               <div className='flex'>
+               <div className="mb-4 max-md:grid justify-center  md:mb-0">
                   <div className="mb-6">
-                     <h3 className="text-xl font-semibold text-teal-600 font-serif">Opening Hours</h3>
-                     <p className="mt-2 text-gray-600 font-serif">Monday - Friday: 10:00 AM - 10:00 PM</p>
-                     <p className="text-gray-600 font-serif">Saturday - Sunday: 11:00 AM - 11:00 PM</p>
+                     <h3 className="text-2xl font-semibold text-teal-600 font-serif">Opening Hours</h3>
+                     <p className="mt-2 text-gray-600 font-serif">Monday - Friday: {adminDetails.openingHours?.mondayFriday}</p>
+                     <p className="text-gray-600 font-serif">Saturday - Sunday: {adminDetails.openingHours?.saturdaySunday}</p>
                   </div>
                </div>
+
             </div>
 
-            <div className='flex justify-between items-center mt-6'>
-               <div className='admin mt-4'>
-                  <div className='flex items-center'>
-                     <h1 className='mb-2 text-teal-600 font-bold text-xl font-serif'>Admin</h1>
-                     <img
-                        className="cursor-pointer ml-2"
-                        src={edit}
-                        alt="update icon"
-                        width="20px"
-                        title="Update Your Order"
-                        onClick={handleEditClick}
-                     />
+            <div className="flex justify-around items-center max-sm:block mt-4">
+               <div className="admin my-4 md:mb-0">
+                  <div className="flex items-center max-sm:justify-center">
+                     <h1 className="mb-2 text-teal-600 font-bold text-2xl font-serif">Admin</h1>
                   </div>
 
-                  <div>
-                     <h1 className='font-serif'>Name : <span className='font-bold'>{adminDetails.owner}</span></h1>
-                     <h1 className='font-serif'>Mobile : <span className='font-bold'>{adminDetails.mobile}</span></h1>
-                     <h1 className='font-serif'>Mail :<span className='font-bold'> {adminDetails.email}</span></h1>
+                  <div className=' max-sm:grid justify-center'>
+                     <h1 className="font-serif">Name : <span className="font-bold">{adminDetails.owner}</span></h1>
+                     <h1 className="font-serif">Mobile : <span className="font-bold">{adminDetails.mobile}</span></h1>
+                     <h1 className="font-serif">Mail :<span className="font-bold"> {adminDetails.email}</span></h1>
                   </div>
-
                </div>
 
-               <div className="QrCode">
+               <div className="mb-4 md:mb-0 max-sm:flex justify-center">
                   <img
-                     src={QrCodeImg}
+                     src={adminDetails.qrCodeImageUrl || QrCodeImg}
                      alt="QR Code"
                      width="150px"
                      className="mt-2"
                   />
                </div>
+
             </div>
+
          </div>
 
-         {isPopupOpen && (
-            <div className="fixed inset-0 flex justify-center items-center z-50">
-               <div className="absolute inset-0 bg-gray-600 bg-opacity-50"></div>
-               <div className="relative bg-white p-6 rounded-lg shadow-lg z-50">
-                  <h2 className="text-xl font-bold mb-4">Edit Admin Details</h2>
-                  <form onSubmit={handleSubmit}>
-                     <div className="mb-4">
-                        <label className="block text-gray-700">Name</label>
-                        <input
-                           type="text"
-                           name="owner"
-                           value={adminDetails.owner}
-                           onChange={handleInputChange}
-                           className="mt-1 p-2 border rounded w-full"
-                        />
-                     </div>
-                     <div className="mb-4">
-                        <label className="block text-gray-700">Mobile</label>
-                        <input
-                           type="text"
-                           name="mobile"
-                           value={adminDetails.mobile}
-                           onChange={handleInputChange}
-                           className="mt-1 p-2 border rounded w-full"
-                        />
-                     </div>
-                     <div className="mb-4">
-                        <label className="block text-gray-700">Email</label>
-                        <input
-                           type="email"
-                           name="email"
-                           value={adminDetails.email}
-                           onChange={handleInputChange}
-                           className="mt-1 p-2 border rounded w-full"
-                        />
-                     </div>
-                     <div className="flex justify-end">
-                        <button
-                           type="button"
-                           onClick={handleClosePopup}
-                           className="bg-blue-500 text-white px-4 py-2 rounded-full mr-2"
-                        >
-                           Cancel
-                        </button>
-                        <button
-                           type="submit"
-                           className="bg-blue-500 text-white px-4 py-2 rounded-full"
-                        >
-                           Save
-                        </button>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         )}
+         <ProfileEdit
+            isOpen={isPopupOpen}
+            onClose={handleClosePopup}
+            onSubmit={handleSubmit}
+            adminDetails={adminDetails}
+            handleInputChange={handleInputChange}
+         />
+
       </div>
    );
 };

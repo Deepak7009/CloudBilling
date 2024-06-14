@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "../utils/Const";
+import { jwtDecode } from 'jwt-decode';
 
 const OrderHistory = () => {
    const [data, setData] = useState([]);
    const [filter, setFilter] = useState("All Transactions");
+   const [userId, setUserId] = useState("");
+
+   useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+         const decodedToken = jwtDecode(token);
+         if (decodedToken.user) {
+            setUserId(decodedToken.user.id);
+         }
+      }
+   }, []);
 
    const fetchData = async () => {
       try {
-         const response = await axios.get(`${baseUrl}bills`);
+         const response = await axios.get(`${baseUrl}bills/${userId}`);
          setData(response.data);
 
       } catch (error) {
@@ -16,10 +28,11 @@ const OrderHistory = () => {
       }
    };
 
-
    useEffect(() => {
-      fetchData();
-   }, []);
+      if (userId) {
+         fetchData();
+      }
+   }, [userId]);
 
    function formatDate(dateString) {
       return new Date(dateString).toLocaleDateString();
