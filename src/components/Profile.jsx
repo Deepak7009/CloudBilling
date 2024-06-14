@@ -14,6 +14,12 @@ const Profile = () => {
    const [adminDetails, setAdminDetails] = useState({});
 
    const [userId, setUserId] = useState("");
+   const [image, setImage] = useState("")
+
+   const handleImageChange = (e) => {
+      setImage(e.target.files[0]);
+      // console.log("data img", image);
+   }
 
    useEffect(() => {
       const token = localStorage.getItem('token');
@@ -71,21 +77,52 @@ const Profile = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
-      const token = localStorage.getItem('token');
 
       try {
+         const token = localStorage.getItem('token');
+         if (!token) {
+            throw new Error('Token not found. Please log in.');
+         }
+
+         let secureUrl = adminDetails.qrCodeImageUrl;
+
+         if (image) {
+            const formData = new FormData();
+            formData.append("file", image);
+            formData.append("upload_preset", "cloudBill");
+
+            const cloudinaryResponse = await axios.post(
+               "https://api.cloudinary.com/v1_1/drpwwh9rm/image/upload",
+               formData
+            );
+
+            const result = cloudinaryResponse.data;
+            if (!result.secure_url) {
+               throw new Error('Image upload failed');
+            }
+            secureUrl = result.secure_url;
+         }
+
+         const updatedAdminDetails = {
+            ...adminDetails,
+            qrCodeImageUrl: secureUrl,
+         };
+
          const response = await axios.put(
             `${baseUrl}user/${userId}`,
-            adminDetails,
+            updatedAdminDetails,
             { headers: { Authorization: `Bearer ${token}` } }
          );
 
-         console.log('User updated successfully:', response.data);
+         setAdminDetails(updatedAdminDetails);
          setIsPopupOpen(false);
+         console.log('User updated successfully:', response.data);
+
       } catch (error) {
          console.error('Error updating user data:', error);
       }
    };
+
 
    return (
       <div className="container-fluid bg-gray-100 py-4 mb-6">
@@ -181,6 +218,7 @@ const Profile = () => {
             onSubmit={handleSubmit}
             adminDetails={adminDetails}
             handleInputChange={handleInputChange}
+            onImageChange={handleImageChange} // Pass the image change handler
          />
 
       </div>

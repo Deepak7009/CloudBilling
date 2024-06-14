@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChange }) => {
+const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChange, onImageChange }) => {
    return (
       <div className={`fixed inset-0 z-50 ${isOpen ? 'flex' : 'hidden'} items-center justify-center overflow-auto`}>
          <div className="absolute inset-0 bg-gray-600 bg-opacity-50"></div>
@@ -85,16 +85,16 @@ const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChang
                      </div>
                   </div>
 
-                  {/*<div className="w-full md:w-1/2 px-4">
+                  <div className="w-full md:w-1/2 px-4">
                      <label className="block text-gray-700 font-semibold font-serif mb-2">Upload QR Code</label>
                      <input
                         type="file"
                         name="qrCodeImageUrl"
-                        value={adminDetails.qrCodeImageUrl}
-                        onChange={handleInputChange}
+                        onChange={onImageChange}
                         className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                      />
-                  </div>*/}
+                  </div>
+
 
                </div>
                <div className="flex justify-end mt-4">
