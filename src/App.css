@@ -143,6 +143,31 @@ input[type=number] {
    color: black !important;
 }
 
+.common_btn {
+   color: white;
+   background: blue;
+   border-radius: 5px;
+   padding: 12px 25px;
+   transition: all 0.3s ease-in-out;
+   border: 1px solid blue;
+   line-height: 21px;
+}
+
+.common_btn:focus,
+.common_btn:hover {
+   animation: pulse 0.7s;
+   -webkit-animation: pulse 0.7s;
+   box-shadow: 0 0 0 0.3em transparent;
+   color: blue !important;
+   background: transparent !important;
+   border: 1px solid blue !important;
+}
+
+@keyframes pulse {
+   0% {
+      box-shadow: 0 0 0 blue;
+   }
+}
 .modal-container {
    max-height: 100vh;
    overflow-y: auto;

@@ -15,6 +15,7 @@ import Profile from "./components/Profile";
 import CustomTable from "./components/CustomTable";
 import Structure from "./components/Structure";
 import Process from "./components/Process";
+import RegistationType from "./components/RegistationType";
 import RequireAuth from "./components/authentication/PrivateRoute";
 
 function App() {
