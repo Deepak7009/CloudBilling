@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from "react";
 import { baseUrl } from "../utils/Const";
 import axios from "axios";
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from "jwt-decode"; 
 
 const BillingDetails = ({
   section,
@@ -13,13 +12,13 @@ const BillingDetails = ({
   calculateTotal,
   generateBillSlip,
   removeFromOrder,
-  orderId
+  orderId,
 }) => {
   const [message, setMessage] = useState("");
   const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       const decodedToken = jwtDecode(token);
       if (decodedToken.user) {
@@ -29,11 +28,16 @@ const BillingDetails = ({
   }, []);
 
   const handlePlaceOrder = async () => {
+    if (!orderItems || orderItems.length === 0) {
+      setMessage("No items selected. Please add items to your order.");
+      return;
+    }
+
     const totalAmount = calculateTotal();
     const billData = {
       name: billingDetails.name,
       mobile: billingDetails.mobile,
-      orderItems: orderItems?.map((item) => ({
+      orderItems: orderItems.map((item) => ({
         productName: item.productName,
         quantity: item.quantity,
         price: item.price,
@@ -45,8 +49,6 @@ const BillingDetails = ({
     console.log("asd", billData);
 
     try {
-      // const response = await axios.post(`${baseUrl}bill/${userId}`, billData);
-      // setMessage("Order placed successfully!");
       if (orderId) {
         await axios.put(`${baseUrl}updateBill/${orderId}`, billData);
         setMessage("Order updated successfully!");
@@ -60,7 +62,6 @@ const BillingDetails = ({
       console.error("Error placing order:", error);
     }
   };
-  
 
   return (
     <div className="flex flex-col md:w-1/3 w-full xl:w-1/3 lg:w-1/3 bg-white px-4 pt-2 rounded shadow-md md:mt-0 md:ml-4">
@@ -78,9 +79,7 @@ const BillingDetails = ({
           />
         </div>
         <div className="flex items-center">
-          <label className="w-1/4 text-right pr-4 xl:block hidden">
-            Mobile:
-          </label>
+          <label className="w-1/4 text-right pr-4 xl:block hidden">Mobile:</label>
           <input
             type="tel"
             name="mobile"
@@ -93,7 +92,7 @@ const BillingDetails = ({
       </div>
 
       <p className="text-lg font-bold mb-4 text-teal-600 font-serif">Order Summary</p>
-      <div className="overflow-x-auto overflow-auto max-h-[200px]  example">
+      <div className="overflow-x-auto overflow-auto max-h-[200px] example">
         <table className="min-w-full divide-y divide-gray-200">
           <thead>
             <tr>
@@ -105,13 +104,10 @@ const BillingDetails = ({
           </thead>
           <tbody className="bg-white divide-y divide-gray-200 text-sm">
             {orderItems?.map((item) => (
-              <tr key={item.name}>
-
+              <tr key={item.productName}>
                 <td className="py-1 px-3">{item.productName}</td>
                 <td className="py-1 px-3 text-center">{item.quantity}</td>
-                <td className="py-1 px-3 text-center">
-                  ₹{item.price * item.quantity}
-                </td>
+                <td className="py-1 px-3 text-center">₹{item.price * item.quantity}</td>
                 <td className="py-1 px-8">
                   <button
                     onClick={() => removeFromOrder(item)}
