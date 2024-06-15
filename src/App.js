@@ -4,7 +4,6 @@ import AddProduct from "./components/AddProduct";
 import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 import OrderHistory from "./components/OrderHistory";
-import GenerateCSV from "./components/GenerateCSV";
 import Login from "./components/Login&Register/Login";
 import Register from "./components/Login&Register/Register";
 import Expensises from "./components/Expensises";
@@ -15,7 +14,6 @@ import Profile from "./components/Profile";
 import CustomTable from "./components/CustomTable";
 import Structure from "./components/Structure";
 import Process from "./components/Process";
-import RegistationType from "./components/RegistationType";
 import RequireAuth from "./components/authentication/PrivateRoute";
 
 function App() {

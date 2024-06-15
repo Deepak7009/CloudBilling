@@ -159,7 +159,7 @@ const BillModal = ({
                         <span>Sub Total :</span> <span>₹{calculateTotal()}</span>
                      </p>
 
-                     {/* <div className="discount flex flex-col sm:flex-row sm:justify-between print:hidden">
+                     <div className="discount flex flex-col sm:flex-row sm:justify-between print:hidden">
                 <div className="mt-2 sm:mt-0">
                   <label htmlFor="discount" className="font-semibold pl-1">
                     Discount:
@@ -184,7 +184,7 @@ const BillModal = ({
                     onChange={handleGSTChange}
                   />
                 </div>
-              </div> */}
+              </div>
 
                      <p className="flex justify-between bill-total text-xl font-bold mt-3 print:border-y-2 border-dashed border-gray-500 print:py-2">
                         <span>Total :</span> <span>₹{totalWithGST.toFixed(2)}</span>
