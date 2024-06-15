@@ -7,6 +7,8 @@ import edit from "../assets/images/update-profile.gif";
 import emailIcon from "../assets/images/email.png";
 import { baseUrl } from '../utils/Const';
 import ProfileEdit from './ProfileEdit';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Profile = () => {
@@ -118,10 +120,12 @@ const Profile = () => {
 
          setAdminDetails(updatedAdminDetails);
          setIsPopupOpen(false);
+         toast.success('User updated successfully!');
          console.log('User updated successfully:', response.data);
 
       } catch (error) {
          console.error('Error updating user data:', error);
+         toast.error('Error updating user data');
       }
       setIsSubmitting(false);
    };
@@ -131,12 +135,12 @@ const Profile = () => {
       <div className="container-fluid bg-gray-100 py-4 mb-6">
          <div className={`bg-white rounded-lg shadow-md mb-6 pb-2 transition ${isPopupOpen ? 'blur' : ''}`}>
             <div className='flex justify-end items-center pt-3 mr-5'>
-               <span className='text-lg font-bold text-gray-700'>Edit</span>
+               <span className='text-2xl font-bold text-gray-700'>Edit</span>
                <img
                   className="cursor-pointer ml-2"
                   src={edit}
                   alt="update icon"
-                  width="30px"
+                  width="34px"
                   title="Update Your Profile"
                   onClick={handleEditClick}
                />
@@ -154,7 +158,7 @@ const Profile = () => {
                   </div>
                   <div className=" max-sm:grid mt-2 justify-center">
                      <div className='flex items-center'>
-                        <h2 className="text-3xl font-semibold text-teal-600 font-serif">{adminDetails.restaurant}</h2>
+                        <h2 className="text-3xl font-semibold text-teal-600 font-serif">{adminDetails.name}</h2>
                      </div>
                      <p className="text-gray-800 font-serif font-bold flex items-center pt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="32" height="32" className="mr-2">
@@ -214,7 +218,8 @@ const Profile = () => {
             </div>
 
          </div>
-
+ 
+     <div>
          <ProfileEdit
             isOpen={isPopupOpen}
             onClose={handleClosePopup}
@@ -224,6 +229,9 @@ const Profile = () => {
             onImageChange={handleImageChange}
             isSubmitting={isSubmitting}
          />
+          <ToastContainer />
+       </div>
+
 
       </div>
    );

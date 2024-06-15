@@ -8,6 +8,7 @@ import { baseUrl } from "../utils/Const";
 import update from "../assets/images/svg/updateicon.svg";
 import cross from "../assets/images/svg/crossicon.svg";
 import { jwtDecode } from 'jwt-decode';
+import { Link } from "react-router-dom";
 
 
 const AddProduct = () => {
@@ -205,9 +206,17 @@ const AddProduct = () => {
                   </div>
                </div>
                <div className="mb-3">
-                  <label htmlFor="category" className="block font-medium text-gray-700">
-                     Category of Food
-                  </label>
+                  <div className="flex justify-between">
+                     <label htmlFor="category" className="block font-medium text-gray-700">
+                        Category of Food
+                     </label>
+                     <Link to="/categories">
+                        <svg className="w-6 h-6 text-green-600 mr-1 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                           <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd" />
+                        </svg>
+
+                     </Link>
+                  </div>
                   <select
                      id="category"
                      className="form-select mt-1 w-full"
@@ -263,8 +272,15 @@ const AddProduct = () => {
                         onChange={handleChange}
                      >
                         <option>Select</option>
-                        <option value="kg">kg</option>
-                        <option value="ml">ml</option>
+                        <option value="ml">Grams (g)</option>
+                        <option value="kg">Kilograms (kg)</option>
+                        <option value="kg">Miligrams (mg)</option>
+                        <option value="ml">Pounds (lb)</option>
+                        <option value="kg">Litres (l)</option>
+                        <option value="ml">Milliliters (ml)</option>
+                        <option value="ml">Pieces</option>
+                        <option value="ml">Dozens</option>
+                        <option value="ml">Cups</option>
                      </select>
                   </div>
                   <div className="input-group w-full md:w-5/12">

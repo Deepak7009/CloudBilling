@@ -275,7 +275,7 @@ const Categories = () => {
                 <div className="form-column w-full md:w-1/3 md:px-4 max-[767px] justify-center text-center">
                     <div className="mb-4 flex items-center max-[1023px]:block">
                         <label htmlFor="newTitle" className="block text-gray-700 font-medium mb-1 md:w-24">
-                            Title
+                            Category
                         </label>
                         <input
                             id="newTitle"

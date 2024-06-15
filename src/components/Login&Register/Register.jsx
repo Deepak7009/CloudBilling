@@ -98,7 +98,7 @@ const Register = () => {
               </select>
             </div>
 
-            <div className="flex lg:gap-3 lg:flex-row flex-col">
+            <div className="flex gap-3 lg:flex-row flex-col">
               <input
                 type="text"
                 name="name"
@@ -118,7 +118,7 @@ const Register = () => {
                 className="inputtext appearance-none border-2 border-gray-300 rounded-md bg-transparent py-2 px-4 mb-4 w-full transform transition duration-500 hover:scale-105 focus:outline-none focus:border-[#000000d0] focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
               />
             </div>
-            <div className="flex lg:gap-3 lg:flex-row flex-col">
+            <div className="flex gap-3 lg:flex-row flex-col">
               <input
                 type="email"
                 name="email"
