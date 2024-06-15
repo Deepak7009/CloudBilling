@@ -132,12 +132,12 @@ const Profile = () => {
       <div className="container-fluid bg-gray-100 py-4 mb-6">
          <div className={`bg-white rounded-lg shadow-md mb-6 pb-2 transition ${isPopupOpen ? 'blur' : ''}`}>
             <div className='flex justify-end items-center pt-3 mr-5'>
-               <span className='text-lg font-bold text-gray-700'>Edit</span>
+               <span className='text-2xl font-bold text-gray-700'>Edit</span>
                <img
                   className="cursor-pointer ml-2"
                   src={edit}
                   alt="update icon"
-                  width="30px"
+                  width="34px"
                   title="Update Your Profile"
                   onClick={handleEditClick}
                />
