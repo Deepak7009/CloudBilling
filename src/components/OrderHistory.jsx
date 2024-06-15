@@ -141,17 +141,10 @@ const OrderHistory = () => {
                                  <td className="py-2 px-4 border-b text-start">
                                     {item.mobile}
                                  </td>
-
-                               <td className="py-2 px-4 border-b text-start">
-                                    {orderItem.productName}
-                                 </td>
-                                 <td className="py-2 px-4 border-b text-start">
-
                                  {/* <td className="py-2 px-4 border-b text-start">
                                     {item.productName}
                                  </td> */}
                                  {/* <td className="py-2 px-4 border-b text-start">
-
                                     {orderItem.quantity}
                                  </td> */}
                                  <td className="py-2 border-b text-start">
