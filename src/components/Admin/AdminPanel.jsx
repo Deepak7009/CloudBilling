@@ -29,7 +29,7 @@ const AdminPanel = () => {
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Structure</h2>
                   </Link>
                </div>*/}
-{/*
+               {/*
                <div className='col-md-2 mb-6'>
                   <Link
                      to=""
@@ -79,7 +79,7 @@ const AdminPanel = () => {
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Invoice</h2>
                   </Link>
                </div>
-{/*
+               {/*
                <div className='col-md-2 mb-6'>
                   <Link
                      to=""

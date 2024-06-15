@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import QrCode from "../assets/images/Qrcode 1.png";
 import { jwtDecode } from "jwt-decode";
 import { baseUrl } from "../utils/Const";
 
@@ -14,56 +13,31 @@ const BillModal = ({
    const [discount, setDiscount] = useState(0);
    const [userId, setUserId] = useState("");
    const [rastroDetails, setRastroDetails] = useState({});
-   const [qr, setQr] = useState({});
    const [gst, setGST] = useState(0);
    const billRef = useRef(null);
-   const [qrCodeImageUrl, setQrCodeImageUrl] = useState();
-
-   const fetchqr = async () => {
-      try {
-         const response = await axios.get(`${baseUrl}/user${userId}`);
-         if (response.data && response.data.adminDetails) {
-            setQrCodeImageUrl(response.data.adminDetails.qrCodeImageUrl);
-            console.log(response.data.adminDetails.qrCodeImageUrl);
-         } else {
-            console.error("QR Code URL not found in response");
-         }
-      } catch (error) {
-         console.error("Error fetching data:", error);
-      }
-   };
 
    useEffect(() => {
-      fetchqr();
-   }, []);
-
-   useEffect(() => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       if (token) {
          const decodedToken = jwtDecode(token);
          console.log("Decoded Token:", decodedToken);
 
          if (decodedToken.user) {
             const userId = decodedToken.user.id;
-            console.log("Extracted UserId:", userId);
-
             setUserId(userId);
-
             if (userId) {
-               axios
-                  .get(`${baseUrl}user/${userId}`)
-                  .then((response) => {
+               axios.get(`${baseUrl}user/${userId}`)
+                  .then(response => {
                      setRastroDetails(response.data);
-                     console.log("Admin Details:", response.data);
                   })
-                  .catch((error) => {
-                     console.error("Error fetching user data:", error);
+                  .catch(error => {
+                     console.error('Error fetching user data:', error);
                   });
             } else {
-               console.error("Error: userId is missing in the decoded token");
+               console.error('Error: userId is missing in the decoded token');
             }
          } else {
-            console.error("Error: user object is missing in the decoded token");
+            console.error('Error: user object is missing in the decoded token');
          }
       }
    }, []);
@@ -89,15 +63,7 @@ const BillModal = ({
       document.body.innerHTML = originalContents;
       window.location.reload();
    };
-   //   const fetchqr = async () => {
-   //     try {
-   //       const response = await axios.get(`${baseUrl}/user/${userId}`);
-   //       setQr(response.data);
-   //       console.log(response.data);
-   //     } catch (error) {
-   //       console.error("Error fetching data:", error);
-   //     }
-   //   };
+
    return (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
          <div className="bg-white p-4 md:p-6 rounded shadow-md w-full max-w-[450px] mx-2 sm:mx-4">
@@ -160,31 +126,31 @@ const BillModal = ({
                      </p>
 
                      <div className="discount flex flex-col sm:flex-row sm:justify-between print:hidden">
-                <div className="mt-2 sm:mt-0">
-                  <label htmlFor="discount" className="font-semibold pl-1">
-                    Discount:
-                  </label>
-                  <input
-                    type="number"
-                    id="discount"
-                    className="border border-gray-300 rounded p-1 max-w-[150px] print:border-none"
-                    value={discount}
-                    onChange={handleDiscountChange}
-                  />
-                </div>
-                <div className="mt-2 sm:mt-0">
-                  <label htmlFor="gst" className="font-semibold pl-1">
-                    GST (%):
-                  </label>
-                  <input
-                    type="number"
-                    id="gst"
-                    className="border border-gray-300 rounded p-1 max-w-[150px] print:border-none"
-                    value={gst}
-                    onChange={handleGSTChange}
-                  />
-                </div>
-              </div>
+                        <div className="mt-2 sm:mt-0">
+                           <label htmlFor="discount" className="font-semibold pl-1">
+                              Discount:
+                           </label>
+                           <input
+                              type="number"
+                              id="discount"
+                              className="border border-gray-300 rounded p-1 max-w-[150px] print:border-none"
+                              value={discount}
+                              onChange={handleDiscountChange}
+                           />
+                        </div>
+                        <div className="mt-2 sm:mt-0">
+                           <label htmlFor="gst" className="font-semibold pl-1">
+                              GST (%):
+                           </label>
+                           <input
+                              type="number"
+                              id="gst"
+                              className="border border-gray-300 rounded p-1 max-w-[150px] print:border-none"
+                              value={gst}
+                              onChange={handleGSTChange}
+                           />
+                        </div>
+                     </div>
 
                      <p className="flex justify-between bill-total text-xl font-bold mt-3 print:border-y-2 border-dashed border-gray-500 print:py-2">
                         <span>Total :</span> <span>₹{totalWithGST.toFixed(2)}</span>
