@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import QrCode from '../assets/images/Qrcode 1.png';
 import { jwtDecode } from 'jwt-decode';
 import { baseUrl } from '../utils/Const';
 
@@ -131,14 +130,20 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                         <span>Total :</span> <span>₹{totalWithGST.toFixed(2)}</span></p>
                   </div>
 
+
                   <div className='thanks my-3 text-center'>
                      <p className='text-xl'>Thanks for visiting !!</p>
 
-                     <div className='flex justify-center mt-2'>
-                        <img src={rastroDetails.qrCodeImageUrl} alt='' className='w-24 h-24' />
-                     </div>
-                     <p className='text-lg'> Scan to pay your bill </p>
+                     {rastroDetails.qrCodeImageUrl && (
+                        <div className='flex justify-center mt-2'>
+                           <img src={rastroDetails.qrCodeImageUrl} className='w-24 h-24' />
+                        </div>
+                     )}
+                     {rastroDetails.qrCodeImageUrl && (
+                        <p className='text-lg'> Scan to pay your bill </p>
+                     )}
                   </div>
+
                </div>
             </div>
 
