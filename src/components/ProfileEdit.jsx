@@ -9,11 +9,11 @@ const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChang
             <form onSubmit={onSubmit}>
                <div className="flex flex-wrap -mx-4">
                   <div className="w-full md:w-1/2 px-4 mb-4">
-                     <label className="block text-gray-700 font-semibold font-serif mb-2">Restaurant's Name</label>
+                     <label className="block text-gray-700 font-semibold font-serif mb-2">Rastaurant's Name</label>
                      <input
                         type="text"
-                        name="restaurant"
-                        value={adminDetails.restaurant}
+                        name="name"
+                        value={adminDetails.name}
                         onChange={handleInputChange}
                         className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                      />

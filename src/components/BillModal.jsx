@@ -74,7 +74,7 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                <div className='print:max-w-[200px]'>
                   <div className='bill'>
                      <h2 className="text-center text-2xl font-bold">
-                        {rastroDetails.restaurant}
+                        {rastroDetails.name}
                      </h2>
                      <div className='address print:border-b-2 border-dotted border-gray-500 print:py-2'>
                         <p className='text-center '>
@@ -135,7 +135,7 @@ const BillModal = ({ billingDetails, orderItems, calculateTotal, closeModal, sha
                      <p className='text-xl'>Thanks for visiting !!</p>
 
                      <div className='flex justify-center mt-2'>
-                        <img src={QrCode} alt='' className='w-24 h-24' />
+                        <img src={rastroDetails.qrCodeImageUrl} alt='' className='w-24 h-24' />
                      </div>
                      <p className='text-lg'> Scan to pay your bill </p>
                   </div>
