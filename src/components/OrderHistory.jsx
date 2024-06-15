@@ -137,7 +137,7 @@ const OrderHistory = () => {
                                     {item.mobile}
                                  </td>
                                  <td className="py-2 px-4 border-b text-start">
-                                    {orderItem.name}
+                                    {orderItem.productName}
                                  </td>
                                  <td className="py-2 px-4 border-b text-start">
                                     {orderItem.quantity}

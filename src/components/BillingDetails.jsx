@@ -45,8 +45,8 @@ const BillingDetails = ({
     console.log("asd", billData);
 
     try {
-      const response = await axios.post(`${baseUrl}bill/${userId}`, billData);
-      setMessage("Order placed successfully!");
+      // const response = await axios.post(`${baseUrl}bill/${userId}`, billData);
+      // setMessage("Order placed successfully!");
       if (orderId) {
         await axios.put(`${baseUrl}updateBill/${orderId}`, billData);
         setMessage("Order updated successfully!");
