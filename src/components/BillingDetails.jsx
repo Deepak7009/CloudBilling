@@ -60,6 +60,7 @@ const BillingDetails = ({
       console.error("Error placing order:", error);
     }
   };
+  
 
   return (
     <div className="flex flex-col md:w-1/3 w-full xl:w-1/3 lg:w-1/3 bg-white px-4 pt-2 rounded shadow-md md:mt-0 md:ml-4">
@@ -73,7 +74,7 @@ const BillingDetails = ({
             placeholder="Enter name..."
             value={billingDetails.name}
             onChange={handleBillingChange}
-            className="border border-gray-400 rounded px-4 py-1 flex-grow"
+            className="border border-gray-400 rounded px-2 py-1 flex-grow"
           />
         </div>
         <div className="flex items-center">
@@ -86,7 +87,7 @@ const BillingDetails = ({
             placeholder="Enter Mobile No..."
             value={billingDetails.mobile}
             onChange={handleBillingChange}
-            className="border border-gray-400 rounded px-4 py-1 flex-grow"
+            className="border border-gray-400 rounded px-2 py-1 flex-grow"
           />
         </div>
       </div>

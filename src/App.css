@@ -104,14 +104,14 @@ input[type=number] {
 }
 
 .img {
-   background-image: url('./assets/images/pexels-ella-olsson-572949-1640774.jpg');
+   background-image: url('./assets/images/bills1.png');
    background-repeat: no-repeat;
    background-size: cover;
    background-position-y: 20%;
 }
 
 .img2 {
-   background-image: url('./assets/images/pexels-ella-olsson-572949-1640774.jpg');
+   background-image: url('./assets/images/bills1.png');
    background-repeat: no-repeat;
    background-size: cover;
    background-position: 20%;

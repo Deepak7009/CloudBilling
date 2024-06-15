@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "../utils/Const";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 const OrderHistory = () => {
    const [data, setData] = useState([]);
@@ -11,28 +11,31 @@ const OrderHistory = () => {
    useEffect(() => {
       const token = localStorage.getItem('token');
       if (token) {
-         const decodedToken = jwtDecode(token);
-         if (decodedToken.user) {
-            setUserId(decodedToken.user.id);
-         }
+        const decodedToken = jwtDecode(token);
+        if (decodedToken.user) {
+          setUserId(decodedToken.user.id);
+        }
       }
-   }, []);
-
-   const fetchData = async () => {
-      try {
-         const response = await axios.get(`${baseUrl}bills/${userId}`);
-         setData(response.data);
-
-      } catch (error) {
-         console.error("Error fetching data:", error);
-      }
-   };
-
-   useEffect(() => {
+    }, []);
+    
+    useEffect(() => {
       if (userId) {
-         fetchData();
+        fetchData();
       }
-   }, [userId]);
+    }, [userId]);
+    
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}bills/${userId}`);
+        setData(response.data);
+  
+        console.log("Bills :", data)
+  
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
 
    function formatDate(dateString) {
       return new Date(dateString).toLocaleDateString();
@@ -118,15 +121,17 @@ const OrderHistory = () => {
                            <th className="py-2 px-4 text-start border-b">Date</th>
                            <th className="py-2 px-4 border-b text-start">Name</th>
                            <th className="py-2 px-4 border-b text-start">Mobile</th>
-                           <th className="py-2 px-4 border-b text-start">Item Name</th>
-                           <th className="py-2 px-4 border-b text-start">Quantity</th>
-                           <th className="py-2 px-4 border-b text-start">Price</th>
+                           {/* <th className="py-2 px-4 border-b text-start">Item Name</th> */}
+                           {/* <th className="py-2 px-4 border-b text-start">Quantity</th> */}
+                           {/* <th className="py-2 px-4 border-b text-start">Price</th> */}
+                           <th className="py-2 px-4 border-b text-start">Total</th>
                         </tr>
                      </thead>
                      <tbody>
                         {filteredData.map((item) =>
-                           item.orderItems.map((orderItem, index) => (
-                              <tr key={index} className="hover:bg-gray-100">
+                           // item.orderItems.map((orderItem, index) => (
+                              // <tr key={index} className="hover:bg-gray-100">
+                              <tr key={item._id} className="hover:bg-gray-100">
                                  <td className="py-2 px-4 border-b text-start">
                                     {formatDate(item.timestamp)}
                                  </td>
@@ -136,17 +141,24 @@ const OrderHistory = () => {
                                  <td className="py-2 px-4 border-b text-start">
                                     {item.mobile}
                                  </td>
-                                 <td className="py-2 px-4 border-b text-start">
+
+                               <td className="py-2 px-4 border-b text-start">
                                     {orderItem.productName}
                                  </td>
                                  <td className="py-2 px-4 border-b text-start">
+
+                                 {/* <td className="py-2 px-4 border-b text-start">
+                                    {item.productName}
+                                 </td> */}
+                                 {/* <td className="py-2 px-4 border-b text-start">
+
                                     {orderItem.quantity}
-                                 </td>
+                                 </td> */}
                                  <td className="py-2 border-b text-start">
-                                    ₹ {orderItem.price.toFixed(2)}
+                                    ₹ {item.totalAmount}
                                  </td>
                               </tr>
-                           ))
+                           // ))
                         )}
                      </tbody>
                   </table>
