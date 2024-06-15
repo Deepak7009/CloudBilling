@@ -21,6 +21,7 @@ function Structure() {
 
   const [data, setData] = useState([]);
   const [userId, setUserId] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -79,6 +80,7 @@ function Structure() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const response = await axios.post(`${baseUrl}structure/${userId}`, formData);
       toast.success("Structure added successfully!");
@@ -91,6 +93,7 @@ function Structure() {
     } catch (error) {
       console.error("Error adding structure:", error);
     }
+    setIsSubmitting(false);
   };
 
   return (
@@ -148,8 +151,9 @@ function Structure() {
               <button
                 type="submit"
                 className="submit-button bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+                disabled={isSubmitting}
               >
-                Add
+                {isSubmitting ? 'Processing...' : 'Add'}
               </button>
             </div>
           </div>

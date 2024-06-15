@@ -14,6 +14,7 @@ const Profile = () => {
    const [adminDetails, setAdminDetails] = useState({});
 
    const [userId, setUserId] = useState("");
+   const [isSubmitting, setIsSubmitting] = useState(false);
    const [image, setImage] = useState("")
 
    const handleImageChange = (e) => {
@@ -77,6 +78,7 @@ const Profile = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+      setIsSubmitting(true);
 
       try {
          const token = localStorage.getItem('token');
@@ -121,6 +123,7 @@ const Profile = () => {
       } catch (error) {
          console.error('Error updating user data:', error);
       }
+      setIsSubmitting(false);
    };
 
 
@@ -218,7 +221,8 @@ const Profile = () => {
             onSubmit={handleSubmit}
             adminDetails={adminDetails}
             handleInputChange={handleInputChange}
-            onImageChange={handleImageChange} // Pass the image change handler
+            onImageChange={handleImageChange}
+            isSubmitting={isSubmitting}
          />
 
       </div>

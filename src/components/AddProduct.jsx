@@ -27,6 +27,7 @@ const AddProduct = () => {
    const [isUpdateMode, setIsUpdateMode] = useState(false);
    const [updateId, setUpdateId] = useState(null);
    const [userId, setUserId] = useState("");
+   const [isSubmitting, setIsSubmitting] = useState(false);
 
    useEffect(() => {
       const token = localStorage.getItem('token');
@@ -49,6 +50,7 @@ const AddProduct = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+      setIsSubmitting(true);
       if (isUpdateMode) {
          try {
             const response =
@@ -100,6 +102,7 @@ const AddProduct = () => {
             console.error("Error adding Product:", error);
          }
       }
+      setIsSubmitting(false);
    };
 
    const fetchData = async () => {
@@ -295,8 +298,9 @@ const AddProduct = () => {
                   <button
                      type="submit"
                      className="submit-button bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+                     disabled={isSubmitting}
                   >
-                     {isUpdateMode ? "Update" : "Submit"}
+                     {isSubmitting ? 'Processing...' : isUpdateMode ? 'Update' : 'Submit'}
                   </button>
                </div>
             </div>
