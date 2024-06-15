@@ -74,7 +74,7 @@ const BillingDetails = ({
             placeholder="Enter name..."
             value={billingDetails.name}
             onChange={handleBillingChange}
-            className="border border-gray-400 rounded px-4 py-1 flex-grow"
+            className="border border-gray-400 rounded px-2 py-1 flex-grow"
           />
         </div>
         <div className="flex items-center">
@@ -87,7 +87,7 @@ const BillingDetails = ({
             placeholder="Enter Mobile No..."
             value={billingDetails.mobile}
             onChange={handleBillingChange}
-            className="border border-gray-400 rounded px-4 py-1 flex-grow"
+            className="border border-gray-400 rounded px-2 py-1 flex-grow"
           />
         </div>
       </div>
