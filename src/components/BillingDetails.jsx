@@ -16,6 +16,7 @@ const BillingDetails = ({
 }) => {
   const [message, setMessage] = useState("");
   const [userId, setUserId] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -34,6 +35,7 @@ const BillingDetails = ({
     }
 
     const totalAmount = calculateTotal();
+    setIsSubmitting(true);
     const billData = {
       name: billingDetails.name,
       mobile: billingDetails.mobile,
@@ -61,6 +63,7 @@ const BillingDetails = ({
       setMessage("Error placing order. Please try again.");
       console.error("Error placing order:", error);
     }
+    setIsSubmitting(false);
   };
 
   return (
@@ -129,8 +132,9 @@ const BillingDetails = ({
       <button
         className="bg-teal-600 hover:bg-teal-700 text-white font-bold font-serif py-2 px-4 rounded-full my-2"
         onClick={handlePlaceOrder}
+        disabled={isSubmitting}
       >
-        {orderId ? "Update Order" : "Place Order"}
+        {isSubmitting ? 'Processing...' : orderId ? 'Update Order' : 'Place Order'}
       </button>
     </div>
   );

@@ -16,6 +16,7 @@ const Profile = () => {
    const [adminDetails, setAdminDetails] = useState({});
 
    const [userId, setUserId] = useState("");
+   const [isSubmitting, setIsSubmitting] = useState(false);
    const [image, setImage] = useState("")
 
    const handleImageChange = (e) => {
@@ -79,6 +80,7 @@ const Profile = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+      setIsSubmitting(true);
 
       try {
          const token = localStorage.getItem('token');
@@ -125,6 +127,7 @@ const Profile = () => {
          console.error('Error updating user data:', error);
          toast.error('Error updating user data');
       }
+      setIsSubmitting(false);
    };
 
 
@@ -215,18 +218,20 @@ const Profile = () => {
             </div>
 
          </div>
-         <div>
+ 
+     <div>
+         <ProfileEdit
+            isOpen={isPopupOpen}
+            onClose={handleClosePopup}
+            onSubmit={handleSubmit}
+            adminDetails={adminDetails}
+            handleInputChange={handleInputChange}
+            onImageChange={handleImageChange}
+            isSubmitting={isSubmitting}
+         />
+          <ToastContainer />
+       </div>
 
-            <ProfileEdit
-               isOpen={isPopupOpen}
-               onClose={handleClosePopup}
-               onSubmit={handleSubmit}
-               adminDetails={adminDetails}
-               handleInputChange={handleInputChange}
-               onImageChange={handleImageChange}
-            />
-            <ToastContainer />
-         </div>
 
       </div>
    );

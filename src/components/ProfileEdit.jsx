@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChange, onImageChange }) => {
+const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChange, onImageChange,  isSubmitting }) => {
    return (
       <div className={`fixed inset-0 z-50 ${isOpen ? 'flex' : 'hidden'} items-center justify-center overflow-auto`}>
          <div className="absolute inset-0 bg-gray-600 bg-opacity-50"></div>
@@ -110,8 +110,9 @@ const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChang
                   <button
                      type="submit"
                      className="bg-teal-500 text-white px-4 py-2 rounded-lg"
+                     disabled={isSubmitting}
                   >
-                     Save
+                     {isSubmitting ? 'Processing...' : 'Save'}
                   </button>
                </div>
             </form>
