@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 const AddProduct = () => {
    const [formData, setFormData] = useState({
       productid: "",
-      name: "",
+      productName: "",
       type: "",
       category: "",
       unit: "",
@@ -61,7 +61,7 @@ const AddProduct = () => {
             toast.success("Data updated successfully!");
             setFormData({
                productid: "",
-               name: "",
+               productName: "",
                type: "",
                category: "",
                unit: "",
@@ -82,7 +82,7 @@ const AddProduct = () => {
             toast.success("Product added successfully!");
             setFormData({
                productid: "",
-               name: "",
+               productName: "",
                type: "",
                category: "",
                unit: "",
@@ -198,9 +198,9 @@ const AddProduct = () => {
                      </label>
                      <input
                         type="text"
-                        id="name"
+                        id="productName"
                         className="form-input mt-1 w-full"
-                        value={formData.name}
+                        value={formData.productName}
                         onChange={handleChange}
                      />
                   </div>
@@ -343,7 +343,7 @@ const AddProduct = () => {
                                  {item.productid}
                               </td>
                               <td className="py-2 px-4 border-b text-start">
-                                 {item.name}
+                                 {item.productName}
                               </td>
                               <td className="py-2 px-4 border-b text-start">
                                  {item.type}
