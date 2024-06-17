@@ -3,10 +3,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import historyIcon from "../assets/images/order.gif";
 import gif from "../assets/images/webp/giphy.webp";
-import process from "../assets/images/loading.gif";
+//import process from "../assets/images/loading.gif";
 import callIcon from "../assets/images/customer-service.gif";
 import productIcon from "../assets/images/add-product.png";
-//import admin from '../assets/images/management-consulting.gif';
 import logout from "../assets/images/log-out.gif";
 import admin from "../assets/images/admin.gif";
 import profile from "../assets/images/profile.gif";
@@ -106,14 +105,14 @@ const Navbar = () => {
                     width="30"
                   />
                 </Link>
-                <Link to="/process" className="flex items-center space-x-2">
+                {/*<Link to="/process" className="flex items-center space-x-2">
                   <img
                     title="Process"
                     src={process}
                     alt="Process"
                     width="28"
                   />
-                </Link>
+                </Link>*/}
                 <Link to="/admin" className="flex items-center space-x-2">
                   <img
                     title="Admin Panel"
@@ -196,7 +195,7 @@ const Navbar = () => {
                     />
                     <span>Order History</span>
                   </Link>
-                  <Link to="/process" className="flex items-center space-x-2">
+                  {/*<Link to="/process" className="flex items-center space-x-2">
                     <img
                       src={process}
                       alt="Process "
@@ -204,7 +203,7 @@ const Navbar = () => {
                       height="40"
                     />
                     <span>Process</span>
-                  </Link>
+                  </Link>*/}
                   <Link to="/admin" className="flex items-center space-x-2">
                     <img
                       src={admin}
