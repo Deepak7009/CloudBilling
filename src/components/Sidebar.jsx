@@ -57,6 +57,16 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
       }
    };
 
+   const fetchAllProducts = async () => {
+      try {
+         const response = await axios.get(`${baseUrl}get-product-data/${userId}`);
+         setItems(response.data);
+         setSearchQuery("");
+      } catch (error) {
+         console.error("Error fetching all products:", error);
+      }
+   };
+
    return (
       <div className="flex flex-col lg:max-w-[210px] min-[767px]:max-w-[150px] w-full bg-white p-4 rounded shadow-md mb-4 md:mb-0 md:mr-4">
          <div className="sticky top-0 bg-white z-10">
@@ -66,7 +76,14 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
          </div>
          <div className="flex overflow-x-auto md:overflow-y-auto">
             <ul className="flex md:flex-col">
+         <button
+          onClick={fetchAllProducts}
+          className='mt-2 max-[]px-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold font-serif'
+          >
+            All Categories</button>
+
                {categories?.map((category, index) => (
+                  
                   <li
                      key={index}
                      className="mt-2 max-[]px-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold font-serif"

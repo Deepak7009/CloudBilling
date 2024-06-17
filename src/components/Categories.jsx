@@ -304,7 +304,7 @@ const Categories = () => {
                      className="flex-1 border border-gray-300 rounded-md p-2 no-spinner block w-0 max-[1023px]:w-52 mx-auto"
                      value={form.newStatus}
                      onChange={handleChange}
-                     required
+                     //required
                   />
                </div>
                <div className="mb-4 flex items-center max-[1023px]:block">
@@ -317,7 +317,7 @@ const Categories = () => {
                      rows="4"
                      value={form.newDescription}
                      onChange={handleChange}
-                     required
+                     //required
                   ></textarea>
                </div>
                <div className="mb-4 flex justify-center md:justify-center">
