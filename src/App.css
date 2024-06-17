@@ -133,9 +133,6 @@ input[type=number] {
    }
 }
 
-
-
-
 .img2 {
    background-image:
       url('./assets/images/Register-bg.gif'),
@@ -169,16 +166,6 @@ input[type=number] {
 .register_background {
    background-color: #18181a9c;
 }
-
-/* Profile */
-
-/*.QrCode {
-   margin-right: 70px;
-}
-
-.admin {
-   margin-left: 70px;
-}*/
 
 .blur {
    filter: blur(3px);
@@ -221,4 +208,10 @@ input[type=number] {
 .modal-container {
    max-height: 100vh;
    overflow-y: auto;
+}
+
+.beta{
+   font-size: 10px;
+   top: 5px;
+   right: 4px;
 }
