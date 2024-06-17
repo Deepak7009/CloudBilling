@@ -20,25 +20,28 @@ const AdminPanel = () => {
 
             <div className="row gap-6 items-center justify-center">
 
-               {/*<div className='col-md-2 mb-6'>
-                  <Link
-                     to=""
-                     className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
-                  >
-                     <img title="Structure" src={structure} alt="Structure" width="50px" />
-                     <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Structure</h2>
-                  </Link>
-               </div>*/}
-               {/*
                <div className='col-md-2 mb-6'>
                   <Link
                      to=""
-                     className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
+                     className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
+                  >
+                     <img title="Structure" src={structure} alt="Structure" width="50px" />
+                     <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Structure</h2>
+                     <span className="beta absolute bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">beta</span>
+
+                  </Link>
+               </div>
+
+               <div className='col-md-2 mb-6'>
+                  <Link
+                     to=""
+                     className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                   >
                      <img title="Offer" src={offer} alt="Offer" width="50px" />
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Offer</h2>
+                     <span className="beta absolute bg-green-500 text-white font-bold px-2 py-1 rounded-full">beta</span>
                   </Link>
-               </div>*/}
+               </div>
 
                <div className='col-md-2 mb-6'>
                   <Link
@@ -46,7 +49,7 @@ const AdminPanel = () => {
                      className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                   >
                      <img title="Add Category" src={historyIcon} alt="Category" width="50px" />
-                     <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Category</h2>
+                     <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Category</h2>                
                   </Link>
                </div>
 
@@ -79,26 +82,30 @@ const AdminPanel = () => {
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Invoice</h2>
                   </Link>
                </div>
-               {/*
+
                <div className='col-md-2 mb-6'>
                   <Link
                      to=""
-                     className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
+                     className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                   >
                      <img title="Add Customer" src={customer} alt="Customer" width="50px" />
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Customer</h2>
-                  </Link>
-               </div>*/}
+                     <span className="beta absolute bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">beta</span>
 
-               {/*<div className='col-md-2 mb-6'>
+                  </Link>
+               </div>
+
+               <div className='col-md-2 mb-6'>
                   <Link
                      to=""
-                     className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
+                     className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                   >
                      <img title="Customers" src={customers} alt="Customer" width="50px" />
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">All Customers</h2>
+                     <span className="beta absolute bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">beta</span>
+
                   </Link>
-               </div>*/}
+               </div>
 
                <div className='col-md-2 mb-6'>
                   <Link
@@ -113,12 +120,20 @@ const AdminPanel = () => {
                <div className='col-md-2 mb-6'>
                   <Link
                      to=""
-                     className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
+                     className="flex flex-col relative items-center bg-white p-4 rounded-lg shadow-md mt-5"
                   >
-                     <img title="Analytics" src={analytics} alt="Expenses" width="50px" />
+                     <img
+                        title="Analytics"
+                        src={analytics}
+                        alt="Analytics"
+                        width="50px"
+                        className=''
+                     />
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Analytics</h2>
+                     <span className="beta absolute bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">beta</span>
                   </Link>
                </div>
+
             </div>
          </div>
       </div>

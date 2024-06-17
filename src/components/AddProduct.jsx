@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 
 const AddProduct = () => {
    const [formData, setFormData] = useState({
-      productid: "",
       productName: "",
       type: "",
       category: "",
@@ -60,7 +59,6 @@ const AddProduct = () => {
                );
             toast.success("Data updated successfully!");
             setFormData({
-               productid: "",
                productName: "",
                type: "",
                category: "",
@@ -81,7 +79,6 @@ const AddProduct = () => {
             const response = await axios.post(`${baseUrl}product/${userId}`, formData);
             toast.success("Product added successfully!");
             setFormData({
-               productid: "",
                productName: "",
                type: "",
                category: "",
@@ -180,18 +177,7 @@ const AddProduct = () => {
          >
             <div className="form-column bg-gray-100 w-full rounded-tl-lg pt-2 md:w-1/3 md:px-4 max-[767px]:grid justify-center">
                <div className="mb-2 flex  flex-wrap justify-between">
-                  <div className="input-group w-full md:w-5/12 mb-4 md:mb-0">
-                     <label htmlFor="productid" className="block text-gray-700 font-medium">
-                        Product ID
-                     </label>
-                     <input
-                        type="text"
-                        id="productid"
-                        className="form-input mt-1 w-full"
-                        value={formData.productid}
-                        onChange={handleChange}
-                     />
-                  </div>
+
                   <div className="input-group w-full md:w-5/12">
                      <label htmlFor="name" className="block font-medium text-gray-700">
                         Product Name
