@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import "./Product.css";
 import { baseUrl } from "../utils/Const";
-import update from "../assets/images/svg/updateicon.svg";
+import update from "../assets/images/edit.png";
 import cross from "../assets/images/svg/crossicon.svg";
 import { jwtDecode } from 'jwt-decode';
 import { Link } from "react-router-dom";
@@ -366,10 +366,10 @@ const AddProduct = () => {
                               <td className="py-2 px-4 border-b text-start">
                                  <div className="flex gap-3">
                                     <img
-                                       className=" cursor-pointer"
+                                       className=" cursor-pointer h-6"
                                        src={update}
                                        alt="update icon"
-                                       title="Update Your Order"
+                                       title="Update Your Product"
                                        onClick={() => handleUpdateClick(item)}
                                     />
                                     <img

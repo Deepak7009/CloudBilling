@@ -60,7 +60,7 @@ const AdminPanel = () => {
                   </Link>
                </div>
 
-               <div className='col-md-2 mb-6'>
+               {/*<div className='col-md-2 mb-6'>
                   <Link
                      to="/products"
                      className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -68,7 +68,7 @@ const AdminPanel = () => {
                      <img title="Products" src={productIcon} alt="product" width="50px" />
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">All Products</h2>
                   </Link>
-               </div>
+               </div>*/}
 
                <div className='col-md-2 mb-6'>
                   <Link
