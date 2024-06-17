@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 
 const AddProduct = () => {
    const [formData, setFormData] = useState({
-      productid: "",
       productName: "",
       type: "",
       category: "",
@@ -60,7 +59,6 @@ const AddProduct = () => {
                );
             toast.success("Data updated successfully!");
             setFormData({
-               productid: "",
                productName: "",
                type: "",
                category: "",
@@ -81,7 +79,6 @@ const AddProduct = () => {
             const response = await axios.post(`${baseUrl}product/${userId}`, formData);
             toast.success("Product added successfully!");
             setFormData({
-               productid: "",
                productName: "",
                type: "",
                category: "",
@@ -180,18 +177,7 @@ const AddProduct = () => {
          >
             <div className="form-column bg-gray-100 w-full rounded-tl-lg pt-2 md:w-1/3 md:px-4 max-[767px]:grid justify-center">
                <div className="mb-2 flex  flex-wrap justify-between">
-                  <div className="input-group w-full md:w-5/12 mb-4 md:mb-0">
-                     <label htmlFor="productid" className="block text-gray-700 font-medium">
-                        Product ID
-                     </label>
-                     <input
-                        type="text"
-                        id="productid"
-                        className="form-input mt-1 w-full"
-                        value={formData.productid}
-                        onChange={handleChange}
-                     />
-                  </div>
+
                   <div className="input-group w-full md:w-5/12">
                      <label htmlFor="name" className="block font-medium text-gray-700">
                         Product Name
@@ -211,7 +197,7 @@ const AddProduct = () => {
                         Category of Food
                      </label>
                      <Link to="/categories">
-                        <svg className="w-6 h-6 text-green-600 mr-1 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-6 h-6 text-green-600 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                            <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd" />
                         </svg>
 
