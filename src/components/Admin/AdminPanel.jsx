@@ -75,7 +75,7 @@ const AdminPanel = () => {
 
                <div className='col-md-2 mb-6'>
                   <Link
-                     to=""
+                     to="/history"
                      className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                   >
                      <img title="Invoice" src={invoice} alt="Invoice" width="50px" />
