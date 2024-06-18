@@ -173,16 +173,16 @@ const AddProduct = () => {
    };
 
    return (
-      <div className="container-fluid mx-auto px-4">
+      <div className="container-fluid mx-auto px-4 max-[375px]:px-0">
          <ToastContainer />
          <h1 className="text-3xl font-bold mt-3 text-center font-serif text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
             Add Products
          </h1>
          <form
-            className="form-wrapper flex flex-col md:flex-row bg-white p-6 shadow-md rounded-lg  max-[425px]:p-0"
+            className="form-wrapper flex flex-col md:flex-row md:px-0 bg-white py-4 shadow-md rounded-lg"
             onSubmit={handleSubmit}
          >
-            <div className="form-column bg-gray-100 w-full rounded-tl-lg pt-2 md:w-1/3 md:px-4 max-[767px]:grid justify-center"
+            <div className="form-column bg-gray-100 w-full rounded-tl-lg pt-2 md:w-1/3 md:px-3 max-[767px]:grid justify-center"
             data-aos="fade-right">
                <div className="mb-2 flex flex-wrap">
 
@@ -314,7 +314,9 @@ const AddProduct = () => {
                   </button>
                </div>
             </div>
-            <div className="w-full  md:w-2/3 px-4 md:mt-0"  data-aos="fade-left">
+
+
+            <div className="product_table w-full md:w-2/3 md:mt-0"  data-aos="fade-left">
                <div className="overflow-x-auto">
                   <table className="min-w-full bg-gray-100">
                      <thead>
