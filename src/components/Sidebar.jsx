@@ -3,6 +3,7 @@ import axios from 'axios';
 import { baseUrl } from '../utils/Const';
 import { ItemsContext } from '../context/ItemsContext';
 import { jwtDecode } from 'jwt-decode';
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
    const [categories, setCategories] = useState([]);
@@ -75,39 +76,58 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
                Categories
             </p>
          </div>
-         <div className="flex overflow-x-auto md:overflow-y-auto">
-            <ul className="flex md:flex-col">
-               <li className="mt-2 max-[]px-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold font-serif">
-                  <button
-                     className="text-left w-full"
-                     onClick={() => {
-                        setSelectedCategory('All'); // Set selected category to 'All'
-                        setSearchQuery(""); // Clear search query
-                        fetchAllProducts(); // Fetch all products
-                     }}
-                  >
-                     All Categories
-                  </button>
-               </li>
-               {categories?.map((category, index) => (
-                  <li
-                     key={index}
-                     className="mt-2 max-[]px-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold font-serif"
-                  >
+
+         {categories.length === 0 ? (
+            <div>
+               <p className="mt-2 mb-4 text-center max-[]px-2 text-[17px] font-semibold text-gray-600 font-serif">
+                  No categories found
+               </p>
+               <Link to="/categories"
+                  className='flex items-center max-[]px-2 text-[17px] font-semibold text-gray-600 font-serif hover:underline underline-offset-4 hover:text-teal-600'
+               >
+                  Add Category
+                  <span>
+                     <svg className="w-6 h-6 text-teal-600 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd" />
+                     </svg>
+                  </span>
+               </Link>
+            </div>
+         ) : (
+            <div className="flex overflow-x-auto md:overflow-y-auto">
+               <ul className="flex md:flex-col">
+                  <li className="mt-2 max-[]px-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold font-serif">
                      <button
                         className="text-left w-full"
                         onClick={() => {
-                           setSelectedCategory(category);
-                           setSearchQuery("");
-                           fetchProducts(category);
+                           setSelectedCategory('All'); 
+                           setSearchQuery(""); 
+                           fetchAllProducts(); 
                         }}
                      >
-                        {category}
+                        All Categories
                      </button>
                   </li>
-               ))}
-            </ul>
-         </div>
+                  {categories?.map((category, index) => (
+                     <li
+                        key={index}
+                        className="mt-2 max-[]px-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold font-serif"
+                     >
+                        <button
+                           className="text-left w-full"
+                           onClick={() => {
+                              setSelectedCategory(category);
+                              setSearchQuery("");
+                              fetchProducts(category);
+                           }}
+                        >
+                           {category}
+                        </button>
+                     </li>
+                  ))}
+               </ul>
+            </div>
+         )}
       </div>
    );
 };
