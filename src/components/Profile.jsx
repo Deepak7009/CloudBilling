@@ -149,13 +149,7 @@ const Profile = () => {
             <div className="flex max-md:block justify-around">
 
                <div className="flex max-md:justify-around max-sm:block mb-4 md:mb-0">
-                  <div className=" max-sm:flex justify-center">
-                     <img
-                        src={logo}
-                        alt="Company Logo"
-                        className="w-[250px] max-lg:w-[150px] max-md:w-[250px]"
-                     />
-                  </div>
+
                   <div className=" max-sm:grid mt-2 justify-center">
                      <div className='flex items-center'>
                         <h2 className="text-3xl font-semibold text-teal-600 font-serif">{adminDetails.name}</h2>
@@ -183,9 +177,9 @@ const Profile = () => {
 
                </div>
 
-               <div className="mb-4 max-md:grid justify-center  md:mb-0">
+               <div className="mb-4 max-md:grid justify-center md:mb-0">
                   <div className="mb-6">
-                     <h3 className="text-2xl font-semibold text-teal-600 font-serif">Opening Hours</h3>
+                     <h3 className="text-2xl text-center font-semibold text-teal-600 font-serif">Opening Hours</h3>
                      <p className="mt-2 text-gray-600 font-serif">Monday - Friday: {adminDetails.openingHours?.mondayFriday}</p>
                      <p className="text-gray-600 font-serif">Saturday - Sunday: {adminDetails.openingHours?.saturdaySunday}</p>
                   </div>
@@ -231,7 +225,6 @@ const Profile = () => {
          />
           <ToastContainer />
        </div>
-
 
       </div>
    );

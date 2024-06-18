@@ -97,7 +97,7 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
 
             <div className="flex overflow-x-auto md:overflow-y-auto">
                <ul className="flex md:flex-col space-x-4">
-                  <li className="mt-2 max-[]px-2 sidebar-item md:pb-2 md:ms-0 md:text-[16px] text-[17px] font-semibold font-serif">
+                  <li className="mt-2 max-[]px-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold font-serif">
                      <button
                         className="text-canter w-full"
                         onClick={() => {

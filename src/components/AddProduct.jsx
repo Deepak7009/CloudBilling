@@ -176,16 +176,16 @@ const AddProduct = () => {
             onSubmit={handleSubmit}
          >
             <div className="form-column bg-gray-100 w-full rounded-tl-lg pt-2 md:w-1/3 md:px-4 max-[767px]:grid justify-center">
-               <div className="mb-2 flex  flex-wrap justify-between">
+               <div className="mb-2 flex flex-wrap">
 
-                  <div className="input-group w-full md:w-5/12">
-                     <label htmlFor="name" className="block font-medium text-gray-700">
+                  <div className="input-group md:w-5/12">
+                     <label htmlFor="productName" className="block font-medium text-gray-700">
                         Product Name
                      </label>
                      <input
                         type="text"
                         id="productName"
-                        className="form-input mt-1 w-full"
+                        className="form-input mt-1"
                         value={formData.productName}
                         onChange={handleChange}
                      />

@@ -29,7 +29,7 @@ const BillingDetails = ({
 
   const handlePlaceOrder = async () => {
     if (!orderItems || orderItems.length === 0) {
-      setMessage("No items selected. Please add items to your order.");
+      setMessage("Add items to your order !!");
       return;
     }
 

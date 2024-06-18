@@ -35,7 +35,7 @@ const SearchBar = ({
       className="flex relative flex-row justify-between items-center bg-white px-4 py-3 mb-4"
     >
       <p
-        className={`text-lg font-bold ${isSearchBarOpen ? "hidden" : "block"}`}
+        className={`text-lg font-bold font-serif ${isSearchBarOpen ? "hidden" : "block"}`}
       >
         Search Items
       </p>
