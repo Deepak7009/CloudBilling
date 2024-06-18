@@ -154,7 +154,7 @@ function HomePage() {
                   calculateTotal={calculateTotal}
                   generateBillSlip={generateBillSlip}
                   removeFromOrder={removeFromOrder}
-                  orderId={orderId} // Pass orderId for updates
+                  orderId={orderId}
                />
             </div>
          </main>
