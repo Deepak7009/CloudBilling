@@ -17,7 +17,6 @@ const AdminPanel = () => {
    useEffect(() => {
       AOS.init({
          duration: 1000,
-         once: true,
          mirror: false,
       });
    }, []);
