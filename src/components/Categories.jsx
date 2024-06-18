@@ -248,7 +248,7 @@ const Categories = () => {
    return (
       <div className="container-fluid mx-auto px-4 py-8 max-[425px]:px-0 max-[1023px]:mx-0">
          <div>
-            <div className=" flex justify-between items-center max-[370px]:block max-[425px]:px-5 ">
+            <div className=" flex justify-between items-center max-[430px]:flex-col-reverse text-center max-[425px]:px-5 ">
                <div className="max-[370px]:flex max-[370px]:justify-center">
                   <select
                      id="type"
@@ -261,12 +261,12 @@ const Categories = () => {
                      <option>3 Months</option>
                   </select>
                </div>
-               <div className="max-[370px]:flex max-[370px]:justify-center max-[370px]:pt-5">
+               <div className="flex justify-center items-center max-[370px]:flex max-[370px]:justify-center max-[430px]:pb-3">
                   <Link to="/add-product">
-                     <p className="flex items-center text-xl text-teal-600 font-semibold">
+                     <p className="flex items-center text-xl text-teal-600 hover:underline underline-offset-2 font-semibold">
                         Add Product
                         <span className="ml-2">
-                           <svg className="w-6 h-6 text-green-600 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                           <svg className="w-6 h-6 text-teal-600 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                               <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd" />
                            </svg>
                         </span>
