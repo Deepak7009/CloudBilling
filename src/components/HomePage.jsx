@@ -108,9 +108,8 @@ function HomePage() {
       billText += `Mobile: ${billingDetails.mobile}\n`;
       billText += `\nOrder Summary\n`;
       orderItems.forEach((item) => {
-         billText += `${item.productName} x ${item.quantity} = ₹${
-            item.price * item.quantity
-         }\n`;
+         billText += `${item.productName} x ${item.quantity} = ₹${item.price * item.quantity
+            }\n`;
       });
       billText += `\nTotal: ₹${calculateTotal()}\n`;
 
@@ -131,10 +130,12 @@ function HomePage() {
       <div className="flex flex-col h-screen">
          <main className="flex flex-grow bg-gray-200 p-4">
             <div className="flex flex-col md:flex-row w-full">
+
                <Sidebar
                   setSelectedCategory={setSelectedCategory}
                   setSearchQuery={setSearchQuery}
                />
+
                <div className="flex flex-col w-full lg:w-1/2 xl:w-2/3">
                   <SearchBar
                      selectedCategory={selectedCategory}

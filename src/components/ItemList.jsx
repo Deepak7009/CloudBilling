@@ -34,7 +34,7 @@ const ItemList = ({ filteredItems, addToOrder }) => {
             className="relative bg-white p-4 rounded shadow-md overflow-hidden group"
           >
             <div className="absolute inset-0 bg-teal-500 transform -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0"></div>
-            <div className="relative z-10">
+            <div className="relative z-10 ">
               <p className="text-base font-bold font-serif group-hover:text-white">{item.productName}</p>
               <p className="text-sm group-hover:text-white font-serif">{item.description}</p>
               <div className="flex flex-row justify-between mt-2 font-serif">

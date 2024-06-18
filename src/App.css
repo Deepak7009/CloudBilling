@@ -154,6 +154,10 @@ input[type=number] {
       background-position: center;
       background-repeat: no-repeat;
    }
+   .bill{
+      margin-top: 28px;
+      padding-bottom: 10px;
+   }
 }
 
 @media (max-width: 480px) {
