@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import logo from "../assets/images/webp/giphy.webp";
 import QrCodeImg from '../assets/images/Qrcode 1.png';
 import edit from "../assets/images/update-profile.gif";
 import emailIcon from "../assets/images/email.png";
@@ -9,6 +8,8 @@ import { baseUrl } from '../utils/Const';
 import ProfileEdit from './ProfileEdit';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 const Profile = () => {
@@ -21,8 +22,15 @@ const Profile = () => {
 
    const handleImageChange = (e) => {
       setImage(e.target.files[0]);
-      // console.log("data img", image);
    }
+
+   useEffect(() => {
+      AOS.init({
+         duration: 1000,
+         once: true,
+         mirror: false,
+      });
+   }, []);
 
    useEffect(() => {
       const token = localStorage.getItem('token');
@@ -148,7 +156,8 @@ const Profile = () => {
 
             <div className="flex max-md:block justify-around">
 
-               <div className="flex max-md:justify-around max-sm:block mb-4 md:mb-0">
+               <div className="flex max-md:justify-around max-sm:block mb-4 md:mb-0"
+                  data-aos="fade-right">
 
                   <div className=" max-sm:grid mt-2 justify-center">
                      <div className='flex items-center'>
@@ -177,7 +186,7 @@ const Profile = () => {
 
                </div>
 
-               <div className="mb-4 max-md:grid justify-center md:mb-0">
+               <div className="mb-4 max-md:grid justify-center md:mb-0" data-aos="fade-left">
                   <div className="mb-6">
                      <h3 className="text-2xl text-center font-semibold text-teal-600 font-serif">Opening Hours</h3>
                      <p className="mt-2 text-gray-600 font-serif">Monday - Friday: {adminDetails.openingHours?.mondayFriday}</p>
@@ -188,7 +197,7 @@ const Profile = () => {
             </div>
 
             <div className="flex justify-around items-center max-sm:block mt-4">
-               <div className="admin my-4 md:mb-0">
+               <div className="admin my-4 md:mb-0" data-aos="flip-right">
                   <div className="flex items-center max-sm:justify-center">
                      <h1 className="mb-2 text-teal-600 font-bold text-2xl font-serif">Admin</h1>
                   </div>
@@ -200,7 +209,7 @@ const Profile = () => {
                   </div>
                </div>
 
-               <div className="mb-4 md:mb-0 max-sm:flex justify-center">
+               <div className="mb-4 md:mb-0 max-sm:flex justify-center" data-aos="flip-left">
                   <img
                      src={adminDetails.qrCodeImageUrl || QrCodeImg}
                      alt="QR Code"
@@ -212,19 +221,19 @@ const Profile = () => {
             </div>
 
          </div>
- 
-     <div>
-         <ProfileEdit
-            isOpen={isPopupOpen}
-            onClose={handleClosePopup}
-            onSubmit={handleSubmit}
-            adminDetails={adminDetails}
-            handleInputChange={handleInputChange}
-            onImageChange={handleImageChange}
-            isSubmitting={isSubmitting}
-         />
-          <ToastContainer />
-       </div>
+
+         <div>
+            <ProfileEdit
+               isOpen={isPopupOpen}
+               onClose={handleClosePopup}
+               onSubmit={handleSubmit}
+               adminDetails={adminDetails}
+               handleInputChange={handleInputChange}
+               onImageChange={handleImageChange}
+               isSubmitting={isSubmitting}
+            />
+            <ToastContainer />
+         </div>
 
       </div>
    );

@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const ItemList = ({ filteredItems, addToOrder }) => {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      mirror: false,
+    });
+  }, []);
 
   if (filteredItems.length === 0) {
     return (
@@ -29,12 +39,12 @@ const ItemList = ({ filteredItems, addToOrder }) => {
     <div className="flex flex-col space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {filteredItems.map((item) => (
-          <div
+          <div data-aos="flip-right"
             key={item.productName}
             className="relative bg-white p-4 rounded shadow-md overflow-hidden group"
           >
             <div className="absolute inset-0 bg-teal-500 transform -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0"></div>
-            <div className="relative z-10 ">
+            <div className="relative z-10 " data-aos="zoom-in">
               <p className="text-base font-bold font-serif group-hover:text-white">{item.productName}</p>
               <p className="text-sm group-hover:text-white font-serif">{item.description}</p>
               <div className="flex flex-row justify-between mt-2 font-serif">

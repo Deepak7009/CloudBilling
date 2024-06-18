@@ -4,11 +4,21 @@ import { baseUrl } from '../utils/Const';
 import { ItemsContext } from '../context/ItemsContext';
 import { jwtDecode } from 'jwt-decode';
 import { Link } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
    const [categories, setCategories] = useState([]);
    const { setItems } = useContext(ItemsContext);
    const [userId, setUserId] = useState("");
+
+   useEffect(() => {
+      AOS.init({
+        duration: 1000,
+        once: true,
+        mirror: false,
+      });
+    }, []);
 
    useEffect(() => {
       const token = localStorage.getItem('token');
@@ -70,7 +80,8 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
    };
 
    return (
-      <div className="flex flex-col lg:max-w-[210px] min-[767px]:max-w-[150px] w-full bg-white p-4 rounded shadow-md mb-4 md:mb-0 md:mr-4">
+      <div className="flex flex-col lg:max-w-[210px] min-[767px]:max-w-[150px] w-full bg-white p-4 rounded shadow-md mb-4 md:mb-0 md:mr-4" 
+      data-aos="fade-right">
          <div className="sticky top-0 bg-white z-10">
             <p className="md:text-[22px] sticky top-0 text-teal-600 bg-white font-serif z-10 text-[20px] md:block hidden font-bold mb-4">
                Categories

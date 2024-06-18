@@ -4,6 +4,8 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const BillingDetails = ({
   section,
@@ -16,7 +18,6 @@ const BillingDetails = ({
   removeFromOrder,
   orderId,
 }) => {
-  const [message, setMessage] = useState("");
   const [userId, setUserId] = useState("");
 
   useEffect(() => {
@@ -27,6 +28,14 @@ const BillingDetails = ({
         setUserId(decodedToken.user.id);
       }
     }
+  }, []);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      mirror: false,
+    });
   }, []);
 
   const handlePlaceOrder = async () => {
@@ -67,7 +76,8 @@ const BillingDetails = ({
 
   return (
     <> <ToastContainer />
-      <div className="bill flex flex-col md:w-1/3 w-full xl:w-1/3 lg:w-1/3 bg-white px-4 pt-2 rounded shadow-md md:ml-4">
+      <div className="bill flex flex-col md:w-1/3 w-full xl:w-1/3 lg:w-1/3 bg-white px-4 pt-2 rounded shadow-md md:ml-4"
+      data-aos="fade-left">
         <p className="text-lg text-teal-600 font-bold font-serif mb-4">Billing Details</p>
         <div className="flex flex-col space-y-4 mb-4">
           <div className="flex items-center">
@@ -128,9 +138,8 @@ const BillingDetails = ({
           <p className="text-lg font-bold">Total</p>
           <p className="text-lg font-bold">₹ {calculateTotal()}</p>
         </div>
-        {message && <p className="text-red-500 mt-2">{message}</p>}
         <button
-          className="bg-teal-600 hover:bg-teal-700 text-white font-bold font-serif py-2 px-4 rounded-full my-2"
+          className="bg-teal-600 hover:bg-teal-700 text-white hover:text-lg font-bold font-serif py-2 px-4 rounded-full my-2"
           onClick={handlePlaceOrder}
         >
           {orderId ? "Update Order" : "Place Order"}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import structure from "../../assets/images/structure.gif";
 import historyIcon from "../../assets/images/order.gif";
 import productIcon from "../../assets/images/add-product.png";
@@ -9,8 +9,19 @@ import invoice from "../../assets/images/invoice.gif";
 import expense from "../../assets/images/expense.gif";
 import analytics from "../../assets/images/analytics.gif";
 import { Link } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const AdminPanel = () => {
+
+   useEffect(() => {
+      AOS.init({
+         duration: 1000,
+         once: true,
+         mirror: false,
+      });
+   }, []);
+
    return (
       <div className=' container mx-auto '>
          <div className=" px-4 py-4 my-3 bg-gray-100 adminepanel">
@@ -20,7 +31,7 @@ const AdminPanel = () => {
 
             <div className="row gap-6 items-center justify-center">
 
-               {/*<div className='col-md-2 mb-6'>
+               {/*<div className='col-md-2 mb-6' data-aos="zoom-in">
                   <Link
                      to=""
                      className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -32,7 +43,7 @@ const AdminPanel = () => {
                   </Link>
                </div>*/}
 
-               {/*<div className='col-md-2 mb-6'>
+               {/*<div className='col-md-2 mb-6' data-aos="zoom-in">
                   <Link
                      to=""
                      className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -43,7 +54,7 @@ const AdminPanel = () => {
                   </Link>
                </div>*/}
 
-               <div className='col-md-2 mb-6'>
+               <div className='col-md-2 mb-6' data-aos="zoom-in">
                   <Link
                      to="/categories"
                      className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -53,7 +64,7 @@ const AdminPanel = () => {
                   </Link>
                </div>
 
-               <div className='col-md-2 mb-6'>
+               <div className='col-md-2 mb-6' data-aos="zoom-in">
                   <Link
                      to="/add-product"
                      className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -63,7 +74,7 @@ const AdminPanel = () => {
                   </Link>
                </div>
 
-               {/*<div className='col-md-2 mb-6'>
+               {/*<div className='col-md-2 mb-6' data-aos="zoom-in">
                   <Link
                      to="/products"
                      className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -73,7 +84,7 @@ const AdminPanel = () => {
                   </Link>
                </div>*/}
 
-               <div className='col-md-2 mb-6'>
+               <div className='col-md-2 mb-6' data-aos="zoom-in">
                   <Link
                      to="/history"
                      className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -83,7 +94,7 @@ const AdminPanel = () => {
                   </Link>
                </div>
 
-               <div className='col-md-2 mb-6'>
+               <div className='col-md-2 mb-6' data-aos="zoom-in">
                   <Link
                      to=""
                      className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -95,7 +106,7 @@ const AdminPanel = () => {
                   </Link>
                </div>
 
-               <div className='col-md-2 mb-6'>
+               <div className='col-md-2 mb-6' data-aos="zoom-in">
                   <Link
                      to=""
                      className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -107,7 +118,7 @@ const AdminPanel = () => {
                   </Link>
                </div>
 
-               <div className='col-md-2 mb-6'>
+               <div className='col-md-2 mb-6' data-aos="zoom-in">
                   <Link
                      to="/expensises"
                      className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -117,7 +128,7 @@ const AdminPanel = () => {
                   </Link>
                </div>
 
-               <div className='col-md-2 mb-6'>
+               <div className='col-md-2 mb-6' data-aos="zoom-in">
                   <Link
                      to=""
                      className="flex flex-col relative items-center bg-white p-4 rounded-lg shadow-md mt-5"

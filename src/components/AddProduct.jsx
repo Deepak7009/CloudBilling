@@ -9,7 +9,8 @@ import update from "../assets/images/edit.png";
 import cross from "../assets/images/svg/crossicon.svg";
 import { jwtDecode } from 'jwt-decode';
 import { Link } from "react-router-dom";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const AddProduct = () => {
    const [formData, setFormData] = useState({
@@ -28,6 +29,14 @@ const AddProduct = () => {
    const [updateId, setUpdateId] = useState(null);
    const [userId, setUserId] = useState("");
    const [isSubmitting, setIsSubmitting] = useState(false);
+
+   useEffect(() => {
+      AOS.init({
+        duration: 1000, 
+        once: true, 
+        mirror: false,
+      });
+    }, []);
 
    useEffect(() => {
       const token = localStorage.getItem('token');
@@ -135,8 +144,6 @@ const AddProduct = () => {
       }
    }, [userId]);
 
-
-
    const handleUpdateClick = (item) => {
       setFormData(item);
       setIsUpdateMode(true);
@@ -175,7 +182,8 @@ const AddProduct = () => {
             className="form-wrapper flex flex-col md:flex-row bg-white p-6 shadow-md rounded-lg  max-[425px]:p-0"
             onSubmit={handleSubmit}
          >
-            <div className="form-column bg-gray-100 w-full rounded-tl-lg pt-2 md:w-1/3 md:px-4 max-[767px]:grid justify-center">
+            <div className="form-column bg-gray-100 w-full rounded-tl-lg pt-2 md:w-1/3 md:px-4 max-[767px]:grid justify-center"
+            data-aos="fade-right">
                <div className="mb-2 flex flex-wrap">
 
                   <div className="input-group md:w-5/12">
@@ -299,57 +307,57 @@ const AddProduct = () => {
                <div className="mb-4 flex justify-center">
                   <button
                      type="submit"
-                     className="submit-button bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+                     className="submit-button bg-blue-500 text-white py-2 px-3 rounded hover:bg-blue-700"
                      disabled={isSubmitting}
                   >
                      {isSubmitting ? 'Processing...' : isUpdateMode ? 'Update' : 'Submit'}
                   </button>
                </div>
             </div>
-            <div className="w-full  md:w-2/3 px-4 md:mt-0">
+            <div className="w-full  md:w-2/3 px-4 md:mt-0"  data-aos="fade-left">
                <div className="overflow-x-auto">
                   <table className="min-w-full bg-gray-100">
                      <thead>
                         <tr className="bg-gray-200">
-                           <th className="py-2 px-4 text-start border-b rounded-tl-lg">Product ID</th>
-                           <th className="py-2 px-4 border-b text-start">Name</th>
-                           <th className="py-2 px-4 border-b text-start">Type</th>
-                           <th className="py-2 px-4 border-b text-start">Category</th>
-                           <th className="py-2 px-4 border-b text-start">Unit</th>
-                           <th className="py-2 px-4 border-b text-start">Stock</th>
-                           <th className="py-2 px-4 border-b text-start">Price</th>
-                           <th className="py-2 px-4 border-b text-start">Description</th>
-                           <th className="py-2 px-4 border-b text-start">Action</th>
+                           <th className="py-2 px-3 text-start border-b rounded-tl-lg">Product ID</th>
+                           <th className="py-2 px-3 border-b text-start">Name</th>
+                           <th className="py-2 px-3 border-b text-start">Type</th>
+                           <th className="py-2 px-3 border-b text-start">Category</th>
+                           <th className="py-2 px-3 border-b text-start">Unit</th>
+                           <th className="py-2 px-3 border-b text-start">Stock</th>
+                           <th className="py-2 px-3 border-b text-start">Price</th>
+                           <th className="py-2 px-3 border-b text-start">Description</th>
+                           <th className="py-2 px-3 border-b text-start">Action</th>
                         </tr>
                      </thead>
                      <tbody>
                         {data?.map((item, index) => (
                            <tr key={index}>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.productid}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.productName}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.type}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.category}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.unit}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.stock}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.price}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.description}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  <div className="flex gap-3">
                                     <img
                                        className=" cursor-pointer h-6"
