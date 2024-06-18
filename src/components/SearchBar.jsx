@@ -32,7 +32,7 @@ const SearchBar = ({
   return (
     <div
       ref={searchBarRef}
-      className="flex relative flex-row justify-between bg-white p-4 mb-4"
+      className="flex relative flex-row justify-between items-center bg-white px-4 py-3 mb-4"
     >
       <p
         className={`text-lg font-bold ${isSearchBarOpen ? "hidden" : "block"}`}
