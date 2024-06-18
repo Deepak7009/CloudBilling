@@ -76,14 +76,18 @@ const Sidebar = ({ setSelectedCategory, setSearchQuery }) => {
          </div>
          <div className="flex overflow-x-auto md:overflow-y-auto">
             <ul className="flex md:flex-col">
-         <button
-          onClick={fetchAllProducts}
-          className='mt-2 max-[]px-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold font-serif'
-          >
-            All Categories</button>
+               <button
+                  onClick={() => {
+                     setSelectedCategory("All");
+                     fetchAllProducts();
+                  }}
+                  className='mt-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold font-serif'
+               >
+                  All Categories
+               </button>
 
                {categories?.map((category, index) => (
-                  
+
                   <li
                      key={index}
                      className="mt-2 max-[]px-2 sidebar-item md:pb-2 md:ms-0 md:text-[20px] text-[17px] font-semibold font-serif"

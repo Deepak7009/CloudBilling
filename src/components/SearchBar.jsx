@@ -1,11 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 
 const SearchBar = ({
-  selectedCategory,
-  setSelectedCategory,
   searchQuery,
-  setSearchQuery,
-  items,
+  setSearchQuery
 }) => {
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
   const searchBarRef = useRef(null);

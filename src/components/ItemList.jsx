@@ -1,16 +1,14 @@
-import React, { useContext } from 'react';
-import { ItemsContext } from '../context/ItemsContext';
+import React from 'react';
 
-const ItemList = ({addToOrder }) => {
-  const { items } = useContext(ItemsContext);
+const ItemList = ({filteredItems, addToOrder }) => {
 
   return (
     <>
     <div className="flex flex-col space-y-4 ">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {items.map((item) => (
+        {filteredItems.map((item) => (
           <div
-            key={item.name}
+            key={filteredItems.productName}
             className="relative bg-white p-4 rounded shadow-md overflow-hidden group"
           >
             <div className="absolute inset-0 bg-teal-500 transform -translate-x-full transition-transform duration-500 ease-out group-hover:translate-x-0"></div>

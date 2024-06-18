@@ -20,7 +20,7 @@ const AdminPanel = () => {
 
             <div className="row gap-6 items-center justify-center">
 
-               <div className='col-md-2 mb-6'>
+               {/*<div className='col-md-2 mb-6'>
                   <Link
                      to=""
                      className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -30,9 +30,9 @@ const AdminPanel = () => {
                      <span className="beta absolute bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">beta</span>
 
                   </Link>
-               </div>
+               </div>*/}
 
-               <div className='col-md-2 mb-6'>
+               {/*<div className='col-md-2 mb-6'>
                   <Link
                      to=""
                      className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
@@ -41,7 +41,7 @@ const AdminPanel = () => {
                      <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Offer</h2>
                      <span className="beta absolute bg-green-500 text-white font-bold px-2 py-1 rounded-full">beta</span>
                   </Link>
-               </div>
+               </div>*/}
 
                <div className='col-md-2 mb-6'>
                   <Link

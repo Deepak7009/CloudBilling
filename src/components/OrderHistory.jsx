@@ -88,7 +88,7 @@ const OrderHistory = () => {
 
    const getChartData = (filteredData) => {
       const labels = filteredData.map(item => formatDate(item.timestamp));
-      const amounts = filteredData.map(item => item.totalAmount); 
+      const amounts = filteredData.map(item => item.totalAmount);
 
       return {
          labels,
@@ -115,6 +115,23 @@ const OrderHistory = () => {
             <h1 className="text-3xl font-bold font-serif mt-2 text-center text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
                Order History
             </h1>
+
+            <div className="flex justify-between items-center my-3">
+               <select
+                  id="type"
+                  className="form-select w-[200px] p-2 border border-gray-300 rounded-md shadow-sm"
+                  onChange={handleFilterChange}
+               >
+                  <option>7 Days</option>
+                  <option>1 Month</option>
+                  <option>3 Months</option>
+                  <option>All Transactions</option>
+               </select>
+               <p className="text-lg font-semibold">
+                  Total Price: <span className="text-blue-600">₹ {totalPrice.toFixed(2)}</span>
+               </p>
+            </div>
+
             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mt-4">
                {/* Chart Section */}
                <div className="flex justify-center items-center h-[35vh] w-full lg:w-2/5 p-4 bg-white shadow-md rounded-lg">
@@ -123,22 +140,6 @@ const OrderHistory = () => {
 
                {/* Table Section */}
                <div className="w-full lg:w-3/5 px-4 mt-6 lg:mt-0">
-                  <div className="flex justify-between items-center mb-3">
-                     <select
-                        id="type"
-                        className="form-select w-[200px] p-2 border border-gray-300 rounded-md shadow-sm"
-                        onChange={handleFilterChange}
-                     >
-                        <option>7 Days</option>
-                        <option>1 Month</option>
-                        <option>3 Months</option>
-                        <option>All Transactions</option>
-                     </select>
-                     <p className="text-lg font-semibold">
-                        Total Price: <span className="text-blue-600">₹ {totalPrice.toFixed(2)}</span>
-                     </p>
-                  </div>
-
                   <div className="overflow-x-auto">
                      <table className="min-w-full bg-white shadow-md rounded-lg">
                         <thead>

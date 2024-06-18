@@ -74,15 +74,14 @@ const BillModal = ({
                <div className="print:max-w-[200px]">
                   <div className="bill">
                      <h2 className="text-center text-2xl font-bold">
-                        {rastroDetails.restaurant}
+                        {rastroDetails.name}
                      </h2>
                      <div className="address print:border-b-2 border-dotted border-gray-500 print:py-2">
                         <p className="text-center ">
-                           {/*<span className='block'>123 Main Street</span>*/}
                            <span className="block">{rastroDetails.address}</span>
-                           {/* {billingDetails.mobile && (
+                           {/*{billingDetails.mobile && (
                     <span>+91 {rastroDetails.mobile}</span>
-                  )} */}
+                  )}*/}
                         </p>
                      </div>
                      <div className="bill-details mt-3 print:border-b-2 border-dotted border-gray-500 print:py-1">

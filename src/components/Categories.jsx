@@ -294,7 +294,7 @@ const Categories = () => {
                      required
                   />
                </div>
-               <div className="mb-4 flex items-center max-[1023px]:block">
+               {/*<div className="mb-4 flex items-center max-[1023px]:block">
                   <label htmlFor="newStatus" className="block text-gray-700 font-medium mb-1 md:w-24">
                      Status
                   </label>
@@ -306,7 +306,7 @@ const Categories = () => {
                      onChange={handleChange}
                      //required
                   />
-               </div>
+               </div>*/}
                <div className="mb-4 flex items-center max-[1023px]:block">
                   <label htmlFor="newDescription" className="block text-gray-700 font-medium mb-1 md:w-24">
                      Description
@@ -343,7 +343,7 @@ const Categories = () => {
                         <tr className="bg-gray-200">
                            <th className="py-2 px-4 text-start border-b rounded-tl-md">Sr. No.</th>
                            <th className="py-2 px-4 border-b text-start">Title</th>
-                           <th className="py-2 px-4 border-b text-start">Status</th>
+                           {/*<th className="py-2 px-4 border-b text-start">Status</th>*/}
                            <th className="py-2 px-4 border-b text-start">Description</th>
                            <th className="py-2 px-4 border-b text-start rounded-tr-md">Action</th>
                         </tr>
@@ -357,9 +357,9 @@ const Categories = () => {
                               <td className="py-2 px-4 border-b text-start">
                                  {item.newTitle}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              {/*<td className="py-2 px-4 border-b text-start">
                                  {item.newStatus}
-                              </td>
+                              </td>*/}
                               <td className="py-2 px-4 border-b text-start">
                                  {item.newDescription}
                               </td>

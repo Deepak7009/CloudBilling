@@ -332,7 +332,7 @@ const Expensises = () => {
                </div>
             </div>
 
-            <div className="w-full md:w-2/3 px-4 mt-4 md:mt-0 max-[425px]:px-0">
+            <div className="w-full md:w-2/3 px-4 md:mt-0 max-[425px]:px-0">
                <div className="overflow-x-auto">
                   <table className="min-w-full bg-white">
                      <thead>

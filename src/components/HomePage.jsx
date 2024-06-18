@@ -7,8 +7,8 @@ import BillModal from "./BillModal";
 import { ItemsContext } from "../context/ItemsContext";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import {jwtDecode} from "jwt-decode";
 import { baseUrl } from "../utils/Const";
-import { jwtDecode } from "jwt-decode";
 
 function HomePage() {
   const location = useLocation();
@@ -18,7 +18,7 @@ function HomePage() {
   const orderId = queryParams.get("orderId");
 
   const [userId, setUserId] = useState("");
-  
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -27,9 +27,9 @@ function HomePage() {
           setUserId(decodedToken.user.id);
        }
     }
- }, []);
+  }, []);
 
-  const [selectedCategory, setSelectedCategory] = useState("Beverages");
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [orderItems, setOrderItems] = useState([]);
   const [billingDetails, setBillingDetails] = useState({
@@ -47,20 +47,15 @@ function HomePage() {
   }, [orderId]);
 
   const fetchOrderDetails = async (orderId) => {
-    orderId && console.log("orderId =>", orderId)
     try {
-      const response = await axios.get(`${baseUrl}billss/${orderId}`);
+      const response = await axios.get(`${baseUrl}/billss/${orderId}`);
       const order = response?.data;
 
-      console.log("Order", order)
       setBillingDetails({
         name: order?.name,
         mobile: order?.mobile,
       });
-      // order.length > 0 && setOrderItems(order?.orderItems);
-       setOrderItems(order?.orderItems);
-
-      console.log("SetOrder", order?.orderItems)
+      setOrderItems(order?.orderItems || []);
     } catch (error) {
       console.error("Error fetching order details:", error);
     }
@@ -72,11 +67,10 @@ function HomePage() {
 
   const allItems = Object.values(items).flat();
 
-  const filteredItems = searchQuery
-    ? allItems.filter((item) =>
-        item.productName.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : items[selectedCategory] || [];
+  const filteredItems = allItems.filter((item) =>
+    item.productName.toLowerCase().includes(searchQuery.toLowerCase()) &&
+    (selectedCategory === "All" || item.category === selectedCategory)
+  );
 
   const addToOrder = (item) => {
     const existingItem = orderItems.find(
@@ -159,7 +153,7 @@ function HomePage() {
             calculateTotal={calculateTotal}
             generateBillSlip={generateBillSlip}
             removeFromOrder={removeFromOrder}
-            orderId={orderId} // Pass orderId for updates
+            orderId={orderId}
           />
         </div>
       </main>
