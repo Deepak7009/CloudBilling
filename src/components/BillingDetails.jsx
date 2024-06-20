@@ -57,7 +57,6 @@ const BillingDetails = ({
       index,
       totalAmount,
     };
-    console.log("Bill data: ", billData);
 
     try {
       if (orderId) {
