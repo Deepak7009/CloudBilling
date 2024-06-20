@@ -133,9 +133,6 @@ input[type=number] {
    }
 }
 
-
-
-
 .img2 {
    background-image:
       url('./assets/images/Register-bg.gif'),
@@ -157,6 +154,11 @@ input[type=number] {
       background-position: center;
       background-repeat: no-repeat;
    }
+
+   .bill {
+      margin-top: 28px;
+      padding-bottom: 10px;
+   }
 }
 
 @media (max-width: 480px) {
@@ -169,16 +171,6 @@ input[type=number] {
 .register_background {
    background-color: #18181a9c;
 }
-
-/* Profile */
-
-/*.QrCode {
-   margin-right: 70px;
-}
-
-.admin {
-   margin-left: 70px;
-}*/
 
 .blur {
    filter: blur(3px);
@@ -221,4 +213,20 @@ input[type=number] {
 .modal-container {
    max-height: 100vh;
    overflow-y: auto;
+}
+
+.beta {
+   font-size: 10px;
+   top: 5px;
+   right: 4px;
+}
+
+.product_table {
+   padding-left: 20px;
+}
+
+@media (max-width: 768) {
+   .product_table {
+      padding-left: 0px;
+   }
 }

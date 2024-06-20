@@ -5,16 +5,16 @@ import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import "./Product.css";
 import { baseUrl } from "../utils/Const";
-import update from "../assets/images/svg/updateicon.svg";
+import update from "../assets/images/edit.png";
 import cross from "../assets/images/svg/crossicon.svg";
 import { jwtDecode } from 'jwt-decode';
 import { Link } from "react-router-dom";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const AddProduct = () => {
    const [formData, setFormData] = useState({
-      productid: "",
-      name: "",
+      productName: "",
       type: "",
       category: "",
       unit: "",
@@ -29,6 +29,14 @@ const AddProduct = () => {
    const [updateId, setUpdateId] = useState(null);
    const [userId, setUserId] = useState("");
    const [isSubmitting, setIsSubmitting] = useState(false);
+
+   useEffect(() => {
+      AOS.init({
+        duration: 1000, 
+        once: true, 
+        mirror: false,
+      });
+    }, []);
 
    useEffect(() => {
       const token = localStorage.getItem('token');
@@ -60,8 +68,7 @@ const AddProduct = () => {
                );
             toast.success("Data updated successfully!");
             setFormData({
-               productid: "",
-               name: "",
+               productName: "",
                type: "",
                category: "",
                unit: "",
@@ -81,8 +88,7 @@ const AddProduct = () => {
             const response = await axios.post(`${baseUrl}product/${userId}`, formData);
             toast.success("Product added successfully!");
             setFormData({
-               productid: "",
-               name: "",
+               productName: "",
                type: "",
                category: "",
                unit: "",
@@ -138,8 +144,6 @@ const AddProduct = () => {
       }
    }, [userId]);
 
-
-
    const handleUpdateClick = (item) => {
       setFormData(item);
       setIsUpdateMode(true);
@@ -169,38 +173,28 @@ const AddProduct = () => {
    };
 
    return (
-      <div className="container-fluid mx-auto px-4">
+      <div className="container-fluid mx-auto px-4 max-[375px]:px-0">
          <ToastContainer />
-         <h1 className="text-3xl font-bold mt-4 text-center font-serif text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
+         <h1 className="text-3xl font-bold mt-3 text-center font-serif text-teal-600 bg-gray-200 py-2 px-6 rounded-full shadow-md">
             Add Products
          </h1>
          <form
-            className="form-wrapper flex flex-col md:flex-row mt-2 bg-white p-6 shadow-md rounded-lg  max-[425px]:p-0"
+            className="form-wrapper flex flex-col md:flex-row md:px-0 bg-white py-4 shadow-md rounded-lg"
             onSubmit={handleSubmit}
          >
-            <div className="form-column bg-gray-100 w-full rounded-tl-lg pt-2 md:w-1/3 md:px-4 max-[767px]:grid justify-center">
-               <div className="mb-2 flex  flex-wrap justify-between">
-                  <div className="input-group w-full md:w-5/12 mb-4 md:mb-0">
-                     <label htmlFor="productid" className="block text-gray-700 font-medium">
-                        Product ID
-                     </label>
-                     <input
-                        type="text"
-                        id="productid"
-                        className="form-input mt-1 w-full"
-                        value={formData.productid}
-                        onChange={handleChange}
-                     />
-                  </div>
-                  <div className="input-group w-full md:w-5/12">
-                     <label htmlFor="name" className="block font-medium text-gray-700">
+            <div className="form-column bg-gray-100 w-full rounded-tl-lg pt-2 md:w-1/3 md:px-3 max-[767px]:grid justify-center"
+            data-aos="fade-right">
+               <div className="mb-2 flex flex-wrap">
+
+                  <div className="input-group md:w-5/12">
+                     <label htmlFor="productName" className="block font-medium text-gray-700">
                         Product Name
                      </label>
                      <input
                         type="text"
-                        id="name"
-                        className="form-input mt-1 w-full"
-                        value={formData.name}
+                        id="productName"
+                        className="form-input mt-1"
+                        value={formData.productName}
                         onChange={handleChange}
                      />
                   </div>
@@ -211,7 +205,7 @@ const AddProduct = () => {
                         Category of Food
                      </label>
                      <Link to="/categories">
-                        <svg className="w-6 h-6 text-green-600 mr-1 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-6 h-6 text-teal-600 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                            <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd" />
                         </svg>
 
@@ -313,63 +307,65 @@ const AddProduct = () => {
                <div className="mb-4 flex justify-center">
                   <button
                      type="submit"
-                     className="submit-button bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+                     className="submit-button bg-blue-500 text-white py-2 px-3 rounded hover:bg-blue-700"
                      disabled={isSubmitting}
                   >
                      {isSubmitting ? 'Processing...' : isUpdateMode ? 'Update' : 'Submit'}
                   </button>
                </div>
             </div>
-            <div className="w-full  md:w-2/3 px-4 md:mt-0">
+
+
+            <div className="product_table w-full md:w-2/3 md:mt-0"  data-aos="fade-left">
                <div className="overflow-x-auto">
                   <table className="min-w-full bg-gray-100">
                      <thead>
                         <tr className="bg-gray-200">
-                           <th className="py-2 px-4 text-start border-b rounded-tl-lg">Product ID</th>
-                           <th className="py-2 px-4 border-b text-start">Name</th>
-                           <th className="py-2 px-4 border-b text-start">Type</th>
-                           <th className="py-2 px-4 border-b text-start">Category</th>
-                           <th className="py-2 px-4 border-b text-start">Unit</th>
-                           <th className="py-2 px-4 border-b text-start">Stock</th>
-                           <th className="py-2 px-4 border-b text-start">Price</th>
-                           <th className="py-2 px-4 border-b text-start">Description</th>
-                           <th className="py-2 px-4 border-b text-start">Action</th>
+                           <th className="py-2 px-3 text-start border-b rounded-tl-lg">Product ID</th>
+                           <th className="py-2 px-3 border-b text-start">Name</th>
+                           <th className="py-2 px-3 border-b text-start">Type</th>
+                           <th className="py-2 px-3 border-b text-start">Category</th>
+                           <th className="py-2 px-3 border-b text-start">Unit</th>
+                           <th className="py-2 px-3 border-b text-start">Stock</th>
+                           <th className="py-2 px-3 border-b text-start">Price</th>
+                           <th className="py-2 px-3 border-b text-start">Description</th>
+                           <th className="py-2 px-3 border-b text-start">Action</th>
                         </tr>
                      </thead>
                      <tbody>
                         {data?.map((item, index) => (
                            <tr key={index}>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.productid}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
-                                 {item.name}
+                              <td className="py-2 px-3 border-b text-start">
+                                 {item.productName}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.type}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.category}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.unit}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.stock}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.price}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  {item.description}
                               </td>
-                              <td className="py-2 px-4 border-b text-start">
+                              <td className="py-2 px-3 border-b text-start">
                                  <div className="flex gap-3">
                                     <img
-                                       className=" cursor-pointer"
+                                       className=" cursor-pointer h-6"
                                        src={update}
                                        alt="update icon"
-                                       title="Update Your Order"
+                                       title="Update Your Product"
                                        onClick={() => handleUpdateClick(item)}
                                     />
                                     <img

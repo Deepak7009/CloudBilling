@@ -67,9 +67,7 @@ const BillModal = ({
    return (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
          <div className="bg-white p-4 md:p-6 rounded shadow-md w-full max-w-[450px] mx-2 sm:mx-4">
-            <h2 className=" text-center !text-green-600">
-               Order Placed Sucessfully
-            </h2>
+            
             <div className="bill-slip bg-gray-100 p-4 rounded" ref={billRef}>
                <div className="print:max-w-[200px]">
                   <div className="bill">
@@ -78,11 +76,7 @@ const BillModal = ({
                      </h2>
                      <div className="address print:border-b-2 border-dotted border-gray-500 print:py-2">
                         <p className="text-center ">
-                           {/*<span className='block'>123 Main Street</span>*/}
                            <span className="block">{rastroDetails.address}</span>
-                           {/* {billingDetails.mobile && (
-                    <span>+91 {rastroDetails.mobile}</span>
-                  )} */}
                         </p>
                      </div>
                      <div className="bill-details mt-3 print:border-b-2 border-dotted border-gray-500 print:py-1">
