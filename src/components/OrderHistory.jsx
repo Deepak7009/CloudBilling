@@ -150,7 +150,7 @@ const OrderHistory = () => {
                   </div>
 
                   {/* Table Section */}
-                  <div className="w-full lg:w-3/5 px-4 mt-6 lg:mt-0">
+                  <div className="w-full lg:w-3/5 px-4 max-md:px-0 mt-6 lg:mt-0">
                      <div className="overflow-x-auto">
                         <table className="min-w-full bg-white shadow-md rounded-lg">
                            <thead>

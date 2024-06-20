@@ -85,8 +85,10 @@ const Login = () => {
               name="password"
               placeholder="Password"
               onChange={handleChange}
-              className="inputtext appearance-none border-2 border-gray-300 rounded-md bg-transparent py-2 px-4 mb-4 w-full transform transition duration-500 hover:scale-105 focus:outline-none focus:border-[#000000d0] focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
+              className="inputtext appearance-none border-2 border-gray-300 rounded-md bg-transparent py-2 px-4 mb-2 w-full transform transition duration-500 hover:scale-105 focus:outline-none focus:border-[#000000d0] focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
             />
+            {error && <p className="text-red-500 mb-2">{error}</p>}
+
             <button
               type="submit"
               className="bg-[#383636c8] hover:bg-[#262525] transform transition duration-500 hover:scale-105 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
@@ -95,16 +97,15 @@ const Login = () => {
               {isSubmitting ? 'Processing...' : 'Login'}
             </button>
             <p className=" text capitalize mt-4">
-              If you have no account
-              <Link to="/register" className="text-[blue] ms-1 font-bold">
-                register
+              Not have an account ?
+              <Link to="/register" className="text-[blue] hover:underline underline-offset-2 ms-1 font-bold">
+                Register
               </Link>{" "}
               here
             </p>
           </form>
         </div>
       </div>
-      {error && <p className="text-red-500">{error}</p>}
     </div>
     // </GoogleOAuthProvider>
   );
