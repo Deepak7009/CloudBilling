@@ -221,9 +221,9 @@ input[type=number] {
    right: 4px;
 }
 
-.product_table {
+/* .product_table {
    padding-left: 20px;
-}
+} */
 
 @media (max-width: 768) {
    .product_table {
