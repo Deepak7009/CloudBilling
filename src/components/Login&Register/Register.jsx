@@ -21,6 +21,20 @@ const Register = () => {
 
    const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(formData.email)) {
+         setError("Please enter a valid email address.");
+         setIsSubmitting(false);
+         return;
+      }
+
+      const mobilePattern = /^[0-9]{10}$/;
+      if (!mobilePattern.test(formData.mobile)) {
+         setError("Please enter a valid 10-digit mobile number.");
+         setIsSubmitting(false);
+         return;
+      }
    };
 
    const handleDropdownChange = (e) => {
@@ -41,20 +55,6 @@ const Register = () => {
             setError(`Please fill in the ${key} field.`);
             return;
          }
-      }
-
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(formData.email)) {
-         setError("Please enter a valid email address.");
-         setIsSubmitting(false);
-         return;
-      }
-
-      const mobilePattern = /^[0-9]{10}$/;
-      if (!mobilePattern.test(formData.mobile)) {
-         setError("Please enter a valid 10-digit mobile number.");
-         setIsSubmitting(false);
-         return;
       }
 
       try {
