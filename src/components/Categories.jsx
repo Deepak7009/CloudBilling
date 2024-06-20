@@ -22,6 +22,7 @@ const Categories = () => {
     const [data, setData] = useState([]);
     const [isUpdateMode, setIsUpdateMode] = useState(false);
     const [updateId, setUpdateId] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [filter, setFilter] = useState("All Transactions");
     const [userId, setUserId] = useState("");
@@ -100,6 +101,7 @@ const Categories = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
         if (isUpdateMode) {
             try {
                 await axios.put(`${baseUrl}newcategories/${updateId}`, form);
@@ -138,6 +140,7 @@ const Categories = () => {
                 console.error("Error adding Category:", error);
             }
         }
+        setIsSubmitting(false);
     };
 
 
@@ -213,7 +216,7 @@ const Categories = () => {
                 return data;
         }
     };
-    
+
 
     const handleFilterChange = (event) => {
         setFilter(event.target.value);
@@ -272,7 +275,7 @@ const Categories = () => {
                 <div className="form-column w-full md:w-1/3 md:px-4 max-[767px] justify-center text-center">
                     <div className="mb-4 flex items-center max-[1023px]:block">
                         <label htmlFor="newTitle" className="block text-gray-700 font-medium mb-1 md:w-24">
-                            Title
+                            Category
                         </label>
                         <input
                             id="newTitle"
@@ -312,8 +315,10 @@ const Categories = () => {
                     <div className="mb-4 flex justify-center md:justify-center">
                         <button
                             type="Add"
-                            className="submit-button bg-blue-500 text-white py-2 px-20 rounded-full hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                            {isUpdateMode ? "Update" : "Add"}
+                            className="submit-button bg-blue-500 text-white py-2 px-20 rounded-full hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Processing...' : isUpdateMode ? 'Update' : 'Add'}
                         </button>
 
                     </div>

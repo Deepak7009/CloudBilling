@@ -16,6 +16,7 @@ const Profile = () => {
    const [adminDetails, setAdminDetails] = useState({});
 
    const [userId, setUserId] = useState("");
+   const [isSubmitting, setIsSubmitting] = useState(false);
    const [image, setImage] = useState("")
 
    const handleImageChange = (e) => {
@@ -79,6 +80,7 @@ const Profile = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+      setIsSubmitting(true);
 
       try {
          const token = localStorage.getItem('token');
@@ -125,6 +127,7 @@ const Profile = () => {
          console.error('Error updating user data:', error);
          toast.error('Error updating user data');
       }
+      setIsSubmitting(false);
    };
 
 
@@ -132,12 +135,12 @@ const Profile = () => {
       <div className="container-fluid bg-gray-100 py-4 mb-6">
          <div className={`bg-white rounded-lg shadow-md mb-6 pb-2 transition ${isPopupOpen ? 'blur' : ''}`}>
             <div className='flex justify-end items-center pt-3 mr-5'>
-               <span className='text-lg font-bold text-gray-700'>Edit</span>
+               <span className='text-2xl font-bold text-gray-700'>Edit</span>
                <img
                   className="cursor-pointer ml-2"
                   src={edit}
                   alt="update icon"
-                  width="30px"
+                  width="34px"
                   title="Update Your Profile"
                   onClick={handleEditClick}
                />
@@ -215,18 +218,20 @@ const Profile = () => {
             </div>
 
          </div>
-         <div>
+ 
+     <div>
+         <ProfileEdit
+            isOpen={isPopupOpen}
+            onClose={handleClosePopup}
+            onSubmit={handleSubmit}
+            adminDetails={adminDetails}
+            handleInputChange={handleInputChange}
+            onImageChange={handleImageChange}
+            isSubmitting={isSubmitting}
+         />
+          <ToastContainer />
+       </div>
 
-            <ProfileEdit
-               isOpen={isPopupOpen}
-               onClose={handleClosePopup}
-               onSubmit={handleSubmit}
-               adminDetails={adminDetails}
-               handleInputChange={handleInputChange}
-               onImageChange={handleImageChange}
-            />
-            <ToastContainer />
-         </div>
 
       </div>
    );

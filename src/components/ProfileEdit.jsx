@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChange, onImageChange }) => {
+const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChange, onImageChange,  isSubmitting }) => {
    return (
       <div className={`fixed inset-0 z-50 ${isOpen ? 'flex' : 'hidden'} items-center justify-center overflow-auto`}>
          <div className="absolute inset-0 bg-gray-600 bg-opacity-50"></div>
@@ -48,7 +48,7 @@ const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChang
                         className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                      />
                   </div>
-                  <div className="w-full px-4 mb-2">
+                  <div className="w-full md:w-1/2 px-4">
                      <label className="block text-gray-700 font-semibold font-serif mb-2">Email</label>
                      <input
                         type="email"
@@ -59,8 +59,18 @@ const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChang
                      />
                   </div>
 
+                  <div className="w-full md:w-1/2 px-4">
+                     <label className="block text-gray-700 font-semibold font-serif mb-2">Upload QR Code</label>
+                     <input
+                        type="file"
+                        name="qrCodeImageUrl"
+                        onChange={onImageChange}
+                        className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                     />
+                  </div>
+
                   <div className="w-full px-4">
-                     <h3 className="text-center text-xl mb-2 text-teal-700 font-semibold font-serif">Opening Hours 🕜</h3>
+                     <h3 className="text-center text-xl my-2 text-teal-700 font-semibold font-serif">Opening Hours 🕜</h3>
                      <div className="flex flex-wrap -mx-4">
                         <div className="w-full md:w-1/2 px-4 mb-4">
                            <label className="block text-gray-700 font-semibold font-serif mb-2">Monday-Friday</label>
@@ -85,15 +95,7 @@ const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChang
                      </div>
                   </div>
 
-                  <div className="w-full md:w-1/2 px-4">
-                     <label className="block text-gray-700 font-semibold font-serif mb-2">Upload QR Code</label>
-                     <input
-                        type="file"
-                        name="qrCodeImageUrl"
-                        onChange={onImageChange}
-                        className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                     />
-                  </div>
+              
 
 
                </div>
@@ -108,8 +110,9 @@ const ProfileEdit = ({ isOpen, onClose, onSubmit, adminDetails, handleInputChang
                   <button
                      type="submit"
                      className="bg-teal-500 text-white px-4 py-2 rounded-lg"
+                     disabled={isSubmitting}
                   >
-                     Save
+                     {isSubmitting ? 'Processing...' : 'Save'}
                   </button>
                </div>
             </form>

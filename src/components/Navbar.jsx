@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import historyIcon from "../assets/images/order.gif";
 import gif from "../assets/images/webp/giphy.webp";
-import notificationIcon from "../assets/images/notification.gif";
+import process from "../assets/images/loading.gif";
 import callIcon from "../assets/images/customer-service.gif";
 import productIcon from "../assets/images/add-product.png";
 //import admin from '../assets/images/management-consulting.gif';
@@ -13,7 +13,7 @@ import profile from "../assets/images/profile.gif";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-     const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,18 +22,18 @@ const Navbar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
- const handleLogout = () => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("registrationType");
-      setIsLoggedOut(true);
-   };
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("registrationType");
+    setIsLoggedOut(true);
+  };
 
-   useEffect(() => {
-      if (isLoggedOut) {
-         navigate("/");
-         window.location.reload();
-      }
-   }, [isLoggedOut, navigate]);
+  useEffect(() => {
+    if (isLoggedOut) {
+      navigate("/");
+      window.location.reload();
+    }
+  }, [isLoggedOut, navigate]);
 
   return (
     <div>
@@ -72,72 +72,72 @@ const Navbar = () => {
           {!(
             location.pathname === "/" || location.pathname === "/register"
           ) && (
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <span>
-                  <img src={callIcon} alt="Call Icon" width="36" height="36" />
-                </span>
-                <span className="font-bold">9876543210</span>
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2">
+                  <span>
+                    <img src={callIcon} alt="Call Icon" width="36" height="36" />
+                  </span>
+                  <span className="font-bold">9876543210</span>
+                </div>
+                <Link to="/profile" className="flex items-center space-x-2">
+                  <img
+                    title="Profile"
+                    src={profile}
+                    alt="Profile Icon"
+                    width="30"
+                  />
+                </Link>
+                <Link
+                  to="/add-product"
+                  className="flex items-center space-x-1 hover:text-red-600 transition duration-300"
+                >
+                  <img
+                    title="Add Product"
+                    src={productIcon}
+                    alt="Add Product Icon"
+                    width="30"
+                  />
+                </Link>
+                <Link to="/history">
+                  <img
+                    title="Order History"
+                    src={historyIcon}
+                    alt="Order History Icon"
+                    width="30"
+                  />
+                </Link>
+                <Link to="/process" className="flex items-center space-x-2">
+                  <img
+                    title="Process"
+                    src={process}
+                    alt="Process"
+                    width="28"
+                  />
+                </Link>
+                <Link to="/admin" className="flex items-center space-x-2">
+                  <img
+                    title="Admin Panel"
+                    src={admin}
+                    alt="Admin Panel Icon"
+                    width="28"
+                  />
+                </Link>
+
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center space-x-2"
+                >
+                  <img title="Logout" src={logout} alt="Logout Icon" width="28" />
+                </button>
               </div>
-              <Link
-                to="/add-product"
-                className="flex items-center space-x-1 hover:text-red-600 transition duration-300"
-              >
-                <img
-                  title="Add Product"
-                  src={productIcon}
-                  alt="Add Product Icon"
-                  width="30"
-                />
-              </Link>
-              <Link to="/history">
-                <img
-                  title="Order History"
-                  src={historyIcon}
-                  alt="Order History Icon"
-                  width="30"
-                />
-              </Link>
-              <Link to="/home" className="flex items-center space-x-2">
-                <img
-                  title="Notifications"
-                  src={notificationIcon}
-                  alt="Notifications Icon"
-                  width="28"
-                />
-              </Link>
-              <Link to="/admin" className="flex items-center space-x-2">
-                <img
-                  title="Admin Panel"
-                  src={admin}
-                  alt="Admin Panel Icon"
-                  width="28"
-                />
-              </Link>
-              <Link to="/profile" className="flex items-center space-x-2">
-                <img
-                  title="Profile"
-                  src={profile}
-                  alt="Profile Icon"
-                  width="30"
-                />
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="flex items-center space-x-2"
-              >
-                <img title="Logout" src={logout} alt="Logout Icon" width="28" />
-              </button>
-            </div>
-          )}
+            )}
         </div>
       </nav>
 
       {/* Sidebar for mobile and tablet screens */}
       <div
-        className={`fixed top-0 z-50 right-0 h-full bg-white shadow-md transform ${
-          isSidebarOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300 lg:hidden`}
+        className={`fixed top-0 z-50 right-0 h-full bg-white shadow-md transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
+          } transition-transform duration-300 lg:hidden`}
       >
         <div className="p-4">
           <button className="text-xl mb-4" onClick={toggleSidebar}>
@@ -147,82 +147,82 @@ const Navbar = () => {
             {/* Always show Login and Register buttons */}
             {(location.pathname === "/" ||
               location.pathname === "/register") && (
-              <>
-                <Link to="/register">Register Now</Link>
-                <Link to="/">Login</Link>
-              </>
-            )}
+                <>
+                  <Link to="/register">Register Now</Link>
+                  <Link to="/">Login</Link>
+                </>
+              )}
             {/* Conditional rendering for other links */}
             {!(
               location.pathname === "/" || location.pathname === "/register"
             ) && (
-              <div>
-                <Link to="/profile" className="flex items-center space-x-2">
-                  <img
-                    title="Profile"
-                    src={profile}
-                    alt="Profile Icon"
-                    width="30"
-                  />
-                  <span>Profile </span>
-                </Link>
-                <div className="flex items-center space-x-2">
-                  <span>
+                <div>
+                  <Link to="/profile" className="flex items-center space-x-2">
                     <img
-                      src={callIcon}
-                      alt="Call Icon"
-                      width="36"
-                      height="36"
+                      title="Profile"
+                      src={profile}
+                      alt="Profile Icon"
+                      width="30"
                     />
-                  </span>
-                  <span>Call for Support</span>
-                  <span className="font-bold">9099012488</span>
+                    <span>Profile </span>
+                  </Link>
+                  <div className="flex items-center space-x-2">
+                    <span>
+                      <img
+                        src={callIcon}
+                        alt="Call Icon"
+                        width="36"
+                        height="36"
+                      />
+                    </span>
+                    <span>Call for Support</span>
+                    <span className="font-bold">9099012488</span>
+                  </div>
+                  <Link to="/add-product" className="flex items-center space-x-2">
+                    <img
+                      src={productIcon}
+                      alt="Add Product Icon"
+                      width="40"
+                      height="40"
+                    />
+                    <span>Add Product</span>
+                  </Link>
+                  <Link to="/history" className="flex items-center space-x-2">
+                    <img
+                      src={historyIcon}
+                      alt="Order History Icon"
+                      width="40"
+                      height="40"
+                    />
+                    <span>Order History</span>
+                  </Link>
+                  <Link to="/process" className="flex items-center space-x-2">
+                    <img
+                      src={process}
+                      alt="Process "
+                      width="40"
+                      height="40"
+                    />
+                    <span>Process</span>
+                  </Link>
+                  <Link to="/admin" className="flex items-center space-x-2">
+                    <img
+                      src={admin}
+                      alt="Admin Panel Icon"
+                      width="40"
+                      height="40"
+                    />
+                    <span>Admin Panel</span>
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center space-x-2"
+                  >
+                    <img src={logout} alt="Logout Icon" width="40" height="40" />
+                    <span>Logout</span>
+                  </button>
                 </div>
-                <Link to="/add-product" className="flex items-center space-x-2">
-                  <img
-                    src={productIcon}
-                    alt="Add Product Icon"
-                    width="40"
-                    height="40"
-                  />
-                  <span>Add Product</span>
-                </Link>
-                <Link to="/history" className="flex items-center space-x-2">
-                  <img
-                    src={historyIcon}
-                    alt="Order History Icon"
-                    width="40"
-                    height="40"
-                  />
-                  <span>Order History</span>
-                </Link>
-                <Link to="/home" className="flex items-center space-x-2">
-                  <img
-                    src={notificationIcon}
-                    alt="Notifications Icon"
-                    width="40"
-                    height="40"
-                  />
-                  <span>Notifications</span>
-                </Link>
-                <Link to="/admin" className="flex items-center space-x-2">
-                  <img
-                    src={admin}
-                    alt="Admin Panel Icon"
-                    width="40"
-                    height="40"
-                  />
-                  <span>Admin Panel</span>
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center space-x-2"
-                >
-                  <img src={logout} alt="Logout Icon" width="40" height="40" />
-                  <span>Logout</span>
-                </button>
-              </div>
-            )}
+              )}
           </div>
         </div>
       </div>

@@ -24,6 +24,7 @@ const Expensises = () => {
    const [data, setData] = useState([]);
    const [isUpdateMode, setIsUpdateMode] = useState(false);
    const [updateId, setUpdateId] = useState(null);
+   const [isSubmitting, setIsSubmitting] = useState(false);
 
    const [filter, setFilter] = useState("All Transactions");
    const [userId, setUserId] = useState("");
@@ -101,6 +102,7 @@ const Expensises = () => {
 
    const handleSubmit = async (e) => {
       e.preventDefault();
+      setIsSubmitting(true);
       try {
          if (isUpdateMode) {
             const response = await axios.put(`${baseUrl}expens/${updateId}`, form);
@@ -128,6 +130,7 @@ const Expensises = () => {
          toast.error(errorMessage);
          console.error(errorMessage, error);
       }
+      setIsSubmitting(false);
       fetchData();
    };
 
@@ -289,7 +292,7 @@ const Expensises = () => {
                </div>
                <div className="mb-4 flex items-center max-[1023px]:block">
                   <label htmlFor="price" className="block text-gray-700 font-medium mb-1 md:w-24">
-                     Price
+                     Amount
                   </label>
                   <input
                      id="price"
@@ -316,8 +319,10 @@ const Expensises = () => {
                <div className="mb-4 flex justify-center md:justify-center">
                   <button
                      type="Add"
-                     className="submit-button bg-blue-500 text-white py-2 px-20 rounded-full hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                     {isUpdateMode ? "Update" : "Add"}
+                     className="submit-button bg-blue-500 text-white py-2 px-20 rounded-full hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                     disabled={isSubmitting}
+                  >
+                     {isSubmitting ? 'Processing...' : isUpdateMode ? 'Update' : 'Add'}
                   </button>
 
                </div>

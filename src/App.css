@@ -104,17 +104,66 @@ input[type=number] {
 }
 
 .img {
-   background-image: url('./assets/images/bills1.png');
-   background-repeat: no-repeat;
-   background-size: cover;
-   background-position-y: 20%;
+   background-image:
+      url('./assets/images/Register-bg.gif'),
+      url('./assets/images/Login-bg.gif');
+
+   background-repeat: no-repeat, no-repeat;
+
+   background-size: 80vh, 80vh;
+
+   background-position: top left, bottom right;
+
+   background-color: #f0f0f0;
 }
 
+@media (max-width: 768px) {
+   .img {
+      background-image: url('./assets/images/login-register-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+   }
+}
+
+@media (max-width: 480px) {
+   .img {
+      background-size: cover;
+      background-position: center;
+   }
+}
+
+
+
+
 .img2 {
-   background-image: url('./assets/images/bills1.png');
-   background-repeat: no-repeat;
-   background-size: cover;
-   background-position: 20%;
+   background-image:
+      url('./assets/images/Register-bg.gif'),
+      url('./assets/images/Login-bg.gif');
+
+   background-repeat: no-repeat, no-repeat;
+
+   background-size: 80vh, 80vh;
+
+   background-position: top left, bottom right;
+
+   background-color: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+   .img2 {
+      background-image: url('./assets/images/login-register-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+   }
+}
+
+@media (max-width: 480px) {
+   .img2 {
+      background-size: cover;
+      background-position: center;
+   }
 }
 
 .register_background {
@@ -168,8 +217,8 @@ input[type=number] {
       box-shadow: 0 0 0 blue;
    }
 }
+
 .modal-container {
    max-height: 100vh;
    overflow-y: auto;
- }
- 
+}
