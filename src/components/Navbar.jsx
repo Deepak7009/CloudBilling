@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import historyIcon from "../assets/images/order.gif";
 import gif from "../assets/images/webp/giphy.webp";
-//import process from "../assets/images/loading.gif";
+import process from "../assets/images/loading.gif";
 import callIcon from "../assets/images/customer-service.gif";
 import productIcon from "../assets/images/add-product.png";
 import logout from "../assets/images/log-out.gif";
@@ -13,6 +13,7 @@ import profile from "../assets/images/profile.gif";
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [registrationType, setRegistrationType] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,6 +34,12 @@ const Navbar = () => {
       window.location.reload();
     }
   }, [isLoggedOut, navigate]);
+
+
+  useEffect(() => {
+    const type = localStorage.getItem("registrationType");
+    setRegistrationType(type);
+  }, []);
 
   return (
     <div>
@@ -105,14 +112,21 @@ const Navbar = () => {
                     width="30"
                   />
                 </Link>
-                {/*<Link to="/process" className="flex items-center space-x-2">
-                  <img
-                    title="Process"
-                    src={process}
-                    alt="Process"
-                    width="28"
-                  />
-                </Link>*/}
+
+
+                {registrationType === "restaurant" && (
+                  <Link to="/process" className="flex items-center space-x-2">
+                    <img
+                      title="Process"
+                      src={process}
+                      alt="Process"
+                      width="28"
+                    />
+                  </Link>
+                )}
+
+
+
                 <Link to="/admin" className="flex items-center space-x-2">
                   <img
                     title="Admin Panel"
@@ -195,15 +209,20 @@ const Navbar = () => {
                     />
                     <span>Order History</span>
                   </Link>
-                  {/*<Link to="/process" className="flex items-center space-x-2">
-                    <img
-                      src={process}
-                      alt="Process "
-                      width="40"
-                      height="40"
-                    />
-                    <span>Process</span>
-                  </Link>*/}
+
+
+                  {registrationType === "restaurant" && (
+                    <Link to="/process" className="flex items-center space-x-2">
+                      <img
+                        src={process}
+                        alt="Process"
+                        width="40"
+                        height="40"
+                      />
+                      <span>Process</span>
+                    </Link>
+                  )}
+
                   <Link to="/admin" className="flex items-center space-x-2">
                     <img
                       src={admin}
@@ -229,4 +248,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar;
