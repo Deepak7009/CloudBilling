@@ -42,7 +42,7 @@ const AdminPanel = () => {
 
                   <div className='col-md-2 mb-6' data-aos="zoom-in">
                      <Link
-                        to=""
+                        to="/structure"
                         className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                      >
                         <img title="Structure" src={structure} alt="Structure" width="50px" />
@@ -56,7 +56,7 @@ const AdminPanel = () => {
 
                   <div className='col-md-2 mb-6' data-aos="zoom-in">
                      <Link
-                        to=""
+                        to="/process"
                         className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                      >
                         <img title="Process" src={process} alt="Offer" width="50px" />
