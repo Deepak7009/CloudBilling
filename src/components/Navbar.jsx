@@ -125,8 +125,6 @@ const Navbar = () => {
                   </Link>
                 )}
 
-
-
                 <Link to="/admin" className="flex items-center space-x-2">
                   <img
                     title="Admin Panel"
