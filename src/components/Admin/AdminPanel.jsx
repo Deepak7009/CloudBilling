@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import structure from "../../assets/images/structure.gif";
 import historyIcon from "../../assets/images/order.gif";
+import process from "../../assets/images/loading.gif";
 import productIcon from "../../assets/images/add-product.png";
-import offer from "../../assets/images/offer.png";
 import customer from "../../assets/images/customer.png";
 import customers from "../../assets/images/customers.gif";
 import invoice from "../../assets/images/invoice.gif";
@@ -14,11 +14,19 @@ import 'aos/dist/aos.css';
 
 const AdminPanel = () => {
 
+   const [registrationType, setRegistrationType] = useState(null);
+
+
    useEffect(() => {
       AOS.init({
          duration: 1000,
          mirror: false,
       });
+   }, []);
+
+   useEffect(() => {
+      const type = localStorage.getItem("registrationType");
+      setRegistrationType(type);
    }, []);
 
    return (
@@ -30,28 +38,32 @@ const AdminPanel = () => {
 
             <div className="row gap-6 items-center justify-center">
 
-               {/*<div className='col-md-2 mb-6' data-aos="zoom-in">
-                  <Link
-                     to=""
-                     className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
-                  >
-                     <img title="Structure" src={structure} alt="Structure" width="50px" />
-                     <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Structure</h2>
-                     <span className="beta absolute bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">beta</span>
+               {registrationType === "restaurant" && (
 
-                  </Link>
-               </div>*/}
+                  <div className='col-md-2 mb-6' data-aos="zoom-in">
+                     <Link
+                        to=""
+                        className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
+                     >
+                        <img title="Structure" src={structure} alt="Structure" width="50px" />
+                        <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Structure</h2>
 
-               {/*<div className='col-md-2 mb-6' data-aos="zoom-in">
-                  <Link
-                     to=""
-                     className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
-                  >
-                     <img title="Offer" src={offer} alt="Offer" width="50px" />
-                     <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Offer</h2>
-                     <span className="beta absolute bg-green-500 text-white font-bold px-2 py-1 rounded-full">beta</span>
-                  </Link>
-               </div>*/}
+                     </Link>
+                  </div>
+               )}
+
+               {registrationType === "restaurant" && (
+
+                  <div className='col-md-2 mb-6' data-aos="zoom-in">
+                     <Link
+                        to=""
+                        className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
+                     >
+                        <img title="Process" src={process} alt="Offer" width="50px" />
+                        <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Process</h2>
+                     </Link>
+                  </div>
+               )}
 
                <div className='col-md-2 mb-6' data-aos="zoom-in">
                   <Link
@@ -59,7 +71,7 @@ const AdminPanel = () => {
                      className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md mt-5"
                   >
                      <img title="Add Category" src={historyIcon} alt="Category" width="50px" />
-                     <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Category</h2>                
+                     <h2 className="pt-2 text-center text-lg font-semibold text-gray-800">Add Category</h2>
                   </Link>
                </div>
 
