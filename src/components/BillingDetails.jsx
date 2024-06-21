@@ -138,7 +138,7 @@ const BillingDetails = ({
           <p className="text-lg font-bold">₹ {calculateTotal()}</p>
         </div>
         <button
-          className="bg-teal-600 hover:bg-teal-700 text-white hover:text-lg font-bold font-serif py-2 px-4 rounded-full my-2"
+          className="bg-teal-600 hover:bg-teal-700 text-white font-bold font-serif py-2 px-4 rounded-full my-2"
           onClick={handlePlaceOrder}
         >
           {orderId ? "Update Order" : "Place Order"}
