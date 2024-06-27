@@ -186,7 +186,7 @@ const Navbar = () => {
                         height="36"
                       />
                     </span>
-                    <span>Call for Support</span>
+                    {/*<span>Call for Support</span>*/}
                     <span className="font-bold">9099012488</span>
                   </div>
                   <Link to="/add-product" className="flex items-center space-x-2">
