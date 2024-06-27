@@ -17,24 +17,34 @@ const Register = () => {
       email: "",
       password: "",
    });
-   const [error, setError] = useState("");
+   const [errors, setErrors] = useState({
+      email: "",
+      mobile: "",
+      form: ""
+   });
 
    const handleChange = (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
 
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(formData.email)) {
-         setError("Please enter a valid email address.");
-         setIsSubmitting(false);
-         return;
+      let emailError = "";
+      let mobileError = "";
+
+      if (name === "email") {
+         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         emailError = emailPattern.test(value) ? "" : "Please enter a valid email address.";
       }
 
-      const mobilePattern = /^[0-9]{10}$/;
-      if (!mobilePattern.test(formData.mobile)) {
-         setError("Please enter a valid 10-digit mobile number.");
-         setIsSubmitting(false);
-         return;
+      if (name === "mobile") {
+         const mobilePattern = /^[0-9]{10}$/;
+         mobileError = mobilePattern.test(value) ? "" : "Please enter a valid 10-digit mobile number.";
       }
+
+      setErrors({
+         ...errors,
+         [name]: name === "email" ? emailError : mobileError,
+         form: ""
+      });
    };
 
    const handleDropdownChange = (e) => {
@@ -46,13 +56,15 @@ const Register = () => {
       setIsSubmitting(true);
 
       if (!registrationType) {
-         setError("Please select a registration type.");
+         setErrors({ ...errors, form: "Please select a registration type." });
+         setIsSubmitting(false);
          return;
       }
 
       for (const key in formData) {
          if (!formData[key]) {
-            setError(`Please fill in the ${key} field.`);
+            setErrors({ ...errors, form: `Please fill in the ${key} field.` });
+            setIsSubmitting(false);
             return;
          }
       }
@@ -65,7 +77,10 @@ const Register = () => {
          console.log(response.data);
          navigate("/");
       } catch (error) {
-         setError(error.response?.data?.msg || "Registration failed.");
+         setErrors({
+            ...errors,
+            form: error.response?.data?.msg || "Registration failed."
+         });
          console.error("Error:", error);
       }
       setIsSubmitting(false);
@@ -133,8 +148,9 @@ const Register = () => {
                         name="email"
                         placeholder="Email"
                         onChange={handleChange}
-                        className="inputtext appearance-none border-2 border-gray-300 rounded-md bg-transparent py-2 px-4 mb-4 w-full transform transition duration-500 hover:scale-105 focus:outline-none focus:border-[black] focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
+                        className="flex inputtext appearance-none border-2 border-gray-300 rounded-md bg-transparent py-2 px-4 mb-4 w-full transform transition duration-500 hover:scale-105 focus:outline-none focus:border-[black] focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
                      />
+
                      <input
                         type="number"
                         name="mobile"
@@ -157,7 +173,10 @@ const Register = () => {
                      onChange={handleChange}
                      className="inputtext appearance-none border-2 border-gray-300 rounded-md bg-transparent py-2 px-4 mb-2 w-full transform transition duration-500 hover:scale-105 focus:outline-none focus:border-[black] focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
                   />
-                  {error && <p className="text-red-500 mb-1">{error}</p>}
+                  {errors.email && <p className="flex text-red-500 mb-1">{errors.email}</p>}
+                  {errors.mobile && <p className="text-red-500 mb-1">{errors.mobile}</p>}
+
+                  {errors.form && <p className="text-red-500 mb-1">{errors.form}</p>}
 
                   <button
                      type="submit"
