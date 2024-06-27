@@ -148,7 +148,7 @@ const Register = () => {
                         name="email"
                         placeholder="Email"
                         onChange={handleChange}
-                        className="flex inputtext appearance-none border-2 border-gray-300 rounded-md bg-transparent py-2 px-4 mb-4 w-full transform transition duration-500 hover:scale-105 focus:outline-none focus:border-[black] focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
+                        className=" inputtext appearance-none border-2 border-gray-300 rounded-md bg-transparent py-2 px-4 mb-4 w-full transform transition duration-500 hover:scale-105 focus:outline-none focus:border-[black] focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50"
                      />
 
                      <input
@@ -175,7 +175,6 @@ const Register = () => {
                   />
                   {errors.email && <p className="flex text-red-500 mb-1">{errors.email}</p>}
                   {errors.mobile && <p className="text-red-500 mb-1">{errors.mobile}</p>}
-
                   {errors.form && <p className="text-red-500 mb-1">{errors.form}</p>}
 
                   <button
