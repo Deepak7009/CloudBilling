@@ -116,6 +116,7 @@ const OrderHistory = () => {
 
 
    const filteredData = filterData(data);
+   console.log("Filtered data :", filteredData)
    const totalPrice = calculateTotalPrice(filteredData);
 
    return (
