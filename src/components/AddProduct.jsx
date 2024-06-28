@@ -288,15 +288,15 @@ const AddProduct = () => {
                 onChange={handleChange}
               >
                 <option>Select</option>
-                <option value="ml">Grams (g)</option>
+                <option value="grams">Grams (g)</option>
                 <option value="kg">Kilograms (kg)</option>
-                <option value="kg">Miligrams (mg)</option>
-                <option value="ml">Pounds (lb)</option>
-                <option value="kg">Litres (l)</option>
+                <option value="mg">Miligrams (mg)</option>
+                <option value="pound">Pounds (lb)</option>
+                <option value="lit">Litres (l)</option>
                 <option value="ml">Milliliters (ml)</option>
-                <option value="ml">Pieces</option>
-                <option value="ml">Dozens</option>
-                <option value="ml">Cups</option>
+                <option value="pieces">Pieces</option>
+                <option value="dozens">Dozens</option>
+                <option value="cup">Cups</option>
               </select>
             </div>
             <div className="input-group w-full md:w-5/12">
